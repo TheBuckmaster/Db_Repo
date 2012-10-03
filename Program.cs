@@ -14,7 +14,11 @@ namespace WindowsFormsApplication1
         [STAThread]
         static void Main()
         {
-                        Form1 OurForm = new Form1();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);                        
+            Form1 OurForm = new Form1();
+
+            Application.Run(OurForm);
             try
             {
                 using (StreamReader sr = new StreamReader("input file goes here"))
@@ -91,9 +95,6 @@ namespace WindowsFormsApplication1
             
             OurForm.CourseList = new List<string>();
             OurForm.CourseList.Add("This is where a list would go"); 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(OurForm);
         }
     }
 }
