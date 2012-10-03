@@ -7,14 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+public struct user
+{
+    public string name;
+    public string password;
+}
+
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
+        // should probably make 2d List for these, but that would really complicate authentication
         public List<string> CourseList;
+        public List<string> UserList;
+        public List<string> PasswordList;
+        public List<string> FstNameList;
+        public List<string> MidNameList;
+        public List<string> LstNameList;
+        public List<string> StatusList;
         const int total = 2000;
-        bool usernameCheck;
-        bool passwordCheck;
+
         //string[,] userPlusPass = new string userPlusPass[total,total]; //array for usernames and passwords
        
         public Form1()
@@ -34,11 +46,12 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            usernameCheck = true;
-            passwordCheck = true;
+            int userndx = UserList.IndexOf(UsernameText.Text);
 
-            if (usernameCheck && passwordCheck)
+            if ((userndx != null) && (PasswordList.IndexOf(PasswordText.Text) == userndx))
             {
+
+
                 label1.Hide();
                 label2.Hide();
                 UsernameText.Hide();
@@ -48,12 +61,18 @@ namespace WindowsFormsApplication1
                 LoginButton.Hide();
                 LoginButton.Enabled = false;
                 ClassOfferings.Show();
-                addClassesToolStripMenuItem.Enabled = true;
-                addClassesToolStripMenuItem.ShowDropDown();
                 classOfferingsToolStripMenuItem.Enabled = true;
                 classOfferingsToolStripMenuItem.ShowDropDown();
-                scheduleToolStripMenuItem.Enabled = true;
-                scheduleToolStripMenuItem.ShowDropDown();
+                if (StatusList[userndx] != "faculty")
+                {
+                    addClassesToolStripMenuItem.Enabled = true;
+                    addClassesToolStripMenuItem.ShowDropDown();
+                }
+                if((StatusList[userndx] == "faculty") || (StatusList[userndx] == "admin")
+                {
+                    scheduleToolStripMenuItem.Enabled = true;
+                    scheduleToolStripMenuItem.ShowDropDown();
+                }
 
             }
             else
