@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.IO;
 
 namespace WindowsFormsApplication1
 {
@@ -13,7 +14,7 @@ namespace WindowsFormsApplication1
         [STAThread]
         static void Main()
         {
-
+                        Form1 OurForm = new Form1();
             try
             {
                 using (StreamReader sr = new StreamReader("input file goes here"))
@@ -26,44 +27,44 @@ namespace WindowsFormsApplication1
                         line.TrimStart();
                         string substring = line.Substring(0, 10);
                         substring.TrimEnd();
-                        UserList.Add(substring);
+                        OurForm.UserList.Add(substring);
                         line.Remove(0, 10);
 
                         // password
                         line.TrimStart();
                         substring = line.Substring(0, 10);
                         substring.TrimEnd();
-                        PasswordList.Add(substring);
+                        OurForm.PasswordList.Add(substring);
                         line.Remove(0, 10);
 
                         // first name
                         line.TrimStart();
                         substring = line.Substring(0, 15);
                         substring.TrimEnd();
-                        FstNameList.Add(substring);
+                        OurForm.FstNameList.Add(substring);
                         line.Remove(0, 15);
 
                         // middle name
                         line.TrimStart();
                         substring = line.Substring(0, 15);
-                        MidNameList.Add(substring);
+                        OurForm.MidNameList.Add(substring);
                         line.Remove(0, 15);
 
                         // last name
                         line.TrimStart();
                         substring = line.Substring(0, 15);
                         substring.TrimEnd();
-                        LstNameList.Add(substring);
+                        OurForm.LstNameList.Add(substring);
                         line.Remove(0, 15);
 
                         // status
                         line.TrimStart();
                         substring = line.Substring(0, 10);
                         substring.TrimEnd();
-                        StatusList.Add(substring);
+                        OurForm.StatusList.Add(substring);
                         line.Remove(0, 10);
 
-                        String line = sr.ReadLine();
+                        line = sr.ReadLine();
                     }
                 }
             }
@@ -72,9 +73,22 @@ namespace WindowsFormsApplication1
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
             }
+            
 
 
-            Form1 OurForm = new Form1();
+            string filename = "Classinput.txt";
+            if (File.Exists(filename))
+            {
+                int localcharred = 0;
+                FileStream input = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                StreamReader filereader = new StreamReader(input); 
+                
+            }
+            else
+            {
+                //Invalid File Configuration. 
+            }
+            
             OurForm.CourseList = new List<string>();
             OurForm.CourseList.Add("This is where a list would go"); 
             Application.EnableVisualStyles();
@@ -83,4 +97,5 @@ namespace WindowsFormsApplication1
         }
     }
 }
+
 

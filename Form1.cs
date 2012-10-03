@@ -18,8 +18,8 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
         // should probably make 2d List for these, but that would really complicate authentication
-        public List<string> CourseList;
-        public List<string> UserList;
+        public List<string> CourseList = new List<string>();
+        public List<string> UserList = new List<string>();
         public List<string> PasswordList;
         public List<string> FstNameList;
         public List<string> MidNameList;
@@ -48,7 +48,7 @@ namespace WindowsFormsApplication1
         {
             int userndx = UserList.IndexOf(UsernameText.Text);
 
-            if ((userndx != null) && (PasswordList.IndexOf(PasswordText.Text) == userndx))
+            if ((userndx != null) && (PasswordList.IndexOf(passwordText.Text) == userndx))
             {
 
 
@@ -68,7 +68,7 @@ namespace WindowsFormsApplication1
                     addClassesToolStripMenuItem.Enabled = true;
                     addClassesToolStripMenuItem.ShowDropDown();
                 }
-                if((StatusList[userndx] == "faculty") || (StatusList[userndx] == "admin")
+                if((StatusList[userndx] == "faculty") || (StatusList[userndx] == "admin"))
                 {
                     scheduleToolStripMenuItem.Enabled = true;
                     scheduleToolStripMenuItem.ShowDropDown();
