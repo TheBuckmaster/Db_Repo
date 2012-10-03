@@ -20,11 +20,11 @@ namespace WindowsFormsApplication1
         // should probably make 2d List for these, but that would really complicate authentication
         public List<string> CourseList = new List<string>();
         public List<string> UserList = new List<string>();
-        public List<string> PasswordList;
-        public List<string> FstNameList;
-        public List<string> MidNameList;
-        public List<string> LstNameList;
-        public List<string> StatusList;
+        public List<string> PasswordList = new List<string>();
+        public List<string> FstNameList = new List<string>();
+        public List<string> MidNameList = new List<string>();
+        public List<string> LstNameList = new List<string>();
+        public List<string> StatusList = new List<string>();
         const int total = 2000;
 
         //string[,] userPlusPass = new string userPlusPass[total,total]; //array for usernames and passwords
