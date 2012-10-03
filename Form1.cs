@@ -26,6 +26,20 @@ namespace WindowsFormsApplication1
         public List<string> LstNameList = new List<string>();
         public List<string> StatusList = new List<string>();
         const int total = 2000;
+        public int numCourses = 0;
+
+        public struct courseinfo
+        {
+            public string coursename;
+            public string coursetitle;
+            public string instructor;
+            public float credit; 
+            public int seats;
+            public int timeblocks;  // how many timeblocks? 
+            public Stack<string> times; // as initialized, these are ddttks in reverse order of entry. 
+        }
+
+        public courseinfo[] Courses = new courseinfo[50];
 
         //string[,] userPlusPass = new string userPlusPass[total,total]; //array for usernames and passwords
        
@@ -33,6 +47,20 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
         }
+
+        private string CourseShow()
+        {
+            //Chris, this is where your graphic design skills go wild. 
+            //
+            //
+            //
+            //
+            return "Thine Milkshake doth bringeth all thine fellowman to thine schoolyard enclosure!";              
+            //
+            //
+            //How much can you do with one string? 
+  
+        } 
 
         private void textBox1_TextChanged(object sender, EventArgs e) // Username textbox
         {
@@ -50,8 +78,6 @@ namespace WindowsFormsApplication1
 
             if ((userndx != null) && (PasswordList.IndexOf(passwordText.Text) == userndx))
             {
-
-
                 label1.Hide();
                 label2.Hide();
                 UsernameText.Hide();
@@ -108,8 +134,10 @@ namespace WindowsFormsApplication1
             ClassOfferings.Hide();
             ClassOfferings.Enabled = false;
 
-            CourseTextBox.Text = "My milkshakes bring all the boys to the yard";
+            CourseTextBox.Text = CourseShow(); 
         }
+
+
 
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -126,7 +154,7 @@ namespace WindowsFormsApplication1
             ClassOfferings.Hide();
             ClassOfferings.Enabled = false;
 
-            CourseTextBox.Text = "My milkshakes bring all the boys to the yard";
+            CourseTextBox.Text = CourseShow();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -138,7 +166,9 @@ namespace WindowsFormsApplication1
 
         private void CourseTextBox_TextChanged(object sender, EventArgs e)
         {
-        
+
         }
+
+
     }
 }

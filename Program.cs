@@ -100,6 +100,7 @@ namespace WindowsFormsApplication1
                     
                     while (!filereader.EndOfStream)
                     {
+                        
                         currstring = filereader.ReadLine();
                         coursename = currstring.Substring(0, 10);
                         currstring.Remove(0, 10);
@@ -136,6 +137,8 @@ namespace WindowsFormsApplication1
                         OurForm.Courses[howmanycourses].seats  = seats;
                         OurForm.Courses[howmanycourses].timeblocks = timeblocks;
                         OurForm.Courses[howmanycourses].times = times;
+                        howmanycourses +=1;
+                        OurForm.numCourses = howmanycourses;
                     }
                 }
                 catch (Exception e)
