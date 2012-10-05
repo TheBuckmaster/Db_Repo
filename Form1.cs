@@ -84,7 +84,7 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             User login;
-            login(UsernameText.Text, passwordText.Text, "","","","")
+            login(UsernameText.Text, passwordText.Text, "", "", "", "");
 
             
             bool valid = false;
@@ -100,7 +100,7 @@ namespace WindowsFormsApplication1
                 }
             }
 
-            if (valid)
+            if (valid && (UserList[userNdx].isPassword(login.Password)))
             {
                 label1.Hide();
                 label2.Hide();
