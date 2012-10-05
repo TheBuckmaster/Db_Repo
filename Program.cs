@@ -27,46 +27,48 @@ namespace WindowsFormsApplication1
 
                     while(line != null)
                     {
+                        string uname, fname, mname, lname, pswd, stat;
+
                         // username
                         line.TrimStart();
-                        string substring = line.Substring(0, 10);
-                        substring.TrimEnd();
-                        OurForm.UserList.Add(substring);
+                        uname = line.Substring(0, 10);
+                        uname.TrimEnd();
                         line.Remove(0, 10);
 
                         // password
                         line.TrimStart();
-                        substring = line.Substring(0, 10);
-                        substring.TrimEnd();
-                        OurForm.PasswordList.Add(substring);
+                        pswd = line.Substring(0, 10);
+                        pswd.TrimEnd();
                         line.Remove(0, 10);
 
                         // first name
                         line.TrimStart();
-                        substring = line.Substring(0, 15);
-                        substring.TrimEnd();
-                        OurForm.FstNameList.Add(substring);
+                        fname = line.Substring(0, 15);
+                        fname.TrimEnd();
                         line.Remove(0, 15);
 
                         // middle name
                         line.TrimStart();
-                        substring = line.Substring(0, 15);
-                        OurForm.MidNameList.Add(substring);
+                        mname = line.Substring(0, 15);
+                        mname.TrimEnd();
                         line.Remove(0, 15);
 
                         // last name
                         line.TrimStart();
-                        substring = line.Substring(0, 15);
-                        substring.TrimEnd();
-                        OurForm.LstNameList.Add(substring);
+                        lname = line.Substring(0, 15);
+                        lname.TrimEnd();
                         line.Remove(0, 15);
 
                         // status
                         line.TrimStart();
-                        substring = line.Substring(0, 10);
-                        substring.TrimEnd();
-                        OurForm.StatusList.Add(substring);
+                        stat = line.Substring(0, 10);
+                        stat.TrimEnd();
                         line.Remove(0, 10);
+
+                        // add user info
+                        User guy;
+                        guy(uname, pswd, fname, mname, lname, stat);
+                        OurForm.UserList.Add(guy);
 
                         line = sr.ReadLine();
                     }

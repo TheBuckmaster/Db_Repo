@@ -7,11 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-public struct user
-{
-    public string name;
-    public string password;
-}
+//public class User
+//{
+//    private string userName;
+//    private string fstName;
+//    private string midName;
+//    private string lstName;
+//    private string password;
+//    private string status;
+
+//    public bool validLogin(string name, string word)
+//    {
+//        return ((name == userName) && (word == password));
+//    }
+//}
 
 namespace WindowsFormsApplication1
 {
@@ -19,12 +28,12 @@ namespace WindowsFormsApplication1
     {
         // should probably make 2d List for these, but that would really complicate authentication
         public List<string> CourseList = new List<string>();
-        public List<string> UserList = new List<string>();
-        public List<string> PasswordList = new List<string>();
-        public List<string> FstNameList = new List<string>();
-        public List<string> MidNameList = new List<string>();
-        public List<string> LstNameList = new List<string>();
-        public List<string> StatusList = new List<string>();
+        public List<User> UserList = new List<string>();
+        //public List<string> PasswordList = new List<string>();
+        //public List<string> FstNameList = new List<string>();
+        //public List<string> MidNameList = new List<string>();
+        //public List<string> LstNameList = new List<string>();
+        //public List<string> StatusList = new List<string>();
         const int total = 2000;
         public int numCourses = 0;
 
@@ -74,9 +83,24 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int userndx = UserList.IndexOf(UsernameText.Text);
+            User login;
+            login(UsernameText.Text, passwordText.Text, "","","","")
 
-            if ((userndx != null) && (PasswordList.IndexOf(passwordText.Text) == userndx))
+            
+            bool valid = false;
+            int userNdx;
+            int legnth = UserList.Count;
+            for(int i = 0; i < length; ++i)
+            {
+                if(login == UserList[i])
+                {
+                    valid = true;
+                    userNdx = i;
+                    i = length;
+                }
+            }
+
+            if (valid)
             {
                 label1.Hide();
                 label2.Hide();
@@ -89,12 +113,12 @@ namespace WindowsFormsApplication1
                 ClassOfferings.Show();
                 classOfferingsToolStripMenuItem.Enabled = true;
                 classOfferingsToolStripMenuItem.ShowDropDown();
-                if (StatusList[userndx] != "faculty")
+                if (UserList[userNdx].Status != "faculty")
                 {
                     addClassesToolStripMenuItem.Enabled = true;
                     addClassesToolStripMenuItem.ShowDropDown();
                 }
-                if((StatusList[userndx] == "faculty") || (StatusList[userndx] == "admin"))
+                if((UserList[userNdx].Status == "faculty") || (UserList[userNdx].Status == "admin"))
                 {
                     scheduleToolStripMenuItem.Enabled = true;
                     scheduleToolStripMenuItem.ShowDropDown();
