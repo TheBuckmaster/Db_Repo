@@ -28,7 +28,7 @@ namespace WindowsFormsApplication1
     {
         // should probably make 2d List for these, but that would really complicate authentication
         public List<string> CourseList = new List<string>();
-        public List<User> UserList = new List<string>();
+        public List<User> UserList = new List<User>();
         //public List<string> PasswordList = new List<string>();
         //public List<string> FstNameList = new List<string>();
         //public List<string> MidNameList = new List<string>();
@@ -83,13 +83,12 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            User login;
-            login(UsernameText.Text, passwordText.Text, "", "", "", "");
+            User login = new User(UsernameText.Text, passwordText.Text, "", "", "", "");
 
             
             bool valid = false;
-            int userNdx;
-            int legnth = UserList.Count;
+            int userNdx=0;
+            int length = UserList.Count;
             for(int i = 0; i < length; ++i)
             {
                 if(login == UserList[i])
@@ -100,7 +99,7 @@ namespace WindowsFormsApplication1
                 }
             }
 
-            if (valid && (UserList[userNdx].isPassword(login.Password)))
+            if (valid && (UserList[userNdx].isPassword(passwordText.Text)))
             {
                 label1.Hide();
                 label2.Hide();

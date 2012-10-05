@@ -66,8 +66,7 @@ namespace WindowsFormsApplication1
                         line.Remove(0, 10);
 
                         // add user info
-                        User guy;
-                        guy(uname, pswd, fname, mname, lname, stat);
+                        User guy = new User(uname, pswd, fname, mname, lname, stat);
                         OurForm.UserList.Add(guy);
 
                         line = sr.ReadLine();
