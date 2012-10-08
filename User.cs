@@ -15,7 +15,7 @@ public class User
     public string LstName { get { return lstName; } }
     public string Status { get { return status; } }
 
-    User(string uname, string pswd, string fname, string mname, string lname, string stat)
+    public User(string uname, string pswd, string fname, string mname, string lname, string stat)
     {
         userName = uname;
         password = pswd;
@@ -27,7 +27,7 @@ public class User
 
     public bool isPassword(string pswd) { return password == pswd; }
 
-    public bool operator ==(User a, User b) { return a.UserName == b.UserName; }
+    public static bool operator ==(User a, User b) { return a.UserName == b.UserName; }
 
-    public bool operator !=(User a, User b) { return a.UserName != b.UserName; }
+    public static bool operator !=(User a, User b) { return a.UserName != b.UserName; }
 }
