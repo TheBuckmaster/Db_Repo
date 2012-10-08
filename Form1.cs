@@ -64,7 +64,7 @@ namespace WindowsFormsApplication1
             //
             //
             //
-            return "Thine Milkshake doth bringeth all thine fellowman to thine schoolyard enclosure!";              
+            return "In which one may be instructed on the proper method to Douglas";              
             //
             //
             //How much can you do with one string? 
@@ -87,7 +87,7 @@ namespace WindowsFormsApplication1
 
             
             bool valid = false;
-            int userNdx=0;
+            int userNdx = -1;
             int length = UserList.Count;
             for(int i = 0; i < length; ++i)
             {

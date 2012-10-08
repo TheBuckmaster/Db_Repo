@@ -28,4 +28,6 @@ public class User
     public bool isPassword(string pswd) { return password == pswd; }
 
     public bool operator ==(User a, User b) { return a.UserName == b.UserName; }
+
+    public bool operator !=(User a, User b) { return a.UserName != b.UserName; }
 }
