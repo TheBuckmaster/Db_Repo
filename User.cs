@@ -8,6 +8,8 @@ public class User
     private string midName;
     private string lstName;
     private string status;
+    private List<courseinfo> schedule = new List<courseinfo>();
+    private List<courseinfo> history = new List<courseinfo>();
 
     public string UserName { get { return userName; } }
     public string FstName { get { return fstName; } }
@@ -26,6 +28,18 @@ public class User
     }
 
     public bool isPassword(string pswd) { return password == pswd; }
+
+    void enrollCourse(courseinfo course)
+    {
+        if(status != "faculty")
+            schedule.Add(course);
+    }
+
+    void unenrollCourse(courseinfo course)
+    {
+        if((status != "faculty") && (!schedule.Remove(course)))
+            Console.WriteLine("Unenroll failed. Were you enrolled?");
+    }
 
     public static bool operator ==(User a, User b) { return a.UserName == b.UserName; }
 

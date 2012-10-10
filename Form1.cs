@@ -14,24 +14,19 @@ namespace WindowsFormsApplication1
     {
         public List<string> CourseList = new List<string>();
         private List<User> UserList = new List<User>();
-        //public List<string> PasswordList = new List<string>();
-        //public List<string> FstNameList = new List<string>();
-        //public List<string> MidNameList = new List<string>();
-        //public List<string> LstNameList = new List<string>();
-        //public List<string> StatusList = new List<string>();
         const int total = 2000;
         public int numCourses = 0;
 
-        public struct courseinfo
-        {
-            public string coursename;
-            public string coursetitle;
-            public string instructor;
-            public float credit; 
-            public int seats;
-            public int timeblocks;  // how many timeblocks? 
-            public Stack<string> times; // as initialized, these are ddttks in reverse order of entry. 
-        }
+        //public struct courseinfo
+        //{
+        //    public string coursename;
+        //    public string coursetitle;
+        //    public string instructor;
+        //    public float credit; 
+        //    public int seats;
+        //    public int timeblocks;  // how many timeblocks? 
+        //    public Stack<string> times; // as initialized, these are ddttks in reverse order of entry. 
+        //}
 
         public courseinfo[] Courses = new courseinfo[50];
 
