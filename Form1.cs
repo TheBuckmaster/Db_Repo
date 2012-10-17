@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 
 namespace WindowsFormsApplication1
@@ -85,7 +86,7 @@ namespace WindowsFormsApplication1
 
                         // add user info
                         User guy = new User(uname, pswd, fname, mname, lname, stat);
-                        OurForm.UserList.Add(guy);
+                        UserList.Add(guy);
 
                         line = sr.ReadLine();
                     }

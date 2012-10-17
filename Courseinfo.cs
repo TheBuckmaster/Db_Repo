@@ -19,7 +19,7 @@ public class courseinfo
     public int Timeblocks { get { return timeblocks; } }
     public Stack<string> Times { get { return times; } }
 
-	public courseinfo(string name, string title, string prof, float cred, int spots, int timeblks)
+	public courseinfo(string name, string title, string prof, float cred, int spots, int timeblks, Stack<string> timestack)
 	{   
         coursename = name;
         coursetitle = title;
@@ -27,6 +27,7 @@ public class courseinfo
         credit = cred;
         seats = spots;
         timeblocks = timeblks;
+        times = timestack;
 	}
 
     public void addTime(string time) { times.Push(time); }

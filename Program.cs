@@ -130,14 +130,7 @@ namespace WindowsFormsApplication1
                             currstring.Remove(0, 5);
                             currstring.TrimStart();
                         }
-
-                        OurForm.Courses[howmanycourses].coursename = coursename;
-                        OurForm.Courses[howmanycourses].coursetitle = coursetitle;
-                        OurForm.Courses[howmanycourses].instructor = instructor;
-                        OurForm.Courses[howmanycourses].credit = credit;
-                        OurForm.Courses[howmanycourses].seats  = seats;
-                        OurForm.Courses[howmanycourses].timeblocks = timeblocks;
-                        OurForm.Courses[howmanycourses].times = times;
+                        OurForm.Courses[howmanycourses] = new courseinfo(coursename, coursetitle, instructor, credit, seats, timeblocks, times);
                         howmanycourses +=1;
                         OurForm.numCourses = howmanycourses;
                     }
