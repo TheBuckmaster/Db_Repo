@@ -102,17 +102,38 @@ namespace WindowsFormsApplication1
 
         private string CourseShow()
         {
-            //Chris, this is where your graphic design skills go wild. 
-            //
-            //
-            //
-            //
-            return "In which one may be instructed on the proper method to Douglas";              
-            //
-            //
-            //How much can you do with one string? 
-  
-        } 
+            string returnstring = "";
+
+            foreach (courseinfo course in Courses)
+            {
+                returnstring += course.Coursename;
+                returnstring += " ";
+                returnstring += course.Times.Peek();
+                
+                if (course.Times.Count > 1)
+                {
+                    Stack<string> timesbaby = new Stack<string>();
+                    timesbaby.Push(course.Times.Pop());
+                    while (course.Times.Count > 0)
+                    {
+                        returnstring += " ";
+                        returnstring += course.Times.Peek();
+                        timesbaby.Push(course.Times.Pop());
+                    }
+
+                    while (timesbaby.Count > 0)
+                    {
+                        course.Times.Push(timesbaby.Pop());
+                    }
+                }
+                             
+
+            }
+
+            return returnstring;              
+            
+        }
+
 
         private void textBox1_TextChanged(object sender, EventArgs e) // Username textbox
         {
