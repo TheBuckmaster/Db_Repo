@@ -165,27 +165,17 @@ namespace WindowsFormsApplication1
 
             if (valid && (UserList[userNdx].isPassword(passwordText.Text)))
             {
-                label1.Hide();
-                label2.Hide();
-                UsernameText.Hide();
-                passwordText.Enabled = false;
-                UsernameText.Enabled = false;
-                passwordText.Hide();
-                LoginButton.Hide();
-                LoginButton.Enabled = false;
-                ClassOfferings.Show();
-                classOfferingsToolStripMenuItem.Enabled = true;
-                classOfferingsToolStripMenuItem.ShowDropDown();
-                if (UserList[userNdx].Status != "faculty")
-                {
-                    addClassesToolStripMenuItem.Enabled = true;
-                    addClassesToolStripMenuItem.ShowDropDown();
-                }
-                if((UserList[userNdx].Status == "faculty") || (UserList[userNdx].Status == "admin"))
-                {
-                    scheduleToolStripMenuItem.Enabled = true;
-                    scheduleToolStripMenuItem.ShowDropDown();
-                }
+
+                //if (UserList[userNdx].Status != "faculty")
+                //{
+                //    addClassesToolStripMenuItem.Enabled = true;
+                //    addClassesToolStripMenuItem.ShowDropDown();
+                //}
+                //if((UserList[userNdx].Status == "faculty") || (UserList[userNdx].Status == "admin"))
+                //{
+                //    scheduleToolStripMenuItem.Enabled = true;
+                //    scheduleToolStripMenuItem.ShowDropDown();
+                //}
 
             }
             else
@@ -202,46 +192,10 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void BackToMainScreen_Click(object sender, EventArgs e)
-        {
-            CourseTextBox.Hide();
-            CourseTextBox.Enabled = false;
-            BackToMainScreen.Hide();
-            BackToMainScreen.Enabled = false;
-            ClassOfferings.Enabled = true;
-            ClassOfferings.Show();
-        }
-
-        private void ClassOfferings_Click(object sender, EventArgs e)
-        {
-            CourseTextBox.Show();
-            BackToMainScreen.Enabled = true;
-            BackToMainScreen.Show();
-            CourseTextBox.Enabled = true;
-            ClassOfferings.Hide();
-            ClassOfferings.Enabled = false;
-
-            CourseTextBox.Text = CourseShow(); 
-        }
-
-
-
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //username = "";
             //password = "";
-        }
-
-        private void classOfferingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CourseTextBox.Show();
-            BackToMainScreen.Enabled = true;
-            BackToMainScreen.Show();
-            CourseTextBox.Enabled = true;
-            ClassOfferings.Hide();
-            ClassOfferings.Enabled = false;
-
-            CourseTextBox.Text = CourseShow();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -250,12 +204,5 @@ namespace WindowsFormsApplication1
             //username = "";
             Environment.Exit(0);
         }
-
-        private void CourseTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
     }
 }
