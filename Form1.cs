@@ -108,23 +108,19 @@ namespace WindowsFormsApplication1
             {
                 returnstring += course.Coursename;
                 returnstring += " ";
-                returnstring += course.Times.Peek();
+                returnstring += course.Times.First().day;
+                returnstring += course.Times.First().start;
                 
                 if (course.Times.Count > 1)
                 {
-                    Stack<string> timesbaby = new Stack<string>();
-                    timesbaby.Push(course.Times.Pop());
-                    while (course.Times.Count > 0)
+
+                    for (int newCount=1; newCount < course.Times.Count; newCount++)
                     {
-                        returnstring += " ";
-                        returnstring += course.Times.Peek();
-                        timesbaby.Push(course.Times.Pop());
+                        returnstring += ", ";
+                        returnstring += course.Times.ElementAt(newCount).day;
+                        returnstring += course.Times.ElementAt(newCount).start;
                     }
 
-                    while (timesbaby.Count > 0)
-                    {
-                        course.Times.Push(timesbaby.Pop());
-                    }
                 }
                              
 

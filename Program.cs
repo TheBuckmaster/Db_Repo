@@ -31,7 +31,7 @@ namespace WindowsFormsApplication1
                 float credit;
                 int seats;
                 int timeblocks;
-                Stack<string> times;
+                List<coursetime> times;
                 
                 FileStream input = new FileStream(filename, FileMode.Open, FileAccess.Read);
                 StreamReader filereader = new StreamReader(input);
@@ -61,15 +61,16 @@ namespace WindowsFormsApplication1
                         currstring.Remove(0, 1);
                         currstring.TrimStart();
 
-                        times = new Stack<string>();
+                        times = new List<coursetime>();
                         for (int counter = 0; counter < timeblocks; counter++)
                         {
                             string littlestring = currstring.Substring(0, 5);
-                            times.Push(littlestring);
+                            times.Add(courseinfo.makeCourseTime(littlestring));
+                            
                             currstring.Remove(0, 5);
                             currstring.TrimStart();
                         }
-                        OurForm.Courses[howmanycourses] = new courseinfo(coursename, coursetitle, instructor, credit, seats, timeblocks, times);
+                        OurForm.Courses[howmanycourses] = new courseinfo(coursename, coursetitle, instructor, credit, seats, times);
                         howmanycourses +=1;
                         OurForm.numCourses = howmanycourses;
                     }

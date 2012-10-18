@@ -30,17 +30,17 @@ public class User
 
     public bool isPassword(string pswd) { return password == pswd; }
 
-    public int enrolledCredits()
+    public double enrolledCredits()
     {
-        int credits = 0;
+        double credits = 0.00;
         foreach (courseinfo course in schedule)
             credits += course.Credit;
         return credits;
     }
 
-    public int earnedCredits()
+    public double earnedCredits()
     {
-        int credits = 0;
+        double credits = 0.00;
         foreach (courseinfo course in history)
             credits += course.Credit;
         return credits;
@@ -92,7 +92,7 @@ public class User
 
     void unenrollCourse(ref courseinfo course, ref User student)
     {
-        if((status != "faculty") && (status != admin) && (!schedule.Remove(course)))
+        if((status != "faculty") && (status != "admin") && (!schedule.Remove(course)))
             Console.WriteLine("Unenroll failed. Were you enrolled?");
     }
 

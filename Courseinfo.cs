@@ -8,6 +8,8 @@ public struct coursetime
     public int end;     // #tt format
 }
 
+
+
 public class courseinfo
 {
     private string coursename;
@@ -26,16 +28,28 @@ public class courseinfo
     public int Enrolled { get { return enrolled; } set { enrolled = Enrolled; } }
     public List<coursetime> Times { get { return times; } }
 
-	public courseinfo(string name, string title, string prof, float cred, int spots, int timeblks, Stack<string> timestack)
+	public courseinfo(string name, string title, string prof, float cred, int spots, List<coursetime> timeslist)
 	{   
         coursename = name;
         coursetitle = title;
         instructor = prof;
         credit = cred;
         seats = spots;
-        timeblocks = timeblks;
-        times = timestack;
+        times = timeslist;
 	}
 
-    public override bool Equals(courseinfo course) { return coursename == course.Coursename; }
+    public static coursetime makeCourseTime(string TerryString)
+    {
+
+        // This function should take a TerryString and return a CourseTime struct. Obviously this is filler code. 
+
+        coursetime mycoursetime;
+        mycoursetime.day = 'M';
+        mycoursetime.start = 10;
+        mycoursetime.end = 11;
+
+        return mycoursetime;
+    }
+
+    public bool Equals(courseinfo course) { return coursename == course.Coursename; }
 }
