@@ -176,7 +176,10 @@ namespace WindowsFormsApplication1
                 //    scheduleToolStripMenuItem.Enabled = true;
                 //    scheduleToolStripMenuItem.ShowDropDown();
                 //}
-
+                Form Form2 = new Form();
+                Form2.Show();
+                this.Close();
+                
             }
             else
             {
@@ -204,5 +207,11 @@ namespace WindowsFormsApplication1
             //username = "";
             Environment.Exit(0);
         }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
     }
 }
