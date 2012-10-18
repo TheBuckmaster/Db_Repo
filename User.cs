@@ -9,9 +9,9 @@ public class User
     private string midName;
     private string lstName;
     private string status;
-    private List<courseinfo> schedule = new List<courseinfo>();
-    private List<courseinfo> history = new List<courseinfo>();
 
+    public List<courseinfo> schedule = new List<courseinfo>();
+    public List<courseinfo> history = new List<courseinfo>();
     public string UserName { get { return userName; } }
     public string FstName { get { return fstName; } }
     public string MidName { get { return midName; } }
@@ -30,15 +30,69 @@ public class User
 
     public bool isPassword(string pswd) { return password == pswd; }
 
-    void enrollCourse(courseinfo course)
+    public int enrolledCredits()
     {
-        if(status != "faculty")
-            schedule.Add(course);
+        int credits = 0;
+        foreach (courseinfo course in schedule)
+            credits += course.Credit;
+        return credits;
     }
 
-    void unenrollCourse(courseinfo course)
+    public int earnedCredits()
     {
-        if((status != "faculty") && (!schedule.Remove(course)))
+        int credits = 0;
+        foreach (courseinfo course in history)
+            credits += course.Credit;
+        return credits;
+    }
+
+    void enrollCourse(ref courseinfo course, ref User student)
+    {
+        if ((student.Status != "faculty") && (student.Status != "admin"))   // check if student
+        {
+            if (course.Enrolled < course.Seats)     // check if room in section
+            {
+                if (!student.schedule.Contains(course))     // check if student already enrolled
+                {
+                    if ((status == "admin") || ((student.enrolledCredits() + course.Credit) < 5.0)) // only let enrolled credits be >= 5 if admin
+                    {
+                        foreach (coursetime time in course.Times)
+                        {
+                            foreach (courseinfo crs in student.schedule)
+                            {
+                                foreach (coursetime time2 in crs.Times)
+                                {
+                                    if (time.day == time2.day)
+                                    {
+                                        // if either starts in the middle of the other, throw warning
+                                        if (((time.start <= time2.start)&&(time2.start <= time.end)) || ((time2.start <= time.start)&&(time.start <= time2.end)))
+                                        {
+                                            // throw scheduling conflict warning
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (student.history.Contains(course))
+                        {
+                            // throw retaking warning
+                        }
+                        student.schedule.Add(course);
+                        ++course.Enrolled;
+                    }
+                    else ; // throw "enrolled in too many credits" error
+                }
+                else ; // throw "already enrolled in a section" error
+            }
+            else ; // throw "section is full" error
+        }
+        else ; // throw "can only enroll students" error
+    }
+
+    void unenrollCourse(ref courseinfo course, ref User student)
+    {
+        if((status != "faculty") && (status != admin) && (!schedule.Remove(course)))
             Console.WriteLine("Unenroll failed. Were you enrolled?");
     }
 
