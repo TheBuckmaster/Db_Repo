@@ -13,7 +13,7 @@ public class User
     private string status;
 
     public List<courseinfo> schedule = new List<courseinfo>();
-    public List<pastcourse> history = new List<courseinfo>();
+    public List<pastcourse> history = new List<pastcourse>();
     public string UserName { get { return userName; } }
     public string FstName { get { return fstName; } }
     public string MidName { get { return midName; } }
@@ -43,7 +43,7 @@ public class User
     public double earnedCredits()
     {
         double credits = 0.00;
-        foreach (courseinfo course in history)
+        foreach (pastcourse course in history)
             credits += course.Credit;
         return credits;
     }
@@ -65,16 +65,21 @@ public class User
                             {
                                 foreach (coursetime time2 in crs.Times)
                                 {
-                                    if (time.day == time2.day)
+                                    // if either starts in the middle of the other, check if same day
+                                    if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
                                     {
-                                        // if either starts in the middle of the other, throw warning
-                                        if (((time.start <= time2.start)&&(time2.start <= time.end)) || ((time2.start <= time.start)&&(time.start <= time2.end)))
+                                        foreach (char day in time.days)
                                         {
-                                            conflict = true;
-                                            // throw scheduling conflict warning
-                                            break;
+                                            if (time2.days.Contains(day))
+                                            {
+                                                conflict = true;
+                                                // throw scheduling conflict warning
+                                                break;
+                                            }
                                         }
                                     }
+                                    if (conflict)
+                                        break;
                                 }
                                 if (conflict)
                                     break;
@@ -108,8 +113,15 @@ public class User
 
     void unenrollCourse(ref courseinfo course, ref User student)
     {
-        if((status != "faculty") && (status != "admin") && (!schedule.Remove(course)))
-            Console.WriteLine("Unenroll failed. Were you enrolled?");
+        if((status != "faculty") && (status != "admin")
+        {
+            if((student.schedule.Remove(course)) & (student.history.Remove(new pastcourse(course.Coursename, "S13", course.Credit, "N"))))
+            {
+                
+            }
+            else ; // throw "Unenroll encountered an error. Were you enrolled?" error
+        }
+        else ; // throw "can only unenroll students" error
     }
 
     public static bool operator ==(User a, User b) { return a.UserName == b.UserName; }
