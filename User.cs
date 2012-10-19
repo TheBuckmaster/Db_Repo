@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public struct pastcourse
-{
-    public string coursename;
-    public char[] term = new char[3];
-    public float credit;
-    public char[] grade = new char[2];
-}
+
 
 public class User
 {
@@ -19,7 +13,7 @@ public class User
     private string status;
 
     public List<courseinfo> schedule = new List<courseinfo>();
-    public List<courseinfo> history = new List<courseinfo>();
+    public List<pastcourse> history = new List<courseinfo>();
     public string UserName { get { return userName; } }
     public string FstName { get { return fstName; } }
     public string MidName { get { return midName; } }
@@ -64,6 +58,7 @@ public class User
                 {
                     if ((status == "admin") || ((student.enrolledCredits() + course.Credit) < 5.0)) // only let enrolled credits be >= 5 if admin
                     {
+                        bool conflict = false;
                         foreach (coursetime time in course.Times)
                         {
                             foreach (courseinfo crs in student.schedule)
@@ -75,17 +70,30 @@ public class User
                                         // if either starts in the middle of the other, throw warning
                                         if (((time.start <= time2.start)&&(time2.start <= time.end)) || ((time2.start <= time.start)&&(time.start <= time2.end)))
                                         {
+                                            conflict = true;
                                             // throw scheduling conflict warning
                                             break;
                                         }
                                     }
                                 }
+                                if (conflict)
+                                    break;
                             }
+                            if (conflict)
+                                break;
                         }
                         if (student.history.Contains(course))
                         {
                             // throw retaking warning
                         }
+
+                        pastcourse newCourse;
+                        newCourse.coursename = course.Coursename;
+                        newCourse.term = "S13";
+                        newCourse.credit = course.Credit;
+                        newCourse.grade = "N";
+                        student.history.Add(newCourse);
+
                         student.schedule.Add(course);
                         ++course.Enrolled;
                     }
