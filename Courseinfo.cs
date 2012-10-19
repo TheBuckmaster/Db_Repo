@@ -118,4 +118,5 @@ public class courseinfo
 
 
     public bool Equals(courseinfo course) { return coursename == course.Coursename; }
+    public bool Equals(pastcourse course) { return coursename == course.Coursename; }
 }

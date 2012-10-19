@@ -13,8 +13,8 @@ public class User
     private string status;
     private int userID; 
 
-    public List<courseinfo> schedule = new List<courseinfo>();
-    public List<pastcourse> history = new List<pastcourse>();
+    public List<courseinfo> Schedule = new List<courseinfo>();
+    public List<pastcourse> History = new List<pastcourse>();
     public string UserName { get { return userName; } }
     public string FstName { get { return fstName; } }
     public string MidName { get { return midName; } }
@@ -36,7 +36,7 @@ public class User
     public double enrolledCredits()
     {
         double credits = 0.00;
-        foreach (courseinfo course in schedule)
+        foreach (courseinfo course in Schedule)
             credits += course.Credit;
         return credits;
     }
@@ -44,10 +44,10 @@ public class User
     public double earnedCredits()
     {
         double credits = 0.00;
-        foreach (pastcourse course in history)
+        foreach (pastcourse course in History)
         {
             if(course.term != "F12")    // if not in progress
-                credits += course.credit;
+                credits += course.Credit;
         }
         return credits;
     }
@@ -56,16 +56,16 @@ public class User
     {
         if ((student.Status != "faculty") && (student.Status != "admin"))   // check if student
         {
-            if (course.enrolled < course.Seats)     // check if room in section
+            if (course.Enrolled < course.Seats)     // check if room in section
             {
-                if (!student.schedule.Contains(course))     // check if student already enrolled
+                if (!student.Schedule.Contains(course))     // check if student already enrolled
                 {
                     if ((status == "admin") || ((student.enrolledCredits() + course.Credit) < 5.0)) // only let enrolled credits be >= 5 if admin
                     {
                         bool conflict = false;
                         foreach (coursetime time in course.Times)
                         {
-                            foreach (courseinfo course2 in student.schedule)
+                            foreach (courseinfo course2 in student.Schedule)
                             {
                                 foreach (coursetime time2 in crs.Times) // What should this be? There is no crs. 
                                 {
@@ -92,13 +92,13 @@ public class User
                                 break;
                         }
                         // This test doesn't work, comparing a current course and a past course isn't defined. 
-                        //if (student.history.Contains(course))
+                        //if (student.History.Contains(course))
                         //{
                         //    // throw retaking warning
                         //}
 
-                        student.schedule.Add(course);
-                        ++course.enrolled;
+                        student.Schedule.Add(course);
+                        ++course.Enrolled;
                     }
                     else ; // throw "enrolled in too many credits" error
                 }
@@ -113,11 +113,10 @@ public class User
     {
         if((status != "faculty") && (status != "admin"))
         {
-            if((student.schedule.Remove(course)) & (student.history.Remove(new pastcourse(course.Coursename, "S13", course.Credit, "N"))))
-            {
-                
+            if (!student.Schedule.Remove(course))
+            {    
+                // throw "Unenroll encountered an error. Were you enrolled?" error 
             }
-            else ; // throw "Unenroll encountered an error. Were you enrolled?" error
         }
         else ; // throw "can only unenroll students" error
     }

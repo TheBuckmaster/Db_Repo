@@ -2,16 +2,19 @@
 
 public class pastcourse
 {
-    public string coursename;
-    public string term;
-    public float credit;
-    public string grade;
+    public string Coursename;
+    public string Term;
+    public float Credit;
+    public string Grade;
 
-	public pastcourse(string name, string trm, float cred, string grd)
+	public pastcourse(string coursename, string term, float credit, string grade)
 	{
-        coursename = name;
-        term = trm;
-        credit = cred;
-        grade = grd;
+        Coursename = coursename;
+        Term = term;
+        Credit = credit;
+        Grade = grade;
 	}
+
+    public bool Equals(pastcourse course) { return coursename == course.Coursename; }
+    public bool Equals(courseinfo course) { return coursename == course.Coursename; }
 }
