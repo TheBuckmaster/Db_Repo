@@ -139,7 +139,7 @@ namespace WindowsFormsApplication1
             int length = UserList.Count;
             for(int i = 0; i < length; ++i)
             {
-                if (UsernameText.Text == UserList[i].Username)
+                if (UsernameText.Text == UserList[i].UserName)
                 {
                     valid = true;
                     userNdx = i;

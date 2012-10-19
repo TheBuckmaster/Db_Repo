@@ -11,6 +11,7 @@ public class User
     private string midName;
     private string lstName;
     private string status;
+    private int userID; 
 
     public List<courseinfo> schedule = new List<courseinfo>();
     public List<pastcourse> history = new List<pastcourse>();
@@ -44,7 +45,7 @@ public class User
     {
         double credits = 0.00;
         foreach (pastcourse course in history)
-            credits += course.Credit;
+            credits += course.credit;
         return credits;
     }
 
@@ -52,7 +53,7 @@ public class User
     {
         if ((student.Status != "faculty") && (student.Status != "admin"))   // check if student
         {
-            if (course.Enrolled < course.Seats)     // check if room in section
+            if (course.enrolled < course.Seats)     // check if room in section
             {
                 if (!student.schedule.Contains(course))     // check if student already enrolled
                 {
@@ -65,7 +66,7 @@ public class User
                             {
                                 if (course.Term == course2.Term)
                                 {
-                                    foreach (coursetime time2 in crs.Times)
+                                    foreach (coursetime time2 in crs.Times) // What should this be? There is no crs. 
                                     {
                                         // if either starts in the middle of the other, check if same day
                                         if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
@@ -90,10 +91,11 @@ public class User
                             if (conflict)
                                 break;
                         }
-                        if (student.history.Contains(course))
-                        {
-                            // throw retaking warning
-                        }
+                        // This test doesn't work, comparing a current course and a past course isn't defined. 
+                        //if (student.history.Contains(course))
+                        //{
+                        //    // throw retaking warning
+                        //}
 
                         pastcourse newCourse;
                         newCourse.coursename = course.Coursename;
@@ -103,7 +105,7 @@ public class User
                         student.history.Add(newCourse);
 
                         student.schedule.Add(course);
-                        ++course.Enrolled;
+                        ++course.enrolled;
                     }
                     else ; // throw "enrolled in too many credits" error
                 }
@@ -128,6 +130,6 @@ public class User
     }
 
     public static bool operator ==(User a, User b) { return a.UserName == b.UserName; }
-
+    
     public static bool operator !=(User a, User b) { return a.UserName != b.UserName; }
 }

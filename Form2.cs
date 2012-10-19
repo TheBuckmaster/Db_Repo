@@ -12,10 +12,18 @@ namespace WindowsFormsApplication2
 {
     public partial class Form2 : Form
     {
+        List<courseinfo> CourseList = new List<courseinfo>();
+
         public Form2()
         {
             InitializeComponent();
         }
+
+        public Form2(List<courseinfo> cl)
+        {
+            CourseList = cl; 
+        }
+
 
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -39,7 +47,7 @@ namespace WindowsFormsApplication2
              // my attempt to make it workish
             for (x = 0; x < CourseList.Count; x++)
             {
-                DataGridViewCell cell = row.Cells[x]; 
+                DataGridViewCell cell = row.Cells[x]; // what does this mean? 
 
                 int i = 1; //starts at course Title then moves on
                 cell.Value = CourseList[x].Coursetitle;
@@ -48,13 +56,13 @@ namespace WindowsFormsApplication2
                 i++;
                 cell[i].Value = CourseList[x].Instructor;
                 i++;
-                cell[i].Value = CourseList[x].credit;
+                cell[i].Value = CourseList[x].Credit;
                 i++;
-                cell[i].Value = CourseList[x].seats;
+                cell[i].Value = CourseList[x].Seats;
                 i++;
-                cell[i].Value = CourseList[x].timestack;
+                cell[i].Value = CourseList[x].Times;
                 i++;
-                cell[i].Value = CourseList[x].timeblks;
+                //  cell[i].Value = CourseList[x].Timeblks;     I think this is no longer necessary. 
             }
         }
 
