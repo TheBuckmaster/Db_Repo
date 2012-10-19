@@ -25,15 +25,16 @@ public class coursetime
 
         start = tt;
 
-        if (dd % 2 == 1)
+        // should be like this according to proj-specs - apb
+        if (dd & 1)
             days.Add('M');
-        if (dd % 4 == 2)
+        if (dd & 2)
             days.Add('T');
-        if (dd % 8 == 4)
+        if (dd & 4)
             days.Add('W');
-        if (dd % 16 == 8)
+        if (dd & 8)
             days.Add('R');
-        if (dd >= 16)
+        if (dd & 16)
             days.Add('F');
 
         
