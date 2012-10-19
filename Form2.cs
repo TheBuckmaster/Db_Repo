@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
 namespace WindowsFormsApplication2
 {
     public partial class Form2 : Form
@@ -38,8 +39,10 @@ namespace WindowsFormsApplication2
              // my attempt to make it workish
             for (x = 0; x < CourseList.Count; x++)
             {
+                DataGridViewCell cell = row.Cells[x]; 
+
                 int i = 1; //starts at course Title then moves on
-                cell[i].Value = CourseList[x].Coursetitle;
+                cell.Value = CourseList[x].Coursetitle;
                 i++;
                 cell[i].Value = CourseList[x].Coursename;
                 i++;
@@ -70,6 +73,17 @@ namespace WindowsFormsApplication2
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void showScheduleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddCourseBttn.Visible = true;
+            AddCourseBttn.Enabled = true;
         }
 
     }

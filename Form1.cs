@@ -160,7 +160,7 @@ namespace WindowsFormsApplication1
                 //}
                 Form Form2 = new Form();
                 Form2.Show();
-                this.Close();
+                this.Hide();
                 
             }
             else
