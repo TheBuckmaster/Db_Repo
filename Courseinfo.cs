@@ -4,7 +4,7 @@ using System.Text;
 
 public class coursetime
 {
-    public List<char> days = new List<char>();    // MTWUF
+    public List<char> days = new List<char>();    // MTWRF
     public int start;   // #tt format
     public int end;     // #tt format
 
@@ -32,7 +32,7 @@ public class coursetime
         if (dd % 8 == 4)
             days.Add('W');
         if (dd % 16 == 8)
-            days.Add('H');
+            days.Add('R');
         if (dd >= 16)
             days.Add('F');
 
@@ -40,6 +40,9 @@ public class coursetime
         end = start + l; 
     }
 
+
+    //This function required reading chapter 16, but I feel better for it.
+    //Returns a string of the time passed in in tt format. Outputs resemble 10:00 AM
     public string showtime(int time)
     {
         StringBuilder ReturnString = new StringBuilder(); 
@@ -47,14 +50,35 @@ public class coursetime
         int minutes = (int)((time % 2.00) * 60);
         
         if (hours > 12)
-            ReturnString.AppendFormat("{0}:{1} PM",hours, minutes);
+            ReturnString.AppendFormat("{0}:{1d2} PM",hours, minutes);
         else
-            ReturnString.AppendFormat("{0}:{1} AM",hours, minutes);
+            ReturnString.AppendFormat("{0}:{1d2} AM",hours, minutes);
         
         return ReturnString.ToString();    
     }
 
+    public override string ToString()
+    {
+        StringBuilder TerryString = new StringBuilder();
 
+        int dd = 0;
+        if (days.Contains('M'))
+            dd +=1;
+        if (days.Contains('T'))
+            dd +=2;
+        if (days.Contains('W'))
+            dd += 4;
+        if (days.Contains('R'))
+            dd += 8;
+        if (days.Contains('F'))
+            dd += 16;
+
+        TerryString.Append(dd);
+        TerryString.Append(start);
+        TerryString.Append(end - start);
+        
+        return TerryString.ToString();
+    }
 
 }
 
@@ -68,7 +92,7 @@ public class courseinfo
     private float credit;
     private int seats;
     private string term;
-    private List<coursetime> times; // as initialized, these are ddttks in reverse order of entry.
+    private List<coursetime> times = new List<coursetime>(); // as initialized, these are ddttks in order of entry.
 
     public string Coursename { get { return coursename; } }
     public string Coursetitle { get { return coursetitle; } }
@@ -79,6 +103,9 @@ public class courseinfo
     public string Term { get { return term; } }
     public List<coursetime> Times { get { return times; } }
 
+
+    //timeslist should be ddttk strings, later termed 'TerryStrings' after their creator.
+    //See the one parameter constructor for coursetimes for more information. 
 	public courseinfo(string name, string title, string prof, float cred, int spots, List<coursetime> timeslist)
 	{   
         coursename = name;

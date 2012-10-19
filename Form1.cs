@@ -91,23 +91,25 @@ namespace WindowsFormsApplication1
 
         private string CourseShow()
         {
-            string returnstring = "";
+            StringBuilder returnstring = new StringBuilder();
 
             foreach (courseinfo course in Courses)
             {
-                returnstring += course.Coursename;
-                returnstring += " ";
-                returnstring += course.Times.First().day;
-                returnstring += course.Times.First().start;
+                returnstring.Append(course.Coursename);
+                returnstring.Append(" ");
+                for(int i = 0; i < course.Times.First().days.Count; i++)
+                    returnstring.Append(course.Times.First().days[i]);
+                returnstring.Append(course.Times.First().start);
                 
                 if (course.Times.Count > 1)
                 {
 
                     for (int newCount=1; newCount < course.Times.Count; newCount++)
                     {
-                        returnstring += ", ";
-                        returnstring += course.Times.ElementAt(newCount).day;
-                        returnstring += course.Times.ElementAt(newCount).start;
+                        returnstring.Append(", ");
+                        for ( int i = 0; i < course.Times.ElementAt(newCount).days.Count; i++)
+                            returnstring.Append(course.Times.ElementAt(newCount).days[i]);
+                        returnstring.Append(course.Times.ElementAt(newCount).start);
                     }
 
                 }
@@ -115,7 +117,7 @@ namespace WindowsFormsApplication1
 
             }
 
-            return returnstring;              
+            return returnstring.ToString();              
             
         }
 

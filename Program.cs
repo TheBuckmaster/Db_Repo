@@ -23,7 +23,6 @@ namespace WindowsFormsApplication1
             string filename = "ClassInput.txt";
             if (File.Exists(filename))
             {
-                int howmanycourses = 0;
                 string currstring;
                 string coursename;
                 string coursetitle;
