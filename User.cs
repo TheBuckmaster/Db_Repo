@@ -61,25 +61,28 @@ public class User
                         bool conflict = false;
                         foreach (coursetime time in course.Times)
                         {
-                            foreach (courseinfo crs in student.schedule)
+                            foreach (courseinfo course2 in student.schedule)
                             {
-                                foreach (coursetime time2 in crs.Times)
+                                if (course.Term == course2.Term)
                                 {
-                                    // if either starts in the middle of the other, check if same day
-                                    if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
+                                    foreach (coursetime time2 in crs.Times)
                                     {
-                                        foreach (char day in time.days)
+                                        // if either starts in the middle of the other, check if same day
+                                        if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
                                         {
-                                            if (time2.days.Contains(day))
+                                            foreach (char day in time.days)
                                             {
-                                                conflict = true;
-                                                // throw scheduling conflict warning
-                                                break;
+                                                if (time2.days.Contains(day))
+                                                {
+                                                    conflict = true;
+                                                    // throw scheduling conflict warning
+                                                    break;
+                                                }
                                             }
                                         }
+                                        if (conflict)
+                                            break;
                                     }
-                                    if (conflict)
-                                        break;
                                 }
                                 if (conflict)
                                     break;

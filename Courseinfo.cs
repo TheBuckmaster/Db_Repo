@@ -17,6 +17,7 @@ public class courseinfo
     private string instructor;
     private float credit;
     private int seats;
+    private string term;
     private List<coursetime> times; // as initialized, these are ddttks in reverse order of entry.
 
     public string Coursename { get { return coursename; } }
@@ -25,6 +26,7 @@ public class courseinfo
     public float Credit { get { return credit; } }
     public int Seats { get { return seats; } }
     public int enrolled;
+    public string Term { get { return term; } }
     public List<coursetime> Times { get { return times; } }
 
 	public courseinfo(string name, string title, string prof, float cred, int spots, List<coursetime> timeslist)
