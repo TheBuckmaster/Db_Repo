@@ -13,23 +13,12 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
-        public List<string> CourseList = new List<string>();
+        public List<courseinfo> Courses = new List<courseinfo>();
         private List<User> UserList = new List<User>();
         const int total = 2000;
         public int numCourses = 0;
 
-        //public struct courseinfo
-        //{
-        //    public string coursename;
-        //    public string coursetitle;
-        //    public string instructor;
-        //    public float credit; 
-        //    public int seats;
-        //    public int timeblocks;  // how many timeblocks? 
-        //    public Stack<string> times; // as initialized, these are ddttks in reverse order of entry. 
-        //}
-
-        public courseinfo[] Courses = new courseinfo[50];
+        //public courseinfo[] Courses = new courseinfo[50];
 
         //string[,] userPlusPass = new string userPlusPass[total,total]; //array for usernames and passwords
        
@@ -143,15 +132,12 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            User login = new User(UsernameText.Text, passwordText.Text, "", "", "", "");
-
-            
             bool valid = false;
             int userNdx = -1;
             int length = UserList.Count;
             for(int i = 0; i < length; ++i)
             {
-                if(login == UserList[i])
+                if (UsernameText.Text == UserList[i].Username)
                 {
                     valid = true;
                     userNdx = i;
