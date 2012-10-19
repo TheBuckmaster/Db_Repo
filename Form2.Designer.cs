@@ -30,13 +30,12 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteCourseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.AddCourseBttn = new System.Windows.Forms.Button();
             this.CheckBoxes = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.CrsTtle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CrsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,6 +44,8 @@
             this.Credt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dys = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tmie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddCourseBttn = new System.Windows.Forms.Button();
+            this.addCourseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -63,7 +64,8 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showScheduleToolStripMenuItem,
+            this.addCourseToolStripMenuItem,
+            this.deleteCourseToolStripMenuItem,
             this.viewScheduleToolStripMenuItem,
             this.logoutToolStripMenuItem,
             this.exitToolStripMenuItem});
@@ -71,13 +73,12 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // showScheduleToolStripMenuItem
+            // deleteCourseToolStripMenuItem
             // 
-            this.showScheduleToolStripMenuItem.Enabled = false;
-            this.showScheduleToolStripMenuItem.Name = "showScheduleToolStripMenuItem";
-            this.showScheduleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.showScheduleToolStripMenuItem.Text = "Add Courses";
-            this.showScheduleToolStripMenuItem.Click += new System.EventHandler(this.showScheduleToolStripMenuItem_Click);
+            this.deleteCourseToolStripMenuItem.Name = "deleteCourseToolStripMenuItem";
+            this.deleteCourseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteCourseToolStripMenuItem.Text = "Delete Course";
+            this.deleteCourseToolStripMenuItem.Click += new System.EventHandler(this.deleteCourseToolStripMenuItem_Click);
             // 
             // viewScheduleToolStripMenuItem
             // 
@@ -123,17 +124,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(682, 275);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // AddCourseBttn
-            // 
-            this.AddCourseBttn.Location = new System.Drawing.Point(610, 368);
-            this.AddCourseBttn.Name = "AddCourseBttn";
-            this.AddCourseBttn.Size = new System.Drawing.Size(75, 23);
-            this.AddCourseBttn.TabIndex = 2;
-            this.AddCourseBttn.Text = "Add Course";
-            this.AddCourseBttn.UseVisualStyleBackColor = true;
-            this.AddCourseBttn.Visible = false;
-            this.AddCourseBttn.Click += new System.EventHandler(this.button1_Click);
             // 
             // CheckBoxes
             // 
@@ -196,6 +186,24 @@
             this.Tmie.ReadOnly = true;
             this.Tmie.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
+            // AddCourseBttn
+            // 
+            this.AddCourseBttn.Location = new System.Drawing.Point(610, 368);
+            this.AddCourseBttn.Name = "AddCourseBttn";
+            this.AddCourseBttn.Size = new System.Drawing.Size(75, 23);
+            this.AddCourseBttn.TabIndex = 2;
+            this.AddCourseBttn.Text = "Add Course";
+            this.AddCourseBttn.UseVisualStyleBackColor = true;
+            this.AddCourseBttn.Visible = false;
+            this.AddCourseBttn.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // addCourseToolStripMenuItem
+            // 
+            this.addCourseToolStripMenuItem.Name = "addCourseToolStripMenuItem";
+            this.addCourseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addCourseToolStripMenuItem.Text = "Add Course";
+            this.addCourseToolStripMenuItem.Click += new System.EventHandler(this.addCourseToolStripMenuItem_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,7 +228,6 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showScheduleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewScheduleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
@@ -235,5 +242,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Credt;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dys;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tmie;
+        private System.Windows.Forms.ToolStripMenuItem deleteCourseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addCourseToolStripMenuItem;
     }
 }

@@ -80,10 +80,15 @@ namespace WindowsFormsApplication2
 
         }
 
-        private void showScheduleToolStripMenuItem_Click(object sender, EventArgs e)
+        private void deleteCourseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddCourseBttn.Visible = true;
+
+        }
+
+        private void addCourseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             AddCourseBttn.Enabled = true;
+            AddCourseBttn.Show();
         }
 
     }
