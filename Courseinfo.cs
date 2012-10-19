@@ -91,16 +91,14 @@ public class courseinfo
     private string instructor;
     private float credit;
     private int seats;
-    private string term;
     private List<coursetime> times = new List<coursetime>(); // as initialized, these are ddttks in order of entry.
 
+    public int Enrolled;
     public string Coursename { get { return coursename; } }
     public string Coursetitle { get { return coursetitle; } }
     public string Instructor { get { return instructor; } }
     public float Credit { get { return credit; } }
     public int Seats { get { return seats; } }
-    public int enrolled;
-    public string Term { get { return term; } }
     public List<coursetime> Times { get { return times; } }
 
 
@@ -114,6 +112,7 @@ public class courseinfo
         credit = cred;
         seats = spots;
         times = timeslist;
+        Enrolled = 0;
 	}
 
 
