@@ -91,11 +91,11 @@ public class User
                             if (conflict)
                                 break;
                         }
-                        // This test doesn't work, comparing a current course and a past course isn't defined. 
-                        //if (student.History.Contains(course))
-                        //{
-                        //    // throw retaking warning
-                        //}
+                        // should work now -APB 
+                        if (student.History.Contains(course))
+                        {
+                            // throw retaking warning
+                        }
 
                         student.Schedule.Add(course);
                         ++course.Enrolled;
