@@ -19,13 +19,12 @@ public class coursetime
 
     public coursetime(string TerryString)
     {
-        int dd = (int)TerryString[0] * 10 + (int)TerryString[1];
-        int tt = (int)TerryString[2] * 10 + (int)TerryString[3];
-        int l = (int)TerryString[4];
+        int dd = TerryString.Substring(0, 2).ToInt32();
+        int tt = TerryString.Substring(2, 2).ToInt32();
+        int l = TerryString.Substring(4,1).ToInt32();
 
         start = tt;
 
-        // should be like this according to proj-specs - apb
         if (dd & 1)
             days.Add('M');
         if (dd & 2)
