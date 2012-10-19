@@ -65,7 +65,7 @@ namespace WindowsFormsApplication1
                         for (int counter = 0; counter < timeblocks; counter++)
                         {
                             string littlestring = currstring.Substring(0, 5);
-                            times.Add(courseinfo.makeCourseTime(littlestring));
+                            times.Add(new coursetime(littlestring));
                             
                             currstring.Remove(0, 5);
                             currstring.TrimStart();

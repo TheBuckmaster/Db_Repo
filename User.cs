@@ -116,7 +116,7 @@ public class User
 
     void unenrollCourse(ref courseinfo course, ref User student)
     {
-        if((status != "faculty") && (status != "admin")
+        if((status != "faculty") && (status != "admin"))
         {
             if((student.schedule.Remove(course)) & (student.history.Remove(new pastcourse(course.Coursename, "S13", course.Credit, "N"))))
             {
