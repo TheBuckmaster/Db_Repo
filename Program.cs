@@ -70,9 +70,10 @@ namespace WindowsFormsApplication1
                             currstring.Remove(0, 5);
                             currstring.TrimStart();
                         }
-                        OurForm.Courses[howmanycourses] = new courseinfo(coursename, coursetitle, instructor, credit, seats, times);
-                        howmanycourses +=1;
-                        OurForm.numCourses = howmanycourses;
+                        OurForm.Courses.Add(new courseinfo(coursename, coursetitle, instructor, credit, seats, times));
+                        //OurForm.Courses[howmanycourses] = new courseinfo(coursename, coursetitle, instructor, credit, seats, times);
+                        //howmanycourses += 1;
+                        //OurForm.numCourses = howmanycourses;
                     }
                 }
                 catch (Exception e)
