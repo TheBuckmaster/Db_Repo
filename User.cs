@@ -45,7 +45,10 @@ public class User
     {
         double credits = 0.00;
         foreach (pastcourse course in history)
-            credits += course.credit;
+        {
+            if(course.term != "F12")    // if not in progress
+                credits += course.credit;
+        }
         return credits;
     }
 
@@ -64,26 +67,23 @@ public class User
                         {
                             foreach (courseinfo course2 in student.schedule)
                             {
-                                if (course.Term == course2.Term)
+                                foreach (coursetime time2 in crs.Times) // What should this be? There is no crs. 
                                 {
-                                    foreach (coursetime time2 in crs.Times) // What should this be? There is no crs. 
+                                    // if either starts in the middle of the other, check if same day
+                                    if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
                                     {
-                                        // if either starts in the middle of the other, check if same day
-                                        if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
+                                        foreach (char day in time.days)
                                         {
-                                            foreach (char day in time.days)
+                                            if (time2.days.Contains(day))
                                             {
-                                                if (time2.days.Contains(day))
-                                                {
-                                                    conflict = true;
-                                                    // throw scheduling conflict warning
-                                                    break;
-                                                }
+                                                conflict = true;
+                                                // throw scheduling conflict warning
+                                                break;
                                             }
                                         }
-                                        if (conflict)
-                                            break;
                                     }
+                                    if (conflict)
+                                        break;
                                 }
                                 if (conflict)
                                     break;
@@ -96,13 +96,6 @@ public class User
                         //{
                         //    // throw retaking warning
                         //}
-
-                        pastcourse newCourse;
-                        newCourse.coursename = course.Coursename;
-                        newCourse.term = "S13";
-                        newCourse.credit = course.Credit;
-                        newCourse.grade = "N";
-                        student.history.Add(newCourse);
 
                         student.schedule.Add(course);
                         ++course.enrolled;
