@@ -1,6 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
+public struct pastcourse
+{
+    public string coursename;
+    public char[] term = new char[3];
+    public float credit;
+    public char[] grade = new char[2];
+}
+
 public class User
 {
     private string userName;
