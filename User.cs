@@ -46,7 +46,7 @@ public class User
         double credits = 0.00;
         foreach (pastcourse course in History)
         {
-            if(course.term != "F12")    // if not in progress
+            if(course.Term != "F12")    // if not in progress
                 credits += course.Credit;
         }
         return credits;
@@ -67,7 +67,7 @@ public class User
                         {
                             foreach (courseinfo course2 in student.Schedule)
                             {
-                                foreach (coursetime time2 in crs.Times) // What should this be? There is no crs. 
+                                foreach (coursetime time2 in course2.Times) //Removed ref. to crs. I think this is what you wanted.  
                                 {
                                     // if either starts in the middle of the other, check if same day
                                     if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
@@ -91,8 +91,14 @@ public class User
                             if (conflict)
                                 break;
                         }
-                        // should work now -APB 
-                        if (student.History.Contains(course))
+                        // should work now; Your == operator is not working, but this compiles. -BPB
+                        bool retake = false;
+
+                        for (int i = 0; i < student.History.Count; i++)
+                            if (student.History[i].Coursename == course.Coursename)
+                                retake = true;
+
+                        if (retake)
                         {
                             // throw retaking warning
                         }
@@ -100,25 +106,25 @@ public class User
                         student.Schedule.Add(course);
                         ++course.Enrolled;
                     }
-                    else ; // throw "enrolled in too many credits" error
+                    else { } // throw "enrolled in too many credits" error
                 }
-                else ; // throw "already enrolled in a section" error
+                else { } // throw "already enrolled in a section" error
             }
-            else ; // throw "section is full" error
+            else { } // throw "section is full" error
         }
-        else ; // throw "can only enroll students" error
+        else { } // throw "can only enroll students" error
     }
 
     void unenrollCourse(ref courseinfo course, ref User student)
     {
-        if((status != "faculty") && (status != "admin"))
+        if ((status != "faculty") && (status != "admin"))
         {
             if (!student.Schedule.Remove(course))
-            {    
+            {
                 // throw "Unenroll encountered an error. Were you enrolled?" error 
             }
         }
-        else ; // throw "can only unenroll students" error
+        else { } // throw "can only unenroll students" error
     }
 
     public static bool operator ==(User a, User b) { return a.UserName == b.UserName; }
