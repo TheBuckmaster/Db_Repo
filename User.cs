@@ -100,12 +100,12 @@ public class User
                         bool retake = false;
 
                         for (int i = 0; i < student.History.Count; i++)
-                            if (student.History[i].Coursename == course.Coursename)
-                                retake = true;
-
-                        if (retake)
                         {
-                            // throw retaking warning
+                            if (student.History[i].Coursename == course.Coursename)
+                            {
+                                // throw retaking warning
+                                break;
+                            }
                         }
 
                         student.Schedule.Add(course);
