@@ -27,16 +27,16 @@ public class coursetime
         start = tt;
 
 
-        //These don't compile. The error message states that it can't explicitly convert ints to bool. 
-        if (dd & 1)
+        //this should do it 
+        if ((dd & 1) == 1)
             days.Add('M');
-        if (dd & 2)
+        if ((dd & 2) == 2)
             days.Add('T');
-        if (dd & 4)
+        if ((dd & 4) == 4)
             days.Add('W');
-        if (dd & 8)
+        if ((dd & 8) == 8)
             days.Add('R');
-        if (dd & 16)
+        if ((dd & 16) == 16)
             days.Add('F');
 
 
