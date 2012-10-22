@@ -33,68 +33,6 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
-
-            // read in UserDatabase
-            try
-            {
-                using (StreamReader sr = new StreamReader("UserInput.txt"))
-                {
-                    String line = sr.ReadLine();
-
-                    while (line != null)
-                    {
-                        string uname, fname, mname, lname, pswd, stat;
-
-                        // username
-                        line.TrimStart();
-                        uname = line.Substring(0, 10);
-                        uname.TrimEnd();
-                        line.Remove(0, 10);
-
-                        // password
-                        line.TrimStart();
-                        pswd = line.Substring(0, 10);
-                        pswd.TrimEnd();
-                        line.Remove(0, 10);
-
-                        // first name
-                        line.TrimStart();
-                        fname = line.Substring(0, 15);
-                        fname.TrimEnd();
-                        line.Remove(0, 15);
-
-                        // middle name
-                        line.TrimStart();
-                        mname = line.Substring(0, 15);
-                        mname.TrimEnd();
-                        line.Remove(0, 15);
-
-                        // last name
-                        line.TrimStart();
-                        lname = line.Substring(0, 15);
-                        lname.TrimEnd();
-                        line.Remove(0, 15);
-
-                        // status
-                        line.TrimStart();
-                        stat = line.Substring(0, 10);
-                        stat.TrimEnd();
-                        line.Remove(0, 10);
-
-                        // add user info
-                        User guy = new User(uname, pswd, fname, mname, lname, stat);
-                        UserList.Add(guy);
-
-                        line = sr.ReadLine();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
-            }
-
         }
 
         private string CourseShow()
