@@ -168,8 +168,8 @@ namespace WindowsFormsApplication1
                 //    scheduleToolStripMenuItem.Enabled = true;
                 //    scheduleToolStripMenuItem.ShowDropDown();
                 //}
-                Form Form2 = new Form();
-                Form2.Show();
+                Form3 frm3 = new Form3(Courses);
+                frm3.Show();
                 this.Hide();
                 
             }
@@ -185,12 +185,6 @@ namespace WindowsFormsApplication1
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //username = "";
-            //password = "";
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

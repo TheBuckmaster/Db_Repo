@@ -18,6 +18,9 @@ namespace WindowsFormsApplication1
             Application.SetCompatibleTextRenderingDefault(false);                        
             //Form1 OurForm = new Form1();
             Form1 OurForm = new Form1("BenSaysThis");
+            Application.Run(new Form2());
+
+            
 
 
             //string filename = "ClassInput.txt";
@@ -113,6 +116,7 @@ namespace WindowsFormsApplication1
 
 
             Application.Run(OurForm);
+
         }
     }
 }
