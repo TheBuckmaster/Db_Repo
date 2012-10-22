@@ -97,8 +97,6 @@ public class User
                                 break;
                         }
                         // should work now; Your == operator is not working, but this compiles. -BPB
-                        bool retake = false;
-
                         for (int i = 0; i < student.History.Count; i++)
                         {
                             if (student.History[i].Coursename == course.Coursename)
