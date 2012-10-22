@@ -27,7 +27,7 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             User Friend = new User("Ben", "Buck", "Benjamin", "P", "Buckmaster", "student");
-            UserList.add(Friend);
+            UserList.Add(Friend);
 
         }            
         public Form1()
