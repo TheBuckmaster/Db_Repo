@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
+struct errorReturn 
+{
+    public bool wasError;
+    public string errorWas; 
+}
 
 
 public class User
@@ -52,7 +57,7 @@ public class User
         return credits;
     }
 
-    void enrollCourse(ref courseinfo course, ref User student)
+    errorReturn enrollCourse(ref courseinfo course, ref User student)
     {
         if ((student.Status != "faculty") && (student.Status != "admin"))   // check if student
         {
@@ -106,25 +111,74 @@ public class User
                         student.Schedule.Add(course);
                         ++course.Enrolled;
                     }
-                    else { } // throw "enrolled in too many credits" error
+                    else {
+
+                        errorReturn er;
+                        er.wasError = true;
+                        er.errorWas = "credits";
+                        return er;
+
+                         } // throw "enrolled in too many credits" error
                 }
-                else { } // throw "already enrolled in a section" error
+                else
+                {
+
+                    errorReturn er;
+                    er.wasError = true;
+                    er.errorWas = "2enroll";
+                    return er;
+
+                } // throw "already enrolled in a section" error
             }
-            else { } // throw "section is full" error
+            else
+            {
+
+                errorReturn er;
+                er.wasError = true;
+                er.errorWas = "isfull";
+                return er;
+
+            } // throw "section is full" error
         }
-        else { } // throw "can only enroll students" error
+        else
+        {
+
+            errorReturn er;
+            er.wasError = true;
+            er.errorWas = "nonstudent";
+            return er;
+
+        } // throw "can only enroll students" error
+
+        errorReturn er1;
+        er1.wasError = false;
+        er1.errorWas = "none";
+        return er1;
     }
 
-    void unenrollCourse(ref courseinfo course, ref User student)
+    errorReturn unenrollCourse(ref courseinfo course, ref User student)
     {
         if ((status != "faculty") && (status != "admin"))
         {
             if (!student.Schedule.Remove(course))
             {
+                errorReturn er;
+                er.wasError = true;
+                er.errorWas = "notenrolled";
+                return er;
                 // throw "Unenroll encountered an error. Were you enrolled?" error 
             }
         }
-        else { } // throw "can only unenroll students" error
+        else
+        {
+            errorReturn er;
+            er.wasError = true;
+            er.errorWas = "nonstudent";
+            return er; // throw "can only unenroll students" error
+        }
+
+        errorReturn er1 = new errorReturn();
+        return er1;
     }
 
     public static bool operator ==(User a, User b) { return a.UserName == b.UserName; }
