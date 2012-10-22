@@ -22,6 +22,14 @@ namespace WindowsFormsApplication1
 
         //string[,] userPlusPass = new string userPlusPass[total,total]; //array for usernames and passwords
        
+        
+        public Form1(string message)
+        {
+            InitializeComponent();
+            User Friend = new User("Ben", "Buck", "Benjamin", "P", "Buckmaster", "student");
+            UserList.add(Friend);
+
+        }            
         public Form1()
         {
             InitializeComponent();
