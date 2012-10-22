@@ -20,9 +20,8 @@ namespace WindowsFormsApplication1
         public Form3(List<courseinfo> cl, string userName)
         {
             InitializeComponent();
-            CourseList = cl;
             this.Text = userName;
-            dataGridView1.DataSource = CourseList;
+            dataGridView1.DataSource = cl;
         }
 
         private void AddCourseBttn_Click(object sender, EventArgs e)
