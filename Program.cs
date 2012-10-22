@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1
             Application.SetCompatibleTextRenderingDefault(false);                        
             //Form1 OurForm = new Form1();
             Form1 OurForm = new Form1("BenSaysThis");
-            Application.Run(new Form2());
+            Form3 frm3 = new Form3();
 
 
             // read in UserDatabase
@@ -178,7 +178,7 @@ namespace WindowsFormsApplication1
 
 
             Application.Run(OurForm);
-
+            Application.Run(frm3);
         }
     }
 }
