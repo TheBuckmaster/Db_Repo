@@ -168,7 +168,7 @@ namespace WindowsFormsApplication1
                 //    scheduleToolStripMenuItem.Enabled = true;
                 //    scheduleToolStripMenuItem.ShowDropDown();
                 //}
-                Form3 frm3 = new Form3(Courses);
+                Form3 frm3 = new Form3(Courses, UsernameText.Text);
                 frm3.Show();
                 this.Hide();
                 
