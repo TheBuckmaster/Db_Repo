@@ -179,7 +179,13 @@ public class User
         return er1;
     }
 
-    public static bool operator ==(User a, User b) { return a.UserName == b.UserName; }
-    
-    public static bool operator !=(User a, User b) { return a.UserName != b.UserName; }
+    public bool Equals(User user)
+    { 
+        if((object)user == null)
+            return false;
+
+        return userName == user.UserName;
+    }
+    public static bool operator ==(User a, User b) { return a.Equals(b); }
+    public static bool operator !=(User a, User b) { return !a.Equals(b); }
 }
