@@ -36,27 +36,12 @@ public class User
         status = stat;
     }
 
-    public bool isPassword(string pswd) { return password == pswd; }
-
-    public double enrolledCredits()
+    public bool isPassword(string pswd)
     {
-        double credits = 0.00;
-        foreach (courseinfo course in Next)
-            credits += course.Credit;
-        return credits;
+        return password == pswd;
     }
 
-    public double earnedCredits()
-    {
-        double credits = 0.00;
-        foreach (pastcourse course in History)
-        {
-            if(course.Term != "F12")    // if not in progress
-                credits += course.Credit;
-        }
-        return credits;
-    }
-
+    
     errorReturn enrollCourse(ref courseinfo course, ref User student)
     {
         if ((student.Status != "faculty") && (student.Status != "admin"))   // check if student
@@ -156,7 +141,7 @@ public class User
 
     errorReturn unenrollCourse(ref courseinfo course, ref User student)
     {
-        if ((status != "faculty") && (status != "admin"))
+        if ((student.Status != "faculty") && (student.Status != "admin"))
         {
             if (!student.Next.Remove(course))
             {
@@ -193,5 +178,76 @@ public class User
 
 public class Student : User
 {
+    Student(string uname, string pswd, string fname, string mname, string lname, string stat)
+    {
+        // check is someone's trying to get clever
+        if ((stat != "admin") && (stat != "faculty"))
+        {
+            userName = uname;
+            password = pswd;
+            fstName = fname;
+            midName = mname;
+            lstName = lname;
+            status = stat;
+        }
+        else
+        {
+            //fail
+        }
+    }
 
+    public double enrolledCredits()
+    {
+        double credits = 0.00;
+        foreach (courseinfo course in Next)
+            credits += course.Credit;
+        return credits;
+    }
+
+    public double earnedCredits()
+    {
+        double credits = 0.00;
+        foreach (pastcourse course in History)
+        {
+            if(course.Term != "F12")    // if not in progress
+                credits += course.Credit;
+        }
+        return credits;
+    }
+
+    public override errorReturn EnrollCourse(ref courseinfo course)
+    {
+        return base.EnrollCourse(course, this);
+    }
+
+    public override errorReturn UnenrollCourse(ref courseinfo course)
+    {
+        return base.UnenrollCourse(course, this);
+    }
+}
+
+public class Faculty : User
+{
+    Faculty(string uname, string pswd, string fname, string mname, string lname)
+    {
+        userName = uname;
+        password = pswd;
+        fstName = fname;
+        midName = mname;
+        lstName = lname;
+        status = "faculty";
+    }
+}
+
+public class Admin : User
+{
+    Admin(string uname, string pswd, string fname, string mname, string lname)
+    {
+        userName = uname;
+        password = pswd;
+        fstName = fname;
+        midName = mname;
+        lstName = lname;
+        status = "admin";
+    }
 }
