@@ -16,9 +16,9 @@ public class User
     private string midName;
     private string lstName;
     private string status;
-    private int userID; 
 
-    public List<courseinfo> Schedule = new List<courseinfo>();
+    public List<courseinfo> Next = new List<courseinfo>();
+    public List<pastcourse> Current = new List<pastcourse>();
     public List<pastcourse> History = new List<pastcourse>();
     public string UserName { get { return userName; } }
     public string FstName { get { return fstName; } }
@@ -41,7 +41,7 @@ public class User
     public double enrolledCredits()
     {
         double credits = 0.00;
-        foreach (courseinfo course in Schedule)
+        foreach (courseinfo course in Next)
             credits += course.Credit;
         return credits;
     }
@@ -63,14 +63,14 @@ public class User
         {
             if (course.Enrolled < course.Seats)     // check if room in section
             {
-                if (!student.Schedule.Contains(course))     // check if student already enrolled
+                if (!student.Next.Contains(course))     // check if student already enrolled
                 {
                     if ((status == "admin") || ((student.enrolledCredits() + course.Credit) < 5.0)) // only let enrolled credits be >= 5 if admin
                     {
                         bool conflict = false;
                         foreach (coursetime time in course.Times)
                         {
-                            foreach (courseinfo course2 in student.Schedule)
+                            foreach (courseinfo course2 in student.Next)
                             {
                                 foreach (coursetime time2 in course2.Times) //Removed ref. to crs. I think this is what you wanted.  
                                 {
@@ -106,7 +106,7 @@ public class User
                             }
                         }
 
-                        student.Schedule.Add(course);
+                        student.Next.Add(course);
                         ++course.Enrolled;
                     }
                     else {
@@ -158,7 +158,7 @@ public class User
     {
         if ((status != "faculty") && (status != "admin"))
         {
-            if (!student.Schedule.Remove(course))
+            if (!student.Next.Remove(course))
             {
                 errorReturn er;
                 er.wasError = true;
@@ -188,4 +188,10 @@ public class User
     }
     public static bool operator ==(User a, User b) { return a.Equals(b); }
     public static bool operator !=(User a, User b) { return !a.Equals(b); }
+}
+
+
+public class Student : User
+{
+
 }
