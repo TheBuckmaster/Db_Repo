@@ -96,20 +96,23 @@ namespace WindowsFormsApplication1
             if (valid && (UserList[userNdx].isPassword(passwordText.Text)))
             {
 
-                //if (UserList[userNdx].Status != "faculty")
-                //{
-                //    addClassesToolStripMenuItem.Enabled = true;
-                //    addClassesToolStripMenuItem.ShowDropDown();
-                //}
-                //if((UserList[userNdx].Status == "faculty") || (UserList[userNdx].Status == "admin"))
-                //{
-                //    scheduleToolStripMenuItem.Enabled = true;
-                //    scheduleToolStripMenuItem.ShowDropDown();
-                //}
-                Form3 frm3 = new Form3(Courses, UsernameText.Text);
-                frm3.Show();
-                this.Hide();
-                
+                if (UserList[userNdx].Status == "faculty")
+                {
+                    FacultyMain fctmain = new FacultyMain(Courses,UserList);
+                    fctmain.Show();
+                    this.Hide();
+                }
+
+                else if (UserList[userNdx].Status == "admin")
+                {
+
+                }
+                else
+                {
+                    Form3 frm3 = new Form3(Courses, UsernameText.Text);
+                    frm3.Show();
+                    this.Hide();
+                }
             }
             else
             {

@@ -19,6 +19,7 @@ namespace WindowsFormsApplication1
             //Form1 OurForm = new Form1();
             Form1 OurForm = new Form1("BenSaysThis");
             Form3 frm3 = new Form3();
+            FacultyMain FctMn = new FacultyMain();
 
 
             // read in UserDatabase
@@ -179,6 +180,7 @@ namespace WindowsFormsApplication1
 
             Application.Run(OurForm);
             Application.Run(frm3);
+            Application.Run(FctMn);
         }
     }
 }
