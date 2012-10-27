@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-struct errorReturn 
+public struct errorReturn 
 {
     public bool wasError;
     public string errorWas; 
@@ -42,7 +42,7 @@ public class User
     }
 
     
-    errorReturn enrollCourse(ref courseinfo course, ref User student)
+    public virtual errorReturn enrollCourse(ref courseinfo course, ref User student)
     {
         if ((student.Status != "faculty") && (student.Status != "admin"))   // check if student
         {
@@ -215,15 +215,15 @@ public class Student : User
         return credits;
     }
 
-    public override errorReturn EnrollCourse(ref courseinfo course)
-    {
-        return base.EnrollCourse(course, this);
-    }
+    //public override errorReturn EnrollCourse(ref courseinfo course)
+    //{
+    //    return base.EnrollCourse(course, this);
+    //}
 
-    public override errorReturn UnenrollCourse(ref courseinfo course)
-    {
-        return base.UnenrollCourse(course, this);
-    }
+    //public override errorReturn UnenrollCourse(ref courseinfo course)
+    //{
+    //    return base.UnenrollCourse(course, this);
+    //}
 }
 
 public class Faculty : User
