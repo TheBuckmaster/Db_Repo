@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
+    //This is defined currently in User.cs
     //public struct errorReturn
     //{
     //    public bool wasError;
@@ -52,7 +54,9 @@ using System.Text;
         midName = mname;
         lstName = lname;
         status = stat;
-        usertype = (stat == "admin") ? VType.admin : (stat == "faculty") ? VType.faculty : (stat == "student") ? VType.student : VType.notmade; 
+        usertype = (stat == "admin") ? VType.admin : //if
+            (stat == "faculty") ? VType.faculty : //elseif
+            (stat == "student") ? VType.student : VType.notmade; //elseif, else. 
     }
 
     public bool isPassword(string pswd)
@@ -96,15 +100,22 @@ using System.Text;
         er1.errorWas = "notError";
         return er1;
     }
-
-    public bool Equals(VUser user)
+    
+    //Because usernames must be unique, this is accaptable. 
+    public override bool Equals(object obj)
     {
-        if ((object)user == null)
+        VUser You = (VUser)obj;
+        if (userName == You.userName)
+            return true;
+        else
             return false;
-
-        return userName == user.UserName;
     }
-
+    
+    //Because usernames must be unique, we can hash by them. 
+    public override int GetHashCode()
+    {
+        return userName.GetHashCode();
+    }
 
     public static bool operator ==(VUser a, VUser b) { return a.Equals(b); }
     public static bool operator !=(VUser a, VUser b) { return !a.Equals(b); }
@@ -177,7 +188,7 @@ using System.Text;
                 }
             }
         }
-
+        //Warning if the course is being retaken. 
         foreach (pastcourse oldcourse in student.History)
         {
             if (course.Coursename == oldcourse.Coursename)
@@ -189,6 +200,7 @@ using System.Text;
             }
         }
 
+        //If there were no errors. 
         if (errlist.Count == 0)
         {
             //Beyond here, no new errors and no new warnings. 
@@ -198,10 +210,12 @@ using System.Text;
 
         //Finalizing. Determine whether to return errlist or warnlist. 
         if (errlist.Count > 0)
+        //If there was an error, we'll return that list. 
         {
             return errlist;
         }
-
+        //Otherwise, we'll return the list of warnings. The only way to have returned an empty list is
+        //If there are no warnings. 
         else
         {   
             return warnlist;
@@ -214,13 +228,14 @@ using System.Text;
 
 public class VFaculty : VUser
 {
-    VUser Me;
+
     List<VStudent> advisees = new List<VStudent>();
     List<courseinfo> taught = new List<courseinfo>();
 
-    VFaculty(string uname, string pswd, string fname, string mname, string lname)
+    VFaculty(string uname, string pswd, string fname, string mname, string lname) 
+        : base(uname, pswd, fname, mname, lname, "faculty")
     {
-        Me = new VUser(uname, pswd, fname, mname, lname, "faculty");
+
     }
 
 
@@ -228,33 +243,31 @@ public class VFaculty : VUser
 
 public class VAdmin : VUser
 {
-    VUser Me;
-
-    public VAdmin(string uname, string pswd, string fname, string mname, string lname)
+    public VAdmin(string uname, string pswd, string fname, string mname, string lname) 
+        : base(uname, pswd, fname, mname, lname, "admin")
     {
-        Me = new VUser(uname, pswd, fname, mname, lname, "admin");
+
     }
 
 }
 
 public class VStudent : VUser
 {
-        VUser Me;
         public List<courseinfo> Next = new List<courseinfo>();
         public List<pastcourse> Current = new List<pastcourse>();
         public List<pastcourse> History = new List<pastcourse>();
 
-        new public string UserName { get { return Me.UserName; } }
-        public string FirstName { get { return Me.FstName; } }
-        public string MiddleName { get { return Me.MidName; } }
-        public string LastName { get { return Me.LstName; } }
+        new public string UserName { get { return base.UserName; } }
+        public string FirstName { get { return base.FstName; } }
+        public string MiddleName { get { return base.MidName; } }
+        public string LastName { get { return base.LstName; } }
         
          
 
         public VStudent(string uname, string pswd, string fname, string mname, string lname,
             List<pastcourse> histterms, List<pastcourse> thisterm, List<courseinfo> nextterm)
+            : base(uname, pswd, fname, mname, lname, "student")
         {
-            Me = new VUser(uname, pswd, fname, mname, lname, "student");
             History = histterms;
             Current = thisterm;
             Next = nextterm;
