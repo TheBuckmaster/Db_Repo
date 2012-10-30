@@ -7,8 +7,10 @@ using System.Text;
     //This is defined currently in User.cs
     //public struct errorReturn
     //{
-    //    public bool wasError;
+    //    public bool wasError;  //true == error; false == warning
     //    public string errorWas;
+
+    //    should there perhaps be a field for an eRType or wRType? 
     //}
 
     public enum VType
@@ -18,6 +20,21 @@ using System.Text;
         faculty,
         admin
     };
+
+    public enum eRType
+    { 
+        warning,   
+        full,
+        twice,
+        credits
+    }
+
+    public enum wRType
+    {
+        error,
+        conflict,
+        retake
+    }
 
     
     public class VUser
@@ -123,8 +140,9 @@ using System.Text;
 
 
     //Returns a list of errorReturns. Warnings are errorList objects with wasError = false; 
-    //Returns an empty list if there were neither errors nor warnings. 
-    public virtual List<errorReturn> enrollCourse(ref courseinfo course, ref VStudent student)
+    //Returns an empty list if there were neither errors nor warnings.
+    //Test for success by List<errorReturn> i = enrollCourse(c,s); ((i.Count == 0) || (i[0].wasError == false));
+    public virtual List<errorReturn> enrollCourse(courseinfo course, VStudent student)
     {
         List<errorReturn> errlist  = new List<errorReturn>();
         List<errorReturn> warnlist = new List<errorReturn>();
@@ -166,18 +184,18 @@ using System.Text;
 
 
         //Warnings for class conflict
-        foreach (coursetime time in course.Times)
+        foreach (coursetime time in course.Times)   //Each time the course is offered
         {
-            foreach (courseinfo course2 in student.Next)
+            foreach (courseinfo course2 in student.Next)    //Compare to each already added class
             {
-                foreach (coursetime time2 in course2.Times)
+                foreach (coursetime time2 in course2.Times)     //And each time of that class. 
                 {
                     if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
-                    {
+                    {   //Does this time overlap?
                         foreach (char day in time.days)
-                        {
+                        {   //Is it on the same day? 
                             if (time2.days.Contains(day))
-                            {
+                            {   //Throw warning message. 
                                 eN.wasError = false;
                                 StringBuilder errorstring = new StringBuilder(course.Coursetitle + "xx" + course2.Coursetitle);
                                 eN.errorWas = errorstring.ToString();
@@ -193,7 +211,7 @@ using System.Text;
         {
             if (course.Coursename == oldcourse.Coursename)
             {
-                StringBuilder estring = new StringBuilder(course.Coursename + "RT" + oldcourse.Coursename + oldcourse.Term);
+                StringBuilder estring = new StringBuilder(course.Coursename + "RT" + oldcourse.Coursename);
                 eN.wasError = false;
                 eN.errorWas = estring.ToString();
                 warnlist.Add(eN); 
@@ -204,8 +222,8 @@ using System.Text;
         if (errlist.Count == 0)
         {
             //Beyond here, no new errors and no new warnings. 
-            student.Next.Add(course);
-            course.students.Add(student);
+            student.Next.Add(course);       //The student has a course.
+            course.students.Add(student);   //The course has a student.
         }
 
         //Finalizing. Determine whether to return errlist or warnlist. 
@@ -239,6 +257,14 @@ public class VFaculty : VUser
     }
 
 
+    VFaculty(string uname, string pswd, string fname, string mname, string lname,
+        List<VStudent> advs, List<courseinfo> mycourses)
+        : base(uname, pswd, fname, mname, lname, "faculty")
+    {
+        advisees = new List<VStudent>(advs);
+        taught = new List<courseinfo>(mycourses);
+    }
+
 }
 
 public class VAdmin : VUser
@@ -249,6 +275,11 @@ public class VAdmin : VUser
 
     }
 
+    //An admin may add any student to any class. 
+    public override List<errorReturn> enrollCourse(courseinfo course, VStudent student)
+    {
+        return base.enrollCourse(course, student);
+    }
 }
 
 public class VStudent : VUser
@@ -291,6 +322,12 @@ public class VStudent : VUser
                     credits += course.Credit;
             }
             return credits;
+        }
+        
+        //A student may only enroll itself. 
+        public List<errorReturn> enrollCourse(courseinfo course)
+        {
+                return base.enrollCourse(course, this);
         }
 
 
