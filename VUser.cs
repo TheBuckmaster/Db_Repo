@@ -5,13 +5,13 @@ using System.Text;
 
 
     //This is defined currently in User.cs
-    //public struct errorReturn
-    //{
-    //    public bool wasError;  //true == error; false == warning
-    //    public string errorWas;
-
-    //    should there perhaps be a field for an eRType or wRType? 
-    //}
+    public struct errorReturn
+    {
+        public bool wasError;  //true == error; false == warning
+        public string errorWas;
+        //public eRType errortype;
+        //public wRType warningtype;
+    }
 
     public enum VType
     {
@@ -26,12 +26,14 @@ using System.Text;
         warning,   
         full,
         twice,
-        credits
+        credits,
+        baduser
     }
 
     public enum wRType
     {
         error,
+        credits,
         conflict,
         retake
     }
@@ -83,18 +85,18 @@ using System.Text;
 
     errorReturn unenrollCourse(ref courseinfo course, ref VStudent student)
     {
+        errorReturn er; 
         //if (this.status == "faculty")
         //{
         //    //Depending on Future specs, we still might want to test for this. 
         //}
 
-        if (this.status == "student")
+        if ((this.status == "student") || (this.usertype == VType.student)) 
         {
             //Is the user doing the edit the student being registered? 
             if (this != student) 
             {
-                //We have a very clever student.
-                errorReturn er;
+                //We have a very clever student.                
                 er.wasError = true;
                 er.errorWas = "diffStudent";
                 return er; //This is one where we might want to kick them out. 
@@ -104,18 +106,15 @@ using System.Text;
 
         if (!student.Next.Remove(course))
             {
-                errorReturn er;
                 er.wasError = true;
                 er.errorWas = "notenrolled";
                 return er;
                 // throw "Unenroll encountered an error. Were you enrolled?" error 
             }
         
-
-        errorReturn er1;
-        er1.wasError = false;
-        er1.errorWas = "notError";
-        return er1;
+        er.wasError = false;
+        er.errorWas = "notError";
+        return er;
     }
     
     //Because usernames must be unique, this is accaptable. 
@@ -247,8 +246,14 @@ using System.Text;
 public class VFaculty : VUser
 {
 
-    List<VStudent> advisees = new List<VStudent>();
-    List<courseinfo> taught = new List<courseinfo>();
+    enum tReq
+    {
+        curr,
+        next    
+    }
+
+    private List<VStudent> advisees = new List<VStudent>();
+    private List<courseinfo> taught = new List<courseinfo>();
 
     VFaculty(string uname, string pswd, string fname, string mname, string lname) 
         : base(uname, pswd, fname, mname, lname, "faculty")
@@ -264,6 +269,26 @@ public class VFaculty : VUser
         advisees = new List<VStudent>(advs);
         taught = new List<courseinfo>(mycourses);
     }
+
+    public List<courseinfo> Taught { get { return taught; } }
+    public List<VStudent> Advisees { get { return advisees; } }
+
+
+    //For all classes (taught), all students currently registered. (taught.students)
+    //Should return a list of students the faculty member will have for next term. 
+    public List<VStudent> futureStudents()
+    {    
+    
+    }
+
+
+    //Should return the schedule for the advisee with a list of warnings for conflicts. 
+    public List<errorReturn> VerifyAdviseeSchedule(VStudent advisee,  out List<courseinfo> AdSched)
+    { 
+    
+    }
+
+
 
 }
 
