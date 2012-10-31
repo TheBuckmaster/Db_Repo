@@ -283,7 +283,7 @@ public class VFaculty : VUser
 
 
     //Should return the schedule for the advisee with a list of warnings for conflicts. 
-    public List<errorReturn> VerifyAdviseeSchedule(VStudent advisee,  out List<courseinfo> AdSched)
+    public List<errorReturn> VerifyAdviseeSchedule(VStudent advisee,  out List<courseinfo> AdSched, tReq term)
     { 
     
     }
