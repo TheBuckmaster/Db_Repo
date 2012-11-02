@@ -4,67 +4,67 @@ using System.Linq;
 using System.Text;
 
 
-    //This is defined currently in User.cs
-    public struct errorReturn
+//This is defined currently in User.cs
+public struct errorReturn
+{
+    public bool wasError;  //true == error; false == warning
+    public string errorWas;
+    //public eRType errortype;
+    //public wRType warningtype;
+}
+
+public enum VType
+{
+    notmade,
+    student,
+    faculty,
+    admin
+};
+
+public enum eRType
+{ 
+    warning,   
+    full,
+    twice,
+    credits,
+    baduser
+}
+
+public enum wRType
+{
+    error,
+    credits,
+    conflict,
+    retake
+}
+
+
+public class VUser
+{
+    private string userName;
+    private string password;
+    private string fstName;
+    private string midName;
+    private string lstName;
+    private string status;
+    VType usertype = VType.notmade;
+
+
+    public string UserName { get { return userName; } }
+    public string FstName { get { return fstName; } }
+    public string MidName { get { return midName; } }
+    public string LstName { get { return lstName; } }
+    public string Status { get { return status; } }
+
+    //Apparently having a constructor (not using; having!) that takes no arguments 
+    //is important for inheritance purposes. 
+    public VUser()
     {
-        public bool wasError;  //true == error; false == warning
-        public string errorWas;
-        //public eRType errortype;
-        //public wRType warningtype;
+        status = "notmade";
+        usertype = VType.notmade;
     }
 
-    public enum VType
-    {
-        notmade,
-        student,
-        faculty,
-        admin
-    };
-
-    public enum eRType
-    { 
-        warning,   
-        full,
-        twice,
-        credits,
-        baduser
-    }
-
-    public enum wRType
-    {
-        error,
-        credits,
-        conflict,
-        retake
-    }
-
-    
-    public class VUser
-    {
-        private string userName;
-        private string password;
-        private string fstName;
-        private string midName;
-        private string lstName;
-        private string status;
-        VType usertype = VType.notmade;
-
-
-        public string UserName { get { return userName; } }
-        public string FstName { get { return fstName; } }
-        public string MidName { get { return midName; } }
-        public string LstName { get { return lstName; } }
-        public string Status { get { return status; } }
-
-        //Apparently having a constructor (not using; having!) that takes no arguments 
-        //is important for inheritance purposes. 
-        public VUser()
-        {
-            status = "notmade";
-            usertype = VType.notmade; 
-        }
-
-        public VUser(string uname, string pswd, string fname, string mname, string lname, string stat)
+    public VUser(string uname, string pswd, string fname, string mname, string lname, string stat)
     {
         stat = stat.ToLower();
         userName = uname;
@@ -83,40 +83,76 @@ using System.Text;
         return password == pswd;
     }
 
-    errorReturn unenrollCourse(ref courseinfo course, ref VStudent student)
+    public virtual errorReturn unenrollCourse(ref courseinfo course, ref VStudent student)
     {
-        errorReturn er; 
+        errorReturn er;
         //if (this.status == "faculty")
         //{
         //    //Depending on Future specs, we still might want to test for this. 
         //}
-
-        if ((this.status == "student") || (this.usertype == VType.student)) 
-        {
-            //Is the user doing the edit the student being registered? 
-            if (this != student) 
-            {
-                //We have a very clever student.                
-                er.wasError = true;
-                er.errorWas = "diffStudent";
-                return er; //This is one where we might want to kick them out. 
-            }
-        }
+        // shouldn't be needed
+        //if ((this.status == "student") || (this.usertype == VType.student))
+        //{
+        //    //Is the user doing the edit the student being registered? 
+        //    if (this != student)
+        //    {
+        //        //We have a very clever student.                
+        //        er.wasError = true;
+        //        er.errorWas = "diffStudent";
+        //        return er; //This is one where we might want to kick them out. 
+        //    }
+        //}
 
 
         if (!student.Next.Remove(course))
+        {
+            er.wasError = true;
+            er.errorWas = "notenrolled";
+            return er;
+            // throw "Unenroll encountered an error. Were you enrolled?" error 
+        }
+
+        //recheck conflicts
+        student.Conflicts.Empty();
+        for (int i = 0; i < Next.Count; ++i)
+        {
+            foreach (coursetime time in Next[i].times)
             {
-                er.wasError = true;
-                er.errorWas = "notenrolled";
-                return er;
-                // throw "Unenroll encountered an error. Were you enrolled?" error 
+                for (int j = i + 1; j < Next.Count; ++j)
+                {
+                    foreach (coursetime time2 in Next[j].times)
+                    {
+                        if ((!Conflicts.Contains(Next[i])) && (!Conflicts.Contains(Next[j])))
+                        {
+                            bool iscnflct = false;
+                            if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
+                            {   //Does this time overlap?
+                                foreach (char day in time.days)
+                                {   //Is it on the same day? 
+                                    if (time2.days.Contains(day))
+                                    {
+                                        if (!Conflicts.Contains(Next[i]))
+                                            Conflicts.Add(Next[i].Coursetitle);
+                                        if (!Conflicts.Contains(Next[j]))
+                                            Conflicts.Add(Next[j].Coursetitle);
+                                        iscnflct = true;
+                                        break;
+                                    }
+                                }
+                                if (iscnflct)
+                                    break;
+                            }
+                        }
+                    }
+                }
             }
-        
+        }
+
         er.wasError = false;
         er.errorWas = "notError";
         return er;
     }
-    
+
     //Because usernames must be unique, this is accaptable. 
     public override bool Equals(object obj)
     {
@@ -126,7 +162,7 @@ using System.Text;
         else
             return false;
     }
-    
+
     //Because usernames must be unique, we can hash by them. 
     public override int GetHashCode()
     {
@@ -141,24 +177,25 @@ using System.Text;
     //Returns a list of errorReturns. Warnings are errorList objects with wasError = false; 
     //Returns an empty list if there were neither errors nor warnings.
     //Test for success by List<errorReturn> i = enrollCourse(c,s); ((i.Count == 0) || (i[0].wasError == false));
-    public virtual List<errorReturn> enrollCourse(courseinfo course, VStudent student)
+    public virtual List<errorReturn> enrollCourse(ref courseinfo course, ref VStudent student)
     {
-        List<errorReturn> errlist  = new List<errorReturn>();
+        List<errorReturn> errlist = new List<errorReturn>();
         List<errorReturn> warnlist = new List<errorReturn>();
         errorReturn eN; // Always use this to add errors and warnings. 
-     
-        //Generate list of Errors.
-        if (course.Enrolled == course.Seats) //Is the course full? Return an error. 
-        {
-            eN.wasError = true;
-            eN.errorWas = "CourseIsFull";
-            errlist.Add(eN);
-        }
 
         if (student.Next.Contains(course)) //Is the student already registered for this course? Return an error. 
         {
             eN.wasError = true;
             eN.errorWas = "AlreadyHere";
+            errlist.Add(eN);
+            return errlist;
+        }
+
+        //Generate list of Errors.
+        if (course.Enrolled == course.Seats) //Is the course full? Return an error. 
+        {
+            eN.wasError = true;
+            eN.errorWas = "CourseIsFull";
             errlist.Add(eN);
         }
 
@@ -176,70 +213,61 @@ using System.Text;
                 errlist.Add(eN);
             }
         }
-        
-        
-        
-        //Generate list of Warnings. 
 
+        if (errlist.Count == 0)
+        {   //Generate list of Warnings.
 
-        //Warnings for class conflict
-        foreach (coursetime time in course.Times)   //Each time the course is offered
-        {
+            //Warnings for class conflict
             foreach (courseinfo course2 in student.Next)    //Compare to each already added class
             {
-                foreach (coursetime time2 in course2.Times)     //And each time of that class. 
+                foreach (coursetime time in course.Times)   //Each time the course is offered
                 {
-                    if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
-                    {   //Does this time overlap?
-                        foreach (char day in time.days)
-                        {   //Is it on the same day? 
-                            if (time2.days.Contains(day))
-                            {   //Throw warning message. 
-                                eN.wasError = false;
-                                StringBuilder errorstring = new StringBuilder(course.Coursetitle + "xx" + course2.Coursetitle);
-                                eN.errorWas = errorstring.ToString();
-                                warnlist.Add(eN);
+                    foreach (coursetime time2 in course2.Times)     //And each time of that class. 
+                    {
+                        bool iscnflct = false;
+                        if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
+                        {   //Does this time overlap?
+                            foreach (char day in time.days)
+                            {   //Is it on the same day? 
+                                if (time2.days.Contains(day))
+                                {   //Throw warning message. 
+                                    eN.wasError = false;
+                                    eN.errorWas = "!" + course2.Coursetitle;
+                                    warnlist.Add(eN);
+                                    if (!student.Conflicts.Containts(course))
+                                        student.Conflicts.Add(course.Coursetitle);
+                                    if (!student.Conflicts.Contains(course2))
+                                        student.Conflicts.Add(course2.Coursetitle);
+                                    iscnflct = true;
+                                    break;
+                                }
                             }
+                            if (iscnflct)
+                                break;
                         }
                     }
                 }
             }
-        }
-        //Warning if the course is being retaken. 
-        foreach (pastcourse oldcourse in student.History)
-        {
-            if (course.Coursename == oldcourse.Coursename)
+            //Warning if the course is being retaken. 
+            foreach (pastcourse oldcourse in student.History)
             {
-                StringBuilder estring = new StringBuilder(course.Coursename + "RT" + oldcourse.Coursename);
-                eN.wasError = false;
-                eN.errorWas = estring.ToString();
-                warnlist.Add(eN); 
+                if (course.Coursename == oldcourse.Coursename)
+                {
+                    eN.wasError = false;
+                    en.errorWas = "?" + oldcourse.Coursetitle;
+                    warnlist.Add(eN);
+                }
             }
-        }
 
-        //If there were no errors. 
-        if (errlist.Count == 0)
-        {
             //Beyond here, no new errors and no new warnings. 
             student.Next.Add(course);       //The student has a course.
             course.students.Add(student);   //The course has a student.
-        }
-
-        //Finalizing. Determine whether to return errlist or warnlist. 
-        if (errlist.Count > 0)
-        //If there was an error, we'll return that list. 
-        {
-            return errlist;
-        }
-        //Otherwise, we'll return the list of warnings. The only way to have returned an empty list is
-        //If there are no warnings. 
-        else
-        {   
+            //Otherwise, we'll return the list of warnings. The only way to have returned an empty list is
+            //If there are no warnings. 
             return warnlist;
         }
+        else return errlist;
     }
-
-
 }
 
 
@@ -249,13 +277,13 @@ public class VFaculty : VUser
     enum tReq
     {
         curr,
-        next    
+        next
     }
 
     private List<VStudent> advisees = new List<VStudent>();
     private List<courseinfo> taught = new List<courseinfo>();
 
-    VFaculty(string uname, string pswd, string fname, string mname, string lname) 
+    VFaculty(string uname, string pswd, string fname, string mname, string lname)
         : base(uname, pswd, fname, mname, lname, "faculty")
     {
 
@@ -277,15 +305,15 @@ public class VFaculty : VUser
     //For all classes (taught), all students currently registered. (taught.students)
     //Should return a list of students the faculty member will have for next term. 
     public List<VStudent> futureStudents()
-    {    
-    
+    {
+
     }
 
 
     //Should return the schedule for the advisee with a list of warnings for conflicts. 
-    public List<errorReturn> VerifyAdviseeSchedule(VStudent advisee,  out List<courseinfo> AdSched, tReq term)
-    { 
-    
+    public List<errorReturn> VerifyAdviseeSchedule(VStudent advisee, out List<courseinfo> AdSched, tReq term)
+    {
+
     }
 
 
@@ -294,66 +322,106 @@ public class VFaculty : VUser
 
 public class VAdmin : VUser
 {
-    public VAdmin(string uname, string pswd, string fname, string mname, string lname) 
+    public VAdmin(string uname, string pswd, string fname, string mname, string lname)
         : base(uname, pswd, fname, mname, lname, "admin")
     {
 
     }
 
     //An admin may add any student to any class. 
-    public override List<errorReturn> enrollCourse(courseinfo course, VStudent student)
+    public override List<errorReturn> enrollCourse(ref courseinfo course, ref VStudent student)
     {
         return base.enrollCourse(course, student);
+    }
+
+    public override errorReturn unenrollCourse(ref courseinfo course, ref VStudent student)
+    {
+        return base.unenrollCourse(course, student);
     }
 }
 
 public class VStudent : VUser
 {
-        public List<courseinfo> Next = new List<courseinfo>();
-        public List<pastcourse> Current = new List<pastcourse>();
-        public List<pastcourse> History = new List<pastcourse>();
+    public List<courseinfo> Next = new List<courseinfo>();
+    public List<pastcourse> Current = new List<pastcourse>();
+    public List<pastcourse> History = new List<pastcourse>();
+    public List<string> Conflicts = new List<string>();
 
-        new public string UserName { get { return base.UserName; } }
-        public string FirstName { get { return base.FstName; } }
-        public string MiddleName { get { return base.MidName; } }
-        public string LastName { get { return base.LstName; } }
-        
-         
+    new public string UserName { get { return base.UserName; } }
+    public string FirstName { get { return base.FstName; } }
+    public string MiddleName { get { return base.MidName; } }
+    public string LastName { get { return base.LstName; } }
 
-        public VStudent(string uname, string pswd, string fname, string mname, string lname,
-            List<pastcourse> histterms, List<pastcourse> thisterm, List<courseinfo> nextterm)
-            : base(uname, pswd, fname, mname, lname, "student")
+
+
+    public VStudent(string uname, string pswd, string fname, string mname, string lname,
+        List<pastcourse> pstterms, List<pastcourse> thisterm, List<courseinfo> nextterm)
+        : base(uname, pswd, fname, mname, lname, "student")
+    {
+        History = new List<pastcourse>(pstterms);
+        Current = new List<pastcourse>(thisterm);
+        Next = new List<courseinfo>(nextterm);
+
+        //find conflicts
+        for (int i = 0; i < Next.Count; ++i)
         {
-            History = histterms;
-            Current = thisterm;
-            Next = nextterm;
-        }
-
-        public double enrolledCredits()
-        {
-            double credits = 0.00;
-            foreach (courseinfo course in Next)
-                credits += course.Credit;
-            return credits;
-        }
-
-        public double earnedCredits()
-        {
-            double credits = 0.00;
-            foreach (pastcourse course in History)
+            foreach (coursetime time in Next[i].times)
             {
-                //I don't think this line is needed anymore, since we don't have current courses in history anymore. 
-                //if (course.Term != "F12")    // if not in progress
-                    credits += course.Credit;
+                for (int j = i + 1; j < Next.Count; ++j)
+                {
+                    foreach (coursetime time2 in Next[j].times)
+                    {
+                        if ((!Conflicts.Contains(Next[i])) && (!Conflicts.Contains(Next[j])))
+                        {
+                            bool iscnflct = false;
+                            if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
+                            {   //Does this time overlap?
+                                foreach (char day in time.days)
+                                {   //Is it on the same day? 
+                                    if (time2.days.Contains(day))
+                                    {
+                                        if (!Conflicts.Contains(Next[i]))
+                                            Conflicts.Add(Next[i].Coursetitle);
+                                        if (!Conflicts.Contains(Next[j]))
+                                            Conflicts.Add(Next[j].Coursetitle);
+                                        iscnflct = true;
+                                        break;
+                                    }
+                                }
+                                if (iscnflct)
+                                    break;
+                            }
+                        }
+                    }
+                }
             }
-            return credits;
         }
-        
-        //A student may only enroll itself. 
-        public List<errorReturn> enrollCourse(courseinfo course)
-        {
-                return base.enrollCourse(course, this);
-        }
+    }
 
+    public double enrolledCredits()
+    {
+        double credits = 0.00;
+        foreach (courseinfo course in Next)
+            credits += course.Credit;
+        return credits;
+    }
 
+    public double earnedCredits()
+    {
+        double credits = 0.00;
+        foreach (pastcourse course in History)
+            credits += course.Credit;
+        return credits;
+    }
+
+    //A student may only enroll itself. 
+    public override List<errorReturn> enrollCourse(ref courseinfo course)
+    {
+        return base.enrollCourse(course, this);
+    }
+
+    public override errorReturn unenrollCourse(ref courseinfo course)
+    {
+        return base.unenrollCourse(course, ref this);
+    }
 }
