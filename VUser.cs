@@ -83,6 +83,44 @@ public class VUser
         return password == pswd;
     }
 
+    public void checkConflicts(ref VStudent student)
+    {
+        student.Conflicts.Empty();
+        for (int i = 0; i < student.Next.Count; ++i)
+        {
+            foreach (coursetime time in student.Next[i].times)
+            {
+                for (int j = i + 1; j < student.Next.Count; ++j)
+                {
+                    foreach (coursetime time2 in student.Next[j].times)
+                    {
+                        if ((!student.Conflicts.Contains(student.Next[i].Coursetitle)) && (!student.Conflicts.Contains(student.Next[j].Coursetitle)))
+                        {
+                            bool iscnflct = false;
+                            if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
+                            {   //Does this time overlap?
+                                foreach (char day in time.days)
+                                {   //Is it on the same day? 
+                                    if (time2.days.Contains(day))
+                                    {
+                                        if (!student.Conflicts.Contains(Next[i]))
+                                            student.Conflicts.Add(Next[i].Coursetitle);
+                                        if (!student.Conflicts.Contains(Next[j]))
+                                            student.Conflicts.Add(Next[j].Coursetitle);
+                                        iscnflct = true;
+                                        break;
+                                    }
+                                }
+                                if (iscnflct)
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public virtual errorReturn unenrollCourse(ref courseinfo course, ref VStudent student)
     {
         errorReturn er;
@@ -113,40 +151,7 @@ public class VUser
         }
 
         //recheck conflicts
-        student.Conflicts.Empty();
-        for (int i = 0; i < Next.Count; ++i)
-        {
-            foreach (coursetime time in Next[i].times)
-            {
-                for (int j = i + 1; j < Next.Count; ++j)
-                {
-                    foreach (coursetime time2 in Next[j].times)
-                    {
-                        if ((!Conflicts.Contains(Next[i])) && (!Conflicts.Contains(Next[j])))
-                        {
-                            bool iscnflct = false;
-                            if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
-                            {   //Does this time overlap?
-                                foreach (char day in time.days)
-                                {   //Is it on the same day? 
-                                    if (time2.days.Contains(day))
-                                    {
-                                        if (!Conflicts.Contains(Next[i]))
-                                            Conflicts.Add(Next[i].Coursetitle);
-                                        if (!Conflicts.Contains(Next[j]))
-                                            Conflicts.Add(Next[j].Coursetitle);
-                                        iscnflct = true;
-                                        break;
-                                    }
-                                }
-                                if (iscnflct)
-                                    break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        checkConflicts(student);
 
         er.wasError = false;
         er.errorWas = "notError";
@@ -249,14 +254,11 @@ public class VUser
                 }
             }
             //Warning if the course is being retaken. 
-            foreach (pastcourse oldcourse in student.History)
+            if(student.History.Contains(course) || (student.Current.Contains(course))
             {
-                if (course.Coursename == oldcourse.Coursename)
-                {
-                    eN.wasError = false;
-                    en.errorWas = "?" + oldcourse.Coursetitle;
-                    warnlist.Add(eN);
-                }
+                eN.wasError = false;
+                en.errorWas = "?" + oldcourse.Coursetitle;
+                warnlist.Add(eN);
             }
 
             //Beyond here, no new errors and no new warnings. 
@@ -363,39 +365,7 @@ public class VStudent : VUser
         Next = new List<courseinfo>(nextterm);
 
         //find conflicts
-        for (int i = 0; i < Next.Count; ++i)
-        {
-            foreach (coursetime time in Next[i].times)
-            {
-                for (int j = i + 1; j < Next.Count; ++j)
-                {
-                    foreach (coursetime time2 in Next[j].times)
-                    {
-                        if ((!Conflicts.Contains(Next[i])) && (!Conflicts.Contains(Next[j])))
-                        {
-                            bool iscnflct = false;
-                            if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
-                            {   //Does this time overlap?
-                                foreach (char day in time.days)
-                                {   //Is it on the same day? 
-                                    if (time2.days.Contains(day))
-                                    {
-                                        if (!Conflicts.Contains(Next[i]))
-                                            Conflicts.Add(Next[i].Coursetitle);
-                                        if (!Conflicts.Contains(Next[j]))
-                                            Conflicts.Add(Next[j].Coursetitle);
-                                        iscnflct = true;
-                                        break;
-                                    }
-                                }
-                                if (iscnflct)
-                                    break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        checkConflicts(this);
     }
 
     public double enrolledCredits()
@@ -422,6 +392,6 @@ public class VStudent : VUser
 
     public override errorReturn unenrollCourse(ref courseinfo course)
     {
-        return base.unenrollCourse(course, ref this);
+        return base.unenrollCourse(course, this);
     }
 }
