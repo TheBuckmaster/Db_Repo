@@ -15,6 +15,6 @@ public class pastcourse
         Grade = grade;
 	}
 
-    public bool Equals(pastcourse course) { return Coursename.Substring(0, Coursename.Length - 2) == course.Coursename.Substring(0, course.Coursename.Length - 2); }
-    public bool Equals(courseinfo course) { return Coursename.Substring(0, Coursename.Length - 2) == course.Coursename.Substring(0, course.Coursename.Length - 2); }
+    public bool Equals(pastcourse course) { return Coursename.Substring(0, Coursename.Length - 3) == course.Coursename.Substring(0, course.Coursename.Length - 3); }
+    public bool Equals(courseinfo course) { return Coursename.Substring(0, Coursename.Length - 3) == course.Coursename.Substring(0, course.Coursename.Length - 3); }
 }

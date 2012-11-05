@@ -54,7 +54,7 @@ public class courseinfo
 
     public bool isFull()
     {
-        return seat <= students.Count();
+        return seats <= students.Count();
     }
 
     public bool enrollStudent(ref VStudent student)
@@ -64,6 +64,6 @@ public class courseinfo
         else return false;
     }
 
-    public bool Equals(courseinfo course) { return coursename.Substring(0, coursename.Length - 2) == course.Coursename.Substring(0, course.Coursename.Length - 2); }
-    public bool Equals(pastcourse course) { return coursename.Substring(0, coursename.Length - 2) == course.Coursename.Substring(0, course.Coursename.Length - 2); }
+    public bool Equals(courseinfo course) { return coursename.Substring(0, coursename.Length - 3) == course.Coursename.Substring(0, course.Coursename.Length - 3); }
+    public bool Equals(pastcourse course) { return coursename.Substring(0, coursename.Length - 3) == course.Coursename.Substring(0, course.Coursename.Length - 3); }
 }
