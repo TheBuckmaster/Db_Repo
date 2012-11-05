@@ -280,15 +280,19 @@ public class VUser
 public class VFaculty : VUser
 {
 
-    enum tReq
-    {
-        curr,
-        next
-    }
+    //enum tReq
+    //{
+    //    curr,
+    //    next
+    //}
 
     private List<VStudent> advisees = new List<VStudent>();
     private List<courseinfo> currentClasses = new List<courseinfo>();
     private List<courseinfo> nextClasses = new List<courseinfo>();
+
+    public List<VStudent> Advisees { get { return advisees; } }
+    public List<courseinfo> CurrentClasses { get { return currentClasses; } }
+    public List<courseinfo> NextClasses { get { return nextClasses; } }
 
     VFaculty(string uname, string pswd, string fname, string mname, string lname)
         : base(uname, pswd, fname, mname, lname, "faculty")
@@ -305,10 +309,6 @@ public class VFaculty : VUser
         currentClasses = new List<courseinfo>(curcourses);
         nextClasses = new List<courseinfo>(nxtcourses);
     }
-
-    public List<VStudent> Advisees { get { return advisees; } }
-    public List<courseinfo> CurrentClasses { get { return currentClasses; } }
-    public List<courseinfo> NextClasses { get { return nextClasses; } }
 
 
     //For all classes (taught), all students currently registered. (taught.students)
@@ -329,15 +329,17 @@ public class VFaculty : VUser
         return nextStudents;
     }
 
-
-    //Should return the schedule for the advisee with a list of warnings for conflicts. 
-    public List<errorReturn> VerifyAdviseeSchedule(VStudent advisee, out List<courseinfo> AdSched, tReq term)
+    public List<courseinfo> VerifyAdviseeCurrentSchedule(ref VStudent advisee)
     {
-
+        return advisee.Current;
     }
 
-
-
+    //Should return the schedule for the advisee with a list of warnings for conflicts. 
+    public List<courseinfo> VerifyAdviseeNextSchedule(ref VStudent advisee, out List<string> conflicts)
+    {
+        conflicts = new List<string>(advisee.Conflicts);
+        return advisee.Next;
+    }
 }
 
 public class VAdmin : VUser
