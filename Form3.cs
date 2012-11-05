@@ -17,11 +17,10 @@ namespace WindowsFormsApplication1
         }
         List<courseinfo> CourseList = new List<courseinfo>();
 
-        public Form3(List<courseinfo> cl, string userName)
+        public Form3(string userName)
         {
             InitializeComponent();
             this.Text = userName;
-            dataGridView1.DataSource = cl;
         }
 
         private void AddCourseBttn_Click(object sender, EventArgs e)
@@ -62,6 +61,11 @@ namespace WindowsFormsApplication1
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void listView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

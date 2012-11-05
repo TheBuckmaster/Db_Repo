@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.AddCourseBttn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.CheckBoxes = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -46,8 +47,20 @@
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listView = new System.Windows.Forms.ListView();
+            this.LVCourseTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LVCourseName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LVProfesser = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LVSeats = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LVCredit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LVDays = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LVTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.courseOfferings1 = new WindowsFormsApplication1.CourseOfferings();
+            this.courseOfferings1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.courseOfferings1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.courseOfferings1BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // AddCourseBttn
@@ -63,6 +76,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CheckBoxes,
@@ -73,6 +87,7 @@
             this.Credt,
             this.Dys,
             this.Tmie});
+            this.dataGridView1.DataSource = this.courseOfferings1BindingSource;
             this.dataGridView1.Enabled = false;
             this.dataGridView1.Location = new System.Drawing.Point(12, 27);
             this.dataGridView1.MultiSelect = false;
@@ -170,7 +185,7 @@
             // addCourseToolStripMenuItem
             // 
             this.addCourseToolStripMenuItem.Name = "addCourseToolStripMenuItem";
-            this.addCourseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addCourseToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.addCourseToolStripMenuItem.Text = "Add Course";
             this.addCourseToolStripMenuItem.Click += new System.EventHandler(this.addCourseToolStripMenuItem_Click_1);
             // 
@@ -183,21 +198,21 @@
             // viewScheduleToolStripMenuItem
             // 
             this.viewScheduleToolStripMenuItem.Name = "viewScheduleToolStripMenuItem";
-            this.viewScheduleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewScheduleToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.viewScheduleToolStripMenuItem.Text = "View Schedule";
             this.viewScheduleToolStripMenuItem.Click += new System.EventHandler(this.viewScheduleToolStripMenuItem_Click_1);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click_1);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -207,11 +222,74 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
+            // listView
+            // 
+            this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.LVCourseTitle,
+            this.LVCourseName,
+            this.LVProfesser,
+            this.LVSeats,
+            this.LVCredit,
+            this.LVDays,
+            this.LVTime});
+            this.listView.DataBindings.Add(new System.Windows.Forms.Binding("GridLines", global::WindowsFormsApplication1.Properties.Settings.Default, "GridLines", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.listView.GridLines = global::WindowsFormsApplication1.Properties.Settings.Default.GridLines;
+            this.listView.Location = new System.Drawing.Point(25, 139);
+            this.listView.Name = "listView";
+            this.listView.Size = new System.Drawing.Size(682, 275);
+            this.listView.TabIndex = 6;
+            this.listView.UseCompatibleStateImageBehavior = false;
+            this.listView.SelectedIndexChanged += new System.EventHandler(this.listView_SelectedIndexChanged);
+            // 
+            // LVCourseTitle
+            // 
+            this.LVCourseTitle.Text = "Course Title";
+            // 
+            // LVCourseName
+            // 
+            this.LVCourseName.Text = "Course Name";
+            this.LVCourseName.Width = 120;
+            // 
+            // LVProfesser
+            // 
+            this.LVProfesser.Text = "Professer";
+            this.LVProfesser.Width = 120;
+            // 
+            // LVSeats
+            // 
+            this.LVSeats.Text = "Seats";
+            this.LVSeats.Width = 75;
+            // 
+            // LVCredit
+            // 
+            this.LVCredit.Text = "Credit";
+            // 
+            // LVDays
+            // 
+            this.LVDays.Text = "Days";
+            this.LVDays.Width = 90;
+            // 
+            // LVTime
+            // 
+            this.LVTime.Text = "Time";
+            this.LVTime.Width = 120;
+            // 
+            // courseOfferings1
+            // 
+            this.courseOfferings1.DataSetName = "CourseOfferings";
+            this.courseOfferings1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // courseOfferings1BindingSource
+            // 
+            this.courseOfferings1BindingSource.DataSource = this.courseOfferings1;
+            this.courseOfferings1BindingSource.Position = 0;
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(719, 361);
+            this.Controls.Add(this.listView);
             this.Controls.Add(this.AddCourseBttn);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menuStrip1);
@@ -220,6 +298,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.courseOfferings1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.courseOfferings1BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,5 +325,15 @@
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ListView listView;
+        private System.Windows.Forms.ColumnHeader LVCourseTitle;
+        private System.Windows.Forms.ColumnHeader LVCourseName;
+        private System.Windows.Forms.ColumnHeader LVProfesser;
+        private System.Windows.Forms.ColumnHeader LVSeats;
+        private System.Windows.Forms.ColumnHeader LVCredit;
+        private System.Windows.Forms.ColumnHeader LVDays;
+        private System.Windows.Forms.ColumnHeader LVTime;
+        private CourseOfferings courseOfferings1;
+        private System.Windows.Forms.BindingSource courseOfferings1BindingSource;
     }
 }

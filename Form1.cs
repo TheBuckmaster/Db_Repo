@@ -14,7 +14,7 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
         public List<courseinfo> Courses = new List<courseinfo>();
-        private List<User> UserList = new List<User>();
+        private List<VUser> UserList = new List<VUser>();
         const int total = 2000;
         public int numCourses = 0;
 
@@ -98,7 +98,7 @@ namespace WindowsFormsApplication1
 
                 if (UserList[userNdx].Status == "faculty")
                 {
-                    FacultyMain fctmain = new FacultyMain(Courses,UserList);
+                    FacultyMain fctmain = new FacultyMain(UserList);
                     fctmain.Show();
                     this.Hide();
                 }
@@ -109,7 +109,7 @@ namespace WindowsFormsApplication1
                 }
                 else
                 {
-                    Form3 frm3 = new Form3(Courses, UsernameText.Text);
+                    Form3 frm3 = new Form3( UsernameText.Text);
                     frm3.Show();
                     this.Hide();
                 }
