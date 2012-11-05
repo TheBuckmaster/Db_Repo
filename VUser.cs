@@ -190,7 +190,7 @@ public class VUser
 
         if (student.Next.Contains(course)) //Is the student already registered for this course? Return an error. 
         {
-            if (course.students.Contains(student))
+            if (course.Students.Contains(student))
             {
                 eN.wasError = true;
                 eN.errorWas = "AlreadyHere";
@@ -287,7 +287,8 @@ public class VFaculty : VUser
     }
 
     private List<VStudent> advisees = new List<VStudent>();
-    private List<courseinfo> taught = new List<courseinfo>();
+    private List<courseinfo> currentClasses = new List<courseinfo>();
+    private List<courseinfo> nextClasses = new List<courseinfo>();
 
     VFaculty(string uname, string pswd, string fname, string mname, string lname)
         : base(uname, pswd, fname, mname, lname, "faculty")
@@ -297,22 +298,35 @@ public class VFaculty : VUser
 
 
     VFaculty(string uname, string pswd, string fname, string mname, string lname,
-        List<VStudent> advs, List<courseinfo> mycourses)
+        List<VStudent> advs, List<courseinfo> curcourses, List<courseinfo> nxtcourses)
         : base(uname, pswd, fname, mname, lname, "faculty")
     {
         advisees = new List<VStudent>(advs);
-        taught = new List<courseinfo>(mycourses);
+        currentClasses = new List<courseinfo>(curcourses);
+        nextClasses = new List<courseinfo>(nxtcourses);
     }
 
-    public List<courseinfo> Taught { get { return taught; } }
     public List<VStudent> Advisees { get { return advisees; } }
+    public List<courseinfo> CurrentClasses { get { return currentClasses; } }
+    public List<courseinfo> NextClasses { get { return nextClasses; } }
 
 
     //For all classes (taught), all students currently registered. (taught.students)
     //Should return a list of students the faculty member will have for next term. 
     public List<VStudent> futureStudents()
     {
+        List<VStudent> nextStudents = new List<VStudent>();
 
+        foreach (courseinfo course in NextClasses)
+        {
+            foreach (VStudent student in course.Students)
+            {
+                if (!nextStudents.Contains(student))
+                    nextStudents.Add(student);
+            }
+        }
+
+        return nextStudents;
     }
 
 

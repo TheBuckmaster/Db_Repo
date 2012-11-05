@@ -18,6 +18,7 @@ public class courseinfo
     public float Credit { get { return credit; } }
     public int Seats { get { return seats; } }
     public List<coursetime> Times { get { return times; } }
+    public List<VStudent> Students { get { return students; } }
 
 
     //timeslist should be ddttk strings, later termed 'TerryStrings' after their creator.
