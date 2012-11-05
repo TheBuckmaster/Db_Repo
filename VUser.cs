@@ -190,14 +190,18 @@ public class VUser
 
         if (student.Next.Contains(course)) //Is the student already registered for this course? Return an error. 
         {
-            eN.wasError = true;
-            eN.errorWas = "AlreadyHere";
-            errlist.Add(eN);
-            return errlist;
+            if (course.students.Contains(student))
+            {
+                eN.wasError = true;
+                eN.errorWas = "AlreadyHere";
+                errlist.Add(eN);
+                return errlist;
+            }
+            else student.Next.Remove(course);   //if out of sync, course has priority
         }
 
         //Generate list of Errors.
-        if (course.Enrolled == course.Seats) //Is the course full? Return an error. 
+        if (course.isFull()) //Is the course full? Return an error. 
         {
             eN.wasError = true;
             eN.errorWas = "CourseIsFull";
@@ -207,7 +211,7 @@ public class VUser
         if ((student.enrolledCredits() + course.Credit) > 5.0) //Would this put the student over 5.0 credits?
         {
             eN.errorWas = ">5.0";
-            if (this.usertype == VType.admin)                   //If Admin, warn, but allow. 
+            if (status == "admin")                   //If Admin, warn, but allow. 
             {
                 eN.wasError = false;
                 warnlist.Add(eN);
@@ -254,7 +258,7 @@ public class VUser
                 }
             }
             //Warning if the course is being retaken. 
-            if(student.History.Contains(course) || (student.Current.Contains(course))
+            if(student.History.Contains(course) || student.Current.Contains(course))
             {
                 eN.wasError = false;
                 en.errorWas = "?" + oldcourse.Coursetitle;
@@ -263,7 +267,7 @@ public class VUser
 
             //Beyond here, no new errors and no new warnings. 
             student.Next.Add(course);       //The student has a course.
-            course.students.Add(student);   //The course has a student.
+            course.enrollStudent(student);   //The course has a student.
             //Otherwise, we'll return the list of warnings. The only way to have returned an empty list is
             //If there are no warnings. 
             return warnlist;
