@@ -10,10 +10,8 @@ public class courseinfo
     private float credit;
     private int seats;
     private List<coursetime> times = new List<coursetime>(); // as initialized, these are ddttks in order of entry.
-    public List<VStudent> students = new List<VStudent>(); // Becase we'll need this; 
-    private int enrolled;
+    private List<VStudent> students = new List<VStudent>(); // Becase we'll need this; 
 
-    public int Enrolled { get { return enrolled; } }
     public string Coursename { get { return coursename; } }
     public string Coursetitle { get { return coursetitle; } }
     public string Instructor { get { return instructor; } }
@@ -32,7 +30,6 @@ public class courseinfo
         credit = cred;
         seats = spots;
         times = timeslist;
-        enrolled = 0;
 	}
 
 
@@ -46,9 +43,25 @@ public class courseinfo
         credit = cred;
         seats = spots;
         times = timeslist;
-        enrolled = students.Count;
         students = new List<VStudent>(studs); 
 
+    }
+
+    public int Enrolled()
+    { 
+        return students.Count();
+    }
+
+    public bool isFull()
+    {
+        return seat <= students.Count();
+    }
+
+    public bool enrollStudent(ref VStudent student)
+    {   // returns true is successful, false otherwise (ex. already enrolled)
+        if (!students.Contains(student))
+            return students.Add(student);
+        else return false;
     }
 
     public bool Equals(courseinfo course) { return coursename.Substring(0, coursename.Length - 2) == course.Coursename.Substring(0, course.Coursename.Length - 2); }
