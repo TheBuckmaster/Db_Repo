@@ -85,14 +85,14 @@ public class VUser
 
     public void checkConflicts(ref VStudent student)
     {
-        student.Conflicts.Empty();
+        student.Conflicts.Clear();
         for (int i = 0; i < student.Next.Count; ++i)
         {
-            foreach (coursetime time in student.Next[i].times)
+            foreach (coursetime time in student.Next[i].Times)
             {
                 for (int j = i + 1; j < student.Next.Count; ++j)
                 {
-                    foreach (coursetime time2 in student.Next[j].times)
+                    foreach (coursetime time2 in student.Next[j].Times)
                     {
                         if ((!student.Conflicts.Contains(student.Next[i].Coursetitle)) && (!student.Conflicts.Contains(student.Next[j].Coursetitle)))
                         {
