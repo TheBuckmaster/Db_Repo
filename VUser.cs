@@ -311,23 +311,23 @@ public class VFaculty : VUser
     }
 
 
-    //For all classes (taught), all students currently registered. (taught.students)
-    //Should return a list of students the faculty member will have for next term. 
-    public List<VStudent> futureStudents()
-    {
-        List<VStudent> nextStudents = new List<VStudent>();
+    // we only need a list of students in a specific course, not all, so this doesn't need to be a function
+ 
+    //public List<VStudent> futureStudents(ref courseinfo course)
+    //{
+    //    List<VStudent> nextStudents = new List<VStudent>();
 
-        foreach (courseinfo course in NextClasses)
-        {
-            foreach (VStudent student in course.Students)
-            {
-                if (!nextStudents.Contains(student))
-                    nextStudents.Add(student);
-            }
-        }
+    //    foreach (courseinfo course in NextClasses)
+    //    {
+    //        foreach (VStudent student in course.Students)
+    //        {
+    //            if (!nextStudents.Contains(student))
+    //                nextStudents.Add(student);
+    //        }
+    //    }
 
-        return nextStudents;
-    }
+    //    return nextStudents;
+    //}
 
     public List<courseinfo> VerifyAdviseeCurrentSchedule(ref VStudent advisee)
     {
