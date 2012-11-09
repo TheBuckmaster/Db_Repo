@@ -64,6 +64,13 @@ public class VUser
         usertype = VType.notmade;
     }
 
+    public VUser(string uname)
+    {
+        userName = uname;
+        status = "notmade";
+        usertype = VType.notmade;
+    }
+
     public VUser(string uname, string pswd, string fname, string mname, string lname, string stat)
     {
         stat = stat.ToLower();
