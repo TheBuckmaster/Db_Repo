@@ -17,12 +17,39 @@ namespace WindowsFormsApplication1
         }
         List<courseinfo> CourseList = new List<courseinfo>();
 
-        public Form3(string userName)
+        public Form3(string userName, List<courseinfo> course)
         {
             InitializeComponent();
             this.Text = userName;
+            CourseList = course;
+            CreateListView();
         }
 
+
+        private void CreateListView()
+        {
+            listView.Columns.Add("Course Title", 120);
+            listView.Columns.Add("Course Name", 150);
+            listView.Columns.Add("Professer", 120);
+            listView.Columns.Add("Days", 75);
+            listView.Columns.Add("TIme", 120);
+
+            listView.View = View.Details;
+            listView.FullRowSelect = true;
+            
+            int i = 0;
+            foreach (item in CourseList)
+            {
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = CourseList[i].Coursetitle.ToString();
+                lvi.SubItems.Add(CourseList[i].Coursename.ToString());
+                lvi.SubItems.Add(CourseList[i].Instructor.ToString());
+                lvi.SubItems.Add(CourseList[i].Days.tostring());
+                lvi.SubItems.Add(CourseList[i].Times.ToString();
+
+                i++;
+            }
+        }
         private void AddCourseBttn_Click(object sender, EventArgs e)
         {
             int selectedCellCount =
@@ -41,6 +68,29 @@ namespace WindowsFormsApplication1
             AddCourseBttn.Visible = true;
             dataGridView1.Enabled = true;
             dataGridView1.Visible = true;
+
+            listView.Clear();
+
+            listView.Columns.Add("Course Title", 120);
+            listView.Columns.Add("Course Name", 150);
+            listView.Columns.Add("Professer", 120);
+            listView.Columns.Add("Seats", 75);
+            listView.Columns.Add("Credit", 75);
+            listView.Columns.Add("Days", 75);
+            listView.Columns.Add("TIme", 120);
+            int i = 0;
+
+            foreach( Item in CourseList)
+            {
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = CourseList[i].Coursetitle.ToString();
+                lvi.SubItems.Add(CourseList[i].Coursename.ToString());
+                lvi.SubItems.Add(CourseList[i].Instructor.ToString());
+                lvi.SubItems.Add(CourseList[i].Days.tostring());
+                lvi.SubItems.Add(CourseList[i].Times.ToString();
+
+                i++;
+            }
         }
 
         private void logoutToolStripMenuItem_Click_1(object sender, EventArgs e)

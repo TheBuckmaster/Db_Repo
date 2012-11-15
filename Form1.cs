@@ -109,7 +109,7 @@ namespace WindowsFormsApplication1
                 }
                 else
                 {
-                    Form3 frm3 = new Form3( UsernameText.Text);
+                    Form3 frm3 = new Form3( UsernameText.Text, Courses);
                     frm3.Show();
                     this.Hide();
                 }

@@ -39,6 +39,7 @@
             this.Credt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dys = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tmie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.courseOfferings1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addCourseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,12 +56,9 @@
             this.LVCredit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LVDays = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LVTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.courseOfferings1 = new WindowsFormsApplication1.CourseOfferings();
-            this.courseOfferings1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.courseOfferings1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.courseOfferings1BindingSource)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // AddCourseBttn
@@ -185,34 +183,34 @@
             // addCourseToolStripMenuItem
             // 
             this.addCourseToolStripMenuItem.Name = "addCourseToolStripMenuItem";
-            this.addCourseToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.addCourseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addCourseToolStripMenuItem.Text = "Add Course";
             this.addCourseToolStripMenuItem.Click += new System.EventHandler(this.addCourseToolStripMenuItem_Click_1);
             // 
             // deleteCourseToolStripMenuItem
             // 
             this.deleteCourseToolStripMenuItem.Name = "deleteCourseToolStripMenuItem";
-            this.deleteCourseToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.deleteCourseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteCourseToolStripMenuItem.Text = "Delete Course";
             // 
             // viewScheduleToolStripMenuItem
             // 
             this.viewScheduleToolStripMenuItem.Name = "viewScheduleToolStripMenuItem";
-            this.viewScheduleToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.viewScheduleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.viewScheduleToolStripMenuItem.Text = "View Schedule";
             this.viewScheduleToolStripMenuItem.Click += new System.EventHandler(this.viewScheduleToolStripMenuItem_Click_1);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click_1);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -233,8 +231,7 @@
             this.LVDays,
             this.LVTime});
             this.listView.DataBindings.Add(new System.Windows.Forms.Binding("GridLines", global::WindowsFormsApplication1.Properties.Settings.Default, "GridLines", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.listView.GridLines = global::WindowsFormsApplication1.Properties.Settings.Default.GridLines;
-            this.listView.Location = new System.Drawing.Point(25, 139);
+            this.listView.Location = new System.Drawing.Point(12, 64);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(682, 275);
             this.listView.TabIndex = 6;
@@ -274,16 +271,6 @@
             this.LVTime.Text = "Time";
             this.LVTime.Width = 120;
             // 
-            // courseOfferings1
-            // 
-            this.courseOfferings1.DataSetName = "CourseOfferings";
-            this.courseOfferings1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // courseOfferings1BindingSource
-            // 
-            this.courseOfferings1BindingSource.DataSource = this.courseOfferings1;
-            this.courseOfferings1BindingSource.Position = 0;
-            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -296,10 +283,9 @@
             this.Name = "Form3";
             this.Text = "Form3";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.courseOfferings1BindingSource)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.courseOfferings1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.courseOfferings1BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
