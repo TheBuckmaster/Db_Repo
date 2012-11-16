@@ -32,28 +32,27 @@ namespace WindowsFormsApplication1
             listView.Columns.Add("Course Name", 150);
             listView.Columns.Add("Professer", 120);
             listView.Columns.Add("Days", 75);
-            listView.Columns.Add("TIme", 120);
+            listView.Columns.Add("Time", 120);
 
             listView.View = View.Details;
             listView.FullRowSelect = true;
             
             int i = 0;
-            foreach (item in CourseList)
+            for ( i = 0; i < 5; i++)
             {
                 ListViewItem lvi = new ListViewItem();
                 lvi.Text = CourseList[i].Coursetitle.ToString();
                 lvi.SubItems.Add(CourseList[i].Coursename.ToString());
                 lvi.SubItems.Add(CourseList[i].Instructor.ToString());
-                lvi.SubItems.Add(CourseList[i].Days.tostring());
-                lvi.SubItems.Add(CourseList[i].Times.ToString();
+                lvi.SubItems.Add(CourseList[i].Times.ToString());
 
-                i++;
+                //i++;
             }
         }
         private void AddCourseBttn_Click(object sender, EventArgs e)
         {
-            int selectedCellCount =
-                dataGridView1.GetCellCount(DataGridViewElementStates.Selected);
+            listView.Focus();
+            listView.Items[0].Selected = true;
             if (selectedCellCount > 0)
             {
                 
@@ -80,14 +79,14 @@ namespace WindowsFormsApplication1
             listView.Columns.Add("TIme", 120);
             int i = 0;
 
-            foreach( Item in CourseList)
+            foreach(var Item in CourseList)
             {
                 ListViewItem lvi = new ListViewItem();
                 lvi.Text = CourseList[i].Coursetitle.ToString();
                 lvi.SubItems.Add(CourseList[i].Coursename.ToString());
                 lvi.SubItems.Add(CourseList[i].Instructor.ToString());
-                lvi.SubItems.Add(CourseList[i].Days.tostring());
-                lvi.SubItems.Add(CourseList[i].Times.ToString();
+                //lvi.SubItems.Add(CourseList[i].Days.tostring());
+                lvi.SubItems.Add(CourseList[i].Times.ToString());
 
                 i++;
             }
@@ -95,8 +94,8 @@ namespace WindowsFormsApplication1
 
         private void logoutToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            Form Form1 = new Form();
-            Form1.Show();
+            Form1 Frm1 = new Form1();
+            Frm1.Show();
             this.Close();
         }
 

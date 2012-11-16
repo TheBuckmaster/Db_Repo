@@ -17,9 +17,9 @@ namespace WindowsFormsApplication1
         }
 
         List<courseinfo> CourseList = new List<courseinfo>();
-        List<User> UserList = new List<User>();
+        List<VUser> UserList = new List<VUser>();
 
-        public FacultyMain(List<User> usrlst)
+        public FacultyMain(List<VUser> usrlst)
         {
             InitializeComponent();
             UserList = usrlst;
@@ -42,7 +42,7 @@ namespace WindowsFormsApplication1
 
             listView1.FullRowSelect = true;
 
-            foreach (DataRow row in DataBindings.Rows)
+            foreach (DataRow row in DataBindings.ToString())
             {
                 var item = new ListViewItem(row[0].ToString());
                 item.Tag = row;
@@ -57,15 +57,16 @@ namespace WindowsFormsApplication1
         {
             listView1.FullRowSelect = true;
 
-            foreach (DataRow row in DataBindings.Rows)
+            ListViewItem lvi = new ListViewItem();
+            string i;
+            this.listView1.Focus();
+            this.listView1.Items[0].Selected = true;
+            i = listView1.Items[0].Text.ToString();
+
+            foreach (var student in CourseList)
             {
-                var item = new ListViewItem(row[0].ToString());
-                item.Tag = row;
 
-
-                listView1.Items.Add(item);
             }
-            viewEnrolledStudents(item)
         }
     }
 }

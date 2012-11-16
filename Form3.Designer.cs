@@ -39,7 +39,6 @@
             this.Credt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dys = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tmie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.courseOfferings1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addCourseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,9 +55,10 @@
             this.LVCredit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LVDays = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LVTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.courseOfferings1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.courseOfferings1BindingSource)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.courseOfferings1BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // AddCourseBttn
@@ -87,7 +87,7 @@
             this.Tmie});
             this.dataGridView1.DataSource = this.courseOfferings1BindingSource;
             this.dataGridView1.Enabled = false;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 27);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 45);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -231,7 +231,7 @@
             this.LVDays,
             this.LVTime});
             this.listView.DataBindings.Add(new System.Windows.Forms.Binding("GridLines", global::WindowsFormsApplication1.Properties.Settings.Default, "GridLines", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.listView.Location = new System.Drawing.Point(12, 64);
+            this.listView.Location = new System.Drawing.Point(12, 45);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(682, 275);
             this.listView.TabIndex = 6;
@@ -283,9 +283,9 @@
             this.Name = "Form3";
             this.Text = "Form3";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.courseOfferings1BindingSource)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.courseOfferings1BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
