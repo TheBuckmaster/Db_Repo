@@ -230,7 +230,7 @@
             this.LVCredit,
             this.LVDays,
             this.LVTime});
-            this.listView.DataBindings.Add(new System.Windows.Forms.Binding("GridLines", global::WindowsFormsApplication1.Properties.Settings.Default, "GridLines", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            //this.listView.DataBindings.Add(new System.Windows.Forms.Binding("GridLines", global::WindowsFormsApplication1.Properties.Settings.Default, "GridLines", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.listView.Location = new System.Drawing.Point(12, 45);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(682, 275);
@@ -319,7 +319,6 @@
         private System.Windows.Forms.ColumnHeader LVCredit;
         private System.Windows.Forms.ColumnHeader LVDays;
         private System.Windows.Forms.ColumnHeader LVTime;
-        private CourseOfferings courseOfferings1;
         private System.Windows.Forms.BindingSource courseOfferings1BindingSource;
     }
 }

@@ -53,12 +53,12 @@ namespace WindowsFormsApplication1
         {
             listView.Focus();
             listView.Items[0].Selected = true;
-            if (selectedCellCount > 0)
-            {
+            //if (selectedCellCount > 0)
+            //{
                 
-            }
-            else
-                MessageBox.Show("Select a course to add a course");
+            //}
+            //else
+            //    MessageBox.Show("Select a course to add a course");
         }
 
         private void addCourseToolStripMenuItem_Click_1(object sender, EventArgs e)

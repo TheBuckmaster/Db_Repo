@@ -50,18 +50,21 @@ public class courseinfo
 
     public int Enrolled()
     { 
-        return students.Count();
+        return students.Count;
     }
 
     public bool isFull()
     {
-        return seats <= students.Count();
+        return seats <= students.Count;
     }
 
     public bool enrollStudent(ref VStudent student)
     {   // returns true is successful, false otherwise (ex. already enrolled)
         if (!students.Contains(student))
-            return students.Add(student);
+        {
+            students.Add(student);
+            return true;
+        }
         else return false;
     }
 

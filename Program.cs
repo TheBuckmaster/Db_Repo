@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1
             Application.SetCompatibleTextRenderingDefault(false);
 
             // our "databases
-            List<User> Users = new List<User>();
+            List<VUser> Users = new List<VUser>();
             List<courseinfo> Courses = new List<courseinfo>();
             string curterm = "F12";
 
@@ -30,7 +30,7 @@ namespace WindowsFormsApplication1
                 {
                     String line = sr.ReadLine();
 
-                    while (!sr.EndOfStream())
+                    while (!sr.EndOfStream)
                     {
                         string uname, fname, mname, lname, pswd, stat;
 
@@ -71,7 +71,7 @@ namespace WindowsFormsApplication1
                         line.Remove(0, 10);
 
                         // add user info
-                        Users.Add(new User(uname, pswd, fname, mname, lname, stat));
+                        Users.Add(new VUser(uname, pswd, fname, mname, lname, stat));
 
                         line = sr.ReadLine();
                     }
@@ -150,7 +150,7 @@ namespace WindowsFormsApplication1
             }
 
 
-            string filename = "HistoryInput.txt";
+            filename = "HistoryInput.txt";
             if (File.Exists(filename))
             {
                 string currstring;
@@ -193,17 +193,19 @@ namespace WindowsFormsApplication1
                             currstring.Remove(0, 3);
                             currstring.TrimStart();
 
-                            if(grade == "N")
-                            {
-                                if(term == curterm)
-                                    Users[undx].Current.Add(new pastcourse(coursename, term, credit, grade));
-                                else
-                                {
-                                    int cndx = Courses.IndexOf(new pastcourse(coursename, term, credit, grade);
-                                    Users[undx].Next.Add(Courses[cndx]);
-                                }
-                            }
-                            else Users[undx].History.Add(new pastcourse(coursename, term, credit, grade));
+
+                            //POLYMORPHISM WTF BBQ
+                            //if(grade == "N")
+                            //{
+                            //    if(term == curterm)
+                            //        Users[undx].Current.Add(new pastcourse(coursename, term, credit, grade));
+                            //    else
+                            //    {
+                            //        int cndx = Courses.IndexOf(new pastcourse(coursename, term, credit, grade));
+                            //        Users[undx].Next.Add(Courses[cndx]);
+                            //    }
+                            //}
+                            //else Users[undx].History.Add(new pastcourse(coursename, term, credit, grade));
                         }
                     }
                 }
@@ -245,8 +247,8 @@ namespace WindowsFormsApplication1
                         
             //Form1 OurForm = new Form1();
             //Modify Form constructors to accept ref to lists?
-            Form1 OurForm = new Form1(Users, Courses);
-            Form3 frm3 = new Form3(Users, Courses);
+            Form1 OurForm = new Form1();
+            Form3 frm3 = new Form3("ben", Courses);
             FacultyMain FctMn = new FacultyMain();
 
 

@@ -110,10 +110,10 @@ public class VUser
                                 {   //Is it on the same day? 
                                     if (time2.days.Contains(day))
                                     {
-                                        if (!student.Conflicts.Contains(Next[i]))
-                                            student.Conflicts.Add(Next[i].Coursetitle);
-                                        if (!student.Conflicts.Contains(Next[j]))
-                                            student.Conflicts.Add(Next[j].Coursetitle);
+                                        if (!student.Conflicts.Contains(student.Next[i].Coursetitle))
+                                            student.Conflicts.Add(student.Next[i].Coursetitle);
+                                        if (!student.Conflicts.Contains(student.Next[j].Coursetitle))
+                                            student.Conflicts.Add(student.Next[j].Coursetitle);
                                         iscnflct = true;
                                         break;
                                     }
@@ -158,7 +158,7 @@ public class VUser
         }
 
         //recheck conflicts
-        checkConflicts(student);
+        checkConflicts(ref student);
 
         er.wasError = false;
         er.errorWas = "notError";
@@ -250,9 +250,9 @@ public class VUser
                                     eN.wasError = false;
                                     eN.errorWas = "!" + course2.Coursetitle;
                                     warnlist.Add(eN);
-                                    if (!student.Conflicts.Containts(course))
+                                    if (!student.Conflicts.Contains(course.Coursetitle))
                                         student.Conflicts.Add(course.Coursetitle);
-                                    if (!student.Conflicts.Contains(course2))
+                                    if (!student.Conflicts.Contains(course2.Coursetitle))
                                         student.Conflicts.Add(course2.Coursetitle);
                                     iscnflct = true;
                                     break;
@@ -265,16 +265,17 @@ public class VUser
                 }
             }
             //Warning if the course is being retaken. 
-            if(student.History.Contains(course) || student.Current.Contains(course))
-            {
-                eN.wasError = false;
-                en.errorWas = "?" + oldcourse.Coursetitle;
-                warnlist.Add(eN);
-            }
+            // Perhaps you should do this by casting or something???
+            //if(student.History.Contains(course) || student.Current.Contains(course))
+            //{
+            //    eN.wasError = false;
+            //    en.errorWas = "?" + oldcourse.Coursetitle;
+            //    warnlist.Add(eN);
+            //}
 
             //Beyond here, no new errors and no new warnings. 
             student.Next.Add(course);       //The student has a course.
-            course.enrollStudent(student);   //The course has a student.
+            course.enrollStudent(ref student);   //The course has a student.
             //Otherwise, we'll return the list of warnings. The only way to have returned an empty list is
             //If there are no warnings. 
             return warnlist;
@@ -336,7 +337,7 @@ public class VFaculty : VUser
     //    return nextStudents;
     //}
 
-    public List<courseinfo> VerifyAdviseeCurrentSchedule(ref VStudent advisee)
+    public List<pastcourse> VerifyAdviseeCurrentSchedule(ref VStudent advisee)
     {
         return advisee.Current;
     }
@@ -360,12 +361,12 @@ public class VAdmin : VUser
     //An admin may add any student to any class. 
     public override List<errorReturn> enrollCourse(ref courseinfo course, ref VStudent student)
     {
-        return base.enrollCourse(course, student);
+        return base.enrollCourse(ref course,ref student);
     }
 
     public override errorReturn unenrollCourse(ref courseinfo course, ref VStudent student)
     {
-        return base.unenrollCourse(course, student);
+        return base.unenrollCourse(ref course,ref student);
     }
 }
 
@@ -392,7 +393,8 @@ public class VStudent : VUser
         Next = new List<courseinfo>(nextterm);
 
         //find conflicts
-        checkConflicts(this);
+        //NEW checkSConflicts(student) or something? 
+        //checkConflicts(this);
     }
 
     public double enrolledCredits()
@@ -411,14 +413,14 @@ public class VStudent : VUser
         return credits;
     }
 
-    //A student may only enroll itself. 
-    public override List<errorReturn> enrollCourse(ref courseinfo course)
-    {
-        return base.enrollCourse(course, this);
-    }
+    ////A student may only enroll itself. 
+    //public List<errorReturn> enrollCourse(ref courseinfo course)
+    //{
+    //    return base.enrollCourse(ref course, ref this);
+    //}
 
-    public override errorReturn unenrollCourse(ref courseinfo course)
-    {
-        return base.unenrollCourse(course, this);
-    }
+    //public errorReturn unenrollCourse(ref courseinfo course)
+    //{
+    //    return base.unenrollCourse(ref course, this);
+    //}
 }

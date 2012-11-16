@@ -40,16 +40,16 @@ namespace WindowsFormsApplication1
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            listView1.FullRowSelect = true;
+            //listView1.FullRowSelect = true;
 
-            foreach (DataRow row in DataBindings.ToString())
-            {
-                var item = new ListViewItem(row[0].ToString());
-                item.Tag = row;
+            //foreach (DataRow row in DataBindings.ToString())
+            //{
+            //    var item = new ListViewItem(row[0].ToString());
+            //    item.Tag = row;
 
 
-                listView1.Items.Add(item);
-            }
+                //listView1.Items.Add(item);
+            //}
 
         }
 
