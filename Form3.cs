@@ -85,8 +85,9 @@ namespace WindowsFormsApplication1
                 lvi.Text = CourseList[i].Coursetitle.ToString();
                 lvi.SubItems.Add(CourseList[i].Coursename.ToString());
                 lvi.SubItems.Add(CourseList[i].Instructor.ToString());
+                lvi.SubItems.Add(CourseList[i].Times[0].showtime(int.Parse(CourseList[i].Times[0].ToString())));
                 //lvi.SubItems.Add(CourseList[i].Days.tostring());
-                lvi.SubItems.Add(CourseList[i].Times.ToString());
+                //lvi.SubItems.Add(CourseList[i].Times.ToString());
 
                 i++;
             }
