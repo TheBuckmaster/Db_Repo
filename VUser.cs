@@ -82,7 +82,18 @@ public class VUser
         status = stat;
         usertype = (stat == "admin") ? VType.admin : //if
             (stat == "faculty") ? VType.faculty : //elseif
-            (stat == "student") ? VType.student : VType.notmade; //elseif, else. 
+            VType.student; //else because stat != "student" ever, see project spec
+    }
+
+    // dummy copy constructor
+    public VUser(VUser user)
+    {
+        userName = user.UserName;
+        fstName = user.FstName;
+        midName = user.MidName;
+        lstName = user.LstName;
+        status = user.Status;
+        usertype = VType.notmade;
     }
 
     public bool isPassword(string pswd)
@@ -90,43 +101,7 @@ public class VUser
         return password == pswd;
     }
 
-    public void checkConflicts(ref VStudent student)
-    {
-        student.Conflicts.Clear();
-        for (int i = 0; i < student.Next.Count; ++i)
-        {
-            foreach (coursetime time in student.Next[i].Times)
-            {
-                for (int j = i + 1; j < student.Next.Count; ++j)
-                {
-                    foreach (coursetime time2 in student.Next[j].Times)
-                    {
-                        if ((!student.Conflicts.Contains(student.Next[i].Coursetitle)) && (!student.Conflicts.Contains(student.Next[j].Coursetitle)))
-                        {
-                            bool iscnflct = false;
-                            if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
-                            {   //Does this time overlap?
-                                foreach (char day in time.days)
-                                {   //Is it on the same day? 
-                                    if (time2.days.Contains(day))
-                                    {
-                                        if (!student.Conflicts.Contains(student.Next[i].Coursetitle))
-                                            student.Conflicts.Add(student.Next[i].Coursetitle);
-                                        if (!student.Conflicts.Contains(student.Next[j].Coursetitle))
-                                            student.Conflicts.Add(student.Next[j].Coursetitle);
-                                        iscnflct = true;
-                                        break;
-                                    }
-                                }
-                                if (iscnflct)
-                                    break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    
 
     public virtual errorReturn unenrollCourse(ref courseinfo course, ref VStudent student)
     {
@@ -158,7 +133,7 @@ public class VUser
         }
 
         //recheck conflicts
-        checkConflicts(ref student);
+        student.checkConflicts();
 
         er.wasError = false;
         er.errorWas = "notError";
@@ -407,17 +382,62 @@ public class VStudent : VUser
 
 
 
-    public VStudent(string uname, string pswd, string fname, string mname, string lname,
+    public VStudent(string uname, string pswd, string fname, string mname, string lname, string stat,
         List<pastcourse> pstterms, List<pastcourse> thisterm, List<courseinfo> nextterm)
-        : base(uname, pswd, fname, mname, lname, "student")
+        : base(uname, pswd, fname, mname, lname, stat)
     {
         History = new List<pastcourse>(pstterms);
         Current = new List<pastcourse>(thisterm);
         Next = new List<courseinfo>(nextterm);
 
-        //find conflicts
-        //NEW checkSConflicts(student) or something? 
-        //checkConflicts(this);
+        checkConflicts();
+    }
+
+    // dummy copy constructor
+    public VStudent(VStudent student) : base(student)
+    {
+        History = student.History;
+        Current = student.Current;
+        Next = student.Next;
+        Conflicts = student.Conflicts;
+    }
+    
+    public void checkConflicts()
+    {
+        Conflicts.Clear();
+        for (int i = 0; i < Next.Count; ++i)
+        {
+            foreach (coursetime time in Next[i].Times)
+            {
+                for (int j = i + 1; j < Next.Count; ++j)
+                {
+                    foreach (coursetime time2 in Next[j].Times)
+                    {
+                        if ((!Conflicts.Contains(Next[i].Coursetitle)) && (!Conflicts.Contains(Next[j].Coursetitle)))
+                        {
+                            bool iscnflct = false;
+                            if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
+                            {   //Does this time overlap?
+                                foreach (char day in time.days)
+                                {   //Is it on the same day? 
+                                    if (time2.days.Contains(day))
+                                    {
+                                        if (!Conflicts.Contains(Next[i].Coursetitle))
+                                            Conflicts.Add(Next[i].Coursetitle);
+                                        if (!Conflicts.Contains(Next[j].Coursetitle))
+                                            Conflicts.Add(Next[j].Coursetitle);
+                                        iscnflct = true;
+                                        break;
+                                    }
+                                }
+                                if (iscnflct)
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public double enrolledCredits()
@@ -436,14 +456,27 @@ public class VStudent : VUser
         return credits;
     }
 
-    ////A student may only enroll itself. 
-    //public List<errorReturn> enrollCourse(ref courseinfo course)
-    //{
-    //    return base.enrollCourse(ref course, ref this);
-    //}
+    //A student may only enroll itself.
+    // super kludgy, but it should do the job.
+    public List<errorReturn> enrollCourse(ref courseinfo course, ref VStudent student)
+    {
+        VStudent dummy = new VStudent(this);
+        List<errorReturn> errlist = base.enrollCourse(ref course, ref dummy);
 
-    //public errorReturn unenrollCourse(ref courseinfo course)
-    //{
-    //    return base.unenrollCourse(ref course, this);
-    //}
+        Next = dummy.Next;
+        Conflicts = dummy.Conflicts;
+
+        return errlist;
+    }
+
+    public errorReturn unenrollCourse(ref courseinfo course, ref VStudent student)
+    {
+        VStudent dummy = new VStudent(this);
+        errorReturn eN = base.unenrollCourse(ref course, ref dummy);
+
+        Next = dummy.Next;
+        Conflicts = dummy.Conflicts;
+
+        return eN;
+    }
 }
