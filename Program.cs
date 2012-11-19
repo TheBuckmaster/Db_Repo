@@ -194,18 +194,18 @@ namespace WindowsFormsApplication1
                             currstring.TrimStart();
 
 
-                            //POLYMORPHISM WTF BBQ
-                            //if(grade == "N")
-                            //{
-                            //    if(term == curterm)
-                            //        Users[undx].Current.Add(new pastcourse(coursename, term, credit, grade));
-                            //    else
-                            //    {
-                            //        int cndx = Courses.IndexOf(new pastcourse(coursename, term, credit, grade));
-                            //        Users[undx].Next.Add(Courses[cndx]);
-                            //    }
-                            //}
-                            //else Users[undx].History.Add(new pastcourse(coursename, term, credit, grade));
+                            // fixed maybe?
+                            if(grade == "N")
+                            {
+                                if(term == curterm)
+                                    Users[undx].Current.Add(new pastcourse(coursename, term, credit, grade));
+                                else
+                                {
+                                    int cndx = Courses.IndexOf(new pastcourse(coursename, term, credit, grade));
+                                    Users[undx].enrollCourse(ref Courses[cndx], ref Users[undx]);
+                                }
+                            }
+                            else Users[undx].History.Add(new pastcourse(coursename, term, credit, grade));
                         }
                     }
                 }
