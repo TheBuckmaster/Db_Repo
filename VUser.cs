@@ -264,14 +264,37 @@ public class VUser
                     }
                 }
             }
-            //Warning if the course is being retaken. 
-            // Perhaps you should do this by casting or something???
-            //if(student.History.Contains(course) || student.Current.Contains(course))
-            //{
-            //    eN.wasError = false;
-            //    en.errorWas = "?" + oldcourse.Coursetitle;
-            //    warnlist.Add(eN);
-            //}
+
+            // Hopefully interface handles this now?
+            bool repeat = false;
+            // are they currently taking it?
+            foreach(var course2 in student.Current)
+            {
+                if(course.Equals(course2))
+                {
+                    repeat = true;
+                    break;
+                }
+            }
+            // have they taken it before?
+            if (!repeat)
+            {
+                foreach (var course2 in student.History)
+                {
+                    if (course.Equals(course2))
+                    {
+                        repeat = true;
+                        break;
+                    }
+                }
+            }
+            // warn if they have taken it
+            if (repeat)
+            {
+                eN.wasError = false;
+                eN.errorWas = "?" + course.Coursetitle;
+                warnlist.Add(eN);
+            }
 
             //Beyond here, no new errors and no new warnings. 
             student.Next.Add(course);       //The student has a course.
