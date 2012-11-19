@@ -84,8 +84,6 @@ namespace WindowsFormsApplication1
             }
 
 
-
-
             string filename = "ClassInput.txt";
             if (File.Exists(filename))
             {
@@ -148,6 +146,22 @@ namespace WindowsFormsApplication1
             {
                 Console.WriteLine("Your File does not Exist.");
             }
+
+            //add advisees/schedule to faculty
+            foreach (VFaculty prof in Users)
+            {
+                foreach (VStudent stud in Users)
+                {
+                    if (prof.Username == stud.Status)
+                        prof.Advisees.Add(stud);
+                }
+                foreach (courseinfo course in Courses)
+                {
+                    if (prof.Username == course.Instructor)
+                        prof.Next.Add(course);
+                }
+            }
+
 
 
             filename = "HistoryInput.txt";
