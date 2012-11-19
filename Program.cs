@@ -261,14 +261,14 @@ namespace WindowsFormsApplication1
                         
             //Form1 OurForm = new Form1();
             //Modify Form constructors to accept ref to lists?
-            Form1 OurForm = new Form1();
-            Form3 frm3 = new Form3("ben", Courses);
-            FacultyMain FctMn = new FacultyMain();
+            Form1 OurForm = new Form1(ref Courses, ref Users);
+            //Form3 frm3 = new Form3("ben", Courses);
+            //FacultyMain FctMn = new FacultyMain();
 
 
             Application.Run(OurForm);
-            Application.Run(frm3);
-            Application.Run(FctMn);
+            //Application.Run(frm3);
+            //Application.Run(FctMn);
         }
     }
 }

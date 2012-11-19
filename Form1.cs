@@ -15,7 +15,7 @@ namespace WindowsFormsApplication1
     {
         public List<courseinfo> Courses = new List<courseinfo>();
         private List<VUser> UserList = new List<VUser>();
-        private List<VFaculty> faculty = new List<VFaculty>();
+        //private List<VFaculty> faculty = new List<VFaculty>();
  
         const int total = 2000;
         public int numCourses = 0;
@@ -23,8 +23,13 @@ namespace WindowsFormsApplication1
         //public courseinfo[] Courses = new courseinfo[50];
 
         //string[,] userPlusPass = new string userPlusPass[total,total]; //array for usernames and passwords
-       
-        
+
+        public Form1(ref List<courseinfo> crslist, ref List<VUser> usrlist)
+        {
+            InitializeComponent();
+            Courses = crslist;
+            UserList = usrlist;
+        }
         public Form1(string message)
         {
             InitializeComponent();
@@ -101,20 +106,20 @@ namespace WindowsFormsApplication1
 
                 if (UserList[userNdx].Status == "faculty")
                 {
-                    FacultyMain fctmain = new FacultyMain(Courses, UserList[userNdx] );
+                    FacultyMain fctmain = new FacultyMain(ref Courses, ref UserList, ref UserList[userNdx] );
                     fctmain.Show();
                     this.Hide();
                 }
 
                 else if (UserList[userNdx].Status == "admin")
                 {
-                    AdminForm adm = new AdminForm(UserList);
+                    AdminForm adm = new AdminForm(ref course, ref UserList, ref UserList[userNdx]);
                     adm.Show();
                     this.Hide();
                 }
                 else
                 {
-                    Form3 frm3 = new Form3( UsernameText.Text, Courses);
+                    Form3 frm3 = new Form3( ref Courses, ref UserList[userNdx]);
                     frm3.Show();
                     this.Hide();
                 }

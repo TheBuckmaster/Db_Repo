@@ -16,11 +16,13 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
         List<courseinfo> CourseList = new List<courseinfo>();
+        VUser student;
 
-        public Form3(string userName, List<courseinfo> course)
+        public Form3(ref List<courseinfo> course, ref VUser stud)
         {
             InitializeComponent();
             this.Text = userName;
+            student = stud;
             CourseList = course;
             CreateListView();
         }

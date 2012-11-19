@@ -20,7 +20,7 @@ namespace WindowsFormsApplication1
         List<VUser> UserList = new List<VUser>();
         VUser faculty;
 
-        public FacultyMain( List<courseinfo> crs, VUser fac, List<VUser> usrlst)
+        public FacultyMain(ref List<courseinfo> crs, ref List<VUser> usrlst, ref VUser fac)
         {
             InitializeComponent();
             faculty = fac;

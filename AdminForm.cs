@@ -11,12 +11,17 @@ namespace WindowsFormsApplication1
 {
     public partial class AdminForm : Form
     {
-        public AdminForm()
+        List<VUser> userList = new List<VUser>();
+        List<courseinfo> Courses = new List<courseinfo>();
+        VUser admin;
+        public AdminForm(ref List<courseinfo> crslist, ref List<VUsers> usrlist, ref VUser admn)
         {
             InitializeComponent();
+            userList = usrlist;
+            Courses = crslist;
+            admin = admn;
         }
 
-        List<VUser> userList = new List<VUser>();
         public AdminForm(List<VUser> usr)
         {
             InitializeComponent();
