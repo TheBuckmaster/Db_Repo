@@ -66,86 +66,70 @@ namespace WindowsFormsApplication1
         private void ViewStudentsInOneClass()
         {
             ListViewItem lvi = new ListViewItem();
-            string selCourse;
             listView1.Focus();
             listView1.Items[0].Selected = true;
-            selCourse = listView1.Items[0].Text.ToString();
+            string selCourse = listView1.Items[0].Text.ToString();
             listView1.Columns.Add("First Name");
             listView1.Columns.Add("Last Name");
 
-            foreach (VFaculty prof in UserList)
+            foreach (courseinfo crs in faculty.Next)
             {
-                foreach (courseinfo crs in prof.NextClasses)
+                if (crs.Coursetitle == selCourse)
                 {
-                    if (prof.NextClasses.ToString() == selCourse)
-                        foreach (VStudent stud in crs.Students)
-                        {
-                            lvi.Text = stud.FirstName.ToString();
-                            lvi.SubItems.Add(stud.LastName.ToString());
-                        }
-                }
-            }
-        }
-    private void ViewAllStudents ()
-        {
-        ListViewItem lvi = new ListViewItem();
-
-        listView1.Columns.Add("Course");
-        listView1.Columns.Add("First Name");
-        listView1.Columns.Add("Last Name");
-
-         foreach (VFaculty prof in UserList)
-            {
-                foreach (courseinfo crs in prof.NextClasses)
-                {
-                    foreach(VStudent stud in crs.Students)
-                    {    
-                        lvi.Text = crs.ToString();
-                        lvi.SubItems.Add(stud.FirstName.ToString());
+                    foreach (VStudent stud in crs.Students)
+                    {
+                        lvi.Text = stud.FirstName.ToString();
                         lvi.SubItems.Add(stud.LastName.ToString());
                     }
+                    break;
                 }
             }
         }
 
-    private void currentSemesterToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        
-    }
+        //if we need this, which we don't
+        private void ViewAllStudents ()
+        {
+            ListViewItem lvi = new ListViewItem();
 
-    private void mainMenuToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        CurrentSchedule();
-    }
-    private void CurrentSchedule()
-    {
-        listView1.Columns.Add("Course Title" , 120);
-        listView1.Columns.Add("Course Name" , 120);
-        listView1.Columns.Add("Days", 120);
-        listView1.Columns.Add("Time",120);
-        listView1.Columns.Add("Enrolled", 25);
+            listView1.Columns.Add("Course");
+            listView1.Columns.Add("First Name");
+            listView1.Columns.Add("Last Name");
 
-        int i = 0;
-        string d = "";
-       
-                foreach (courseinfo crs in CourseList)
-                {
-                    if (faculty.UserName == CourseList[i].Instructor)
-                    {
-                        ListViewItem lvi = new ListViewItem();
-                        lvi.Text = crs.Coursetitle.ToString();
-                        lvi.SubItems.Add(crs.Coursename.ToString());
-                        lvi.SubItems.Add(crs.Times.days);
-                        lvi.SubItems.Add(crs.Times.showtime(crs.Times.start) + " - " + crs.Times.showtime(crs.Times.end));
-                        lvi.SubItems.Add(crs.Seats.ToString());
-                    }
-                    i++;
+            foreach (courseinfo crs in faculty.Next)
+            {
+                foreach(VStudent stud in crs.Students)
+                {    
+                    lvi.Text = crs.ToString();
+                    lvi.SubItems.Add(stud.FirstName.ToString());
+                    lvi.SubItems.Add(stud.LastName.ToString());
                 }
+            }
+        }
 
 
+        private void mainMenuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CurrentSchedule();
+        }
 
+        private void CurrentSchedule()
+        {
+            listView1.Columns.Add("Course Title" , 120);
+            listView1.Columns.Add("Course Name" , 120);
+            listView1.Columns.Add("Days", 120);
+            listView1.Columns.Add("Time",120);
+            listView1.Columns.Add("Enrolled", 25);
 
-    }
+            foreach (courseinfo crs in faculty.Next)
+            {
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = crs.Coursetitle.ToString();
+                lvi.SubItems.Add(crs.Coursename.ToString());
+                lvi.SubItems.Add(crs.Times.days.ToString());
+                lvi.SubItems.Add(crs.Times.showtime(crs.Times.start) + "-" + crs.Times.showtime(crs.Times.end));
+                lvi.SubItems.Add(crs.Enrolled().ToString());
+            }
+        }
     }   
 
 }
