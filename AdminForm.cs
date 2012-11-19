@@ -14,7 +14,7 @@ namespace WindowsFormsApplication1
         List<VUser> userList = new List<VUser>();
         List<courseinfo> Courses = new List<courseinfo>();
         VUser admin;
-        public AdminForm(ref List<courseinfo> crslist, ref List<VUsers> usrlist, ref VUser admn)
+        public AdminForm(ref List<courseinfo> crslist, ref List<VUser> usrlist, ref VUser admn)
         {
             InitializeComponent();
             userList = usrlist;

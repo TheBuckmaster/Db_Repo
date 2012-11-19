@@ -213,6 +213,7 @@ namespace WindowsFormsApplication1
                             {
                                 if(term == curterm)
                                     Users[undx].Current.Add(new pastcourse(coursename, term, credit, grade));
+                                   // Users[undx].Add(new pastcourse(coursename, term, credit, grade);
                                 else
                                 {
                                     int cndx = Courses.IndexOf(new pastcourse(coursename, term, credit, grade));

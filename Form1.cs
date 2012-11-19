@@ -23,7 +23,12 @@ namespace WindowsFormsApplication1
         //public courseinfo[] Courses = new courseinfo[50];
 
         //string[,] userPlusPass = new string userPlusPass[total,total]; //array for usernames and passwords
-
+        public Form1(List<courseinfo> crs, List<VUser> usr)
+        {
+            InitializeComponent();
+            UserList = usr;
+            Courses = crs;
+        }
         public Form1(ref List<courseinfo> crslist, ref List<VUser> usrlist)
         {
             InitializeComponent();
@@ -50,17 +55,17 @@ namespace WindowsFormsApplication1
             {
                 returnstring.Append(course.Coursename);
                 returnstring.Append(" ");
-                for(int i = 0; i < course.Times.First().days.Count; i++)
-                    returnstring.Append(course.Times.First().days[i]);
-                returnstring.Append(course.Times.First().start);
+                for(int i = 0; i < course.Times.days.First(); i++)
+                    returnstring.Append(course.Times.days.First()/*.days[i]*/);
+                returnstring.Append(course.Times.days.First()/*.start*/);
                 
-                if (course.Times.Count > 1)
+                if (course.Times.days.Count > 1)
                 {
 
-                    for (int newCount=1; newCount < course.Times.Count; newCount++)
+                    for (int newCount=1; newCount < course.Times.days.Count; newCount++)
                     {
                         returnstring.Append(", ");
-                        for ( int i = 0; i < course.Times.ElementAt(newCount).days.Count; i++)
+                        for ( int i = 0; i < course.Times.days.Count; i++)
                             returnstring.Append(course.Times.ElementAt(newCount).days[i]);
                         returnstring.Append(course.Times.ElementAt(newCount).start);
                     }

@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1
         public Form3(ref List<courseinfo> course, ref List<VUser> usrlist, ref VUser stud)
         {
             InitializeComponent();
-            this.Text = userName;
+            this.Text = stud.FstName + " " + stud.LstName;
             student = stud;
             CourseList = course;
             UserList = usrlist;
@@ -41,14 +41,15 @@ namespace WindowsFormsApplication1
             listView.View = View.Details;
             listView.FullRowSelect = true;
           
-            foreach (courseinfo course in student.Next)
+            foreach (courseinfo course in student)
             {
                 ListViewItem lvi = new ListViewItem();
                 lvi.Text = course.Coursetitle.ToString();
                 lvi.SubItems.Add(course.Coursename.ToString());
                 lvi.SubItems.Add(course.Instructor.ToString());
                 lvi.SubItems.Add(course.Times.days.ToString());
-                lvi.SubItems.Add(Item.Times.showtime(Item.Times.start) + "-" + Item.Times.showtime(Item.Times.end));
+                lvi.SubItems.Add(course.Times.showtime(course.Times.start) + "-" + course.Times.showtime(course.Times.end));
+               // lvi.SubItems.Add(Item.Times.showtime(Item.Times.start) + "-" + Item.Times.showtime(Item.Times.end));
             }
         }
         private void AddCourseBttn_Click(object sender, EventArgs e)
