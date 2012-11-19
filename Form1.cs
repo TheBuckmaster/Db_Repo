@@ -108,20 +108,20 @@ namespace WindowsFormsApplication1
                 {
                     FacultyMain fctmain = new FacultyMain(ref Courses, ref UserList, ref UserList[userNdx] );
                     fctmain.Show();
-                    this.Hide();
+                    this.Close();
                 }
 
                 else if (UserList[userNdx].Status == "admin")
                 {
-                    AdminForm adm = new AdminForm(ref course, ref UserList, ref UserList[userNdx]);
+                    AdminForm adm = new AdminForm(ref Courses, ref UserList, ref UserList[userNdx]);
                     adm.Show();
-                    this.Hide();
+                    this.Close();
                 }
                 else
                 {
-                    Form3 frm3 = new Form3( ref Courses, ref UserList[userNdx]);
+                    Form3 frm3 = new Form3( ref Courses, ref UserList, ref UserList[userNdx]);
                     frm3.Show();
-                    this.Hide();
+                    this.Close();
                 }
             }
             else

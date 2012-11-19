@@ -16,14 +16,16 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
         List<courseinfo> CourseList = new List<courseinfo>();
+        List<VUser> UserList = new List<VUser>();
         VUser student;
 
-        public Form3(ref List<courseinfo> course, ref VUser stud)
+        public Form3(ref List<courseinfo> course, ref List<VUser> usrlist, ref VUser stud)
         {
             InitializeComponent();
             this.Text = userName;
             student = stud;
             CourseList = course;
+            UserList = usrlist;
             CreateListView();
         }
 
@@ -98,7 +100,7 @@ namespace WindowsFormsApplication1
 
         private void logoutToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            Form1 Frm1 = new Form1();
+            Form1 Frm1 = new Form1(ref CourseList, ref UserList);
             Frm1.Show();
             this.Close();
         }

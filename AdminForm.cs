@@ -35,7 +35,7 @@ namespace WindowsFormsApplication1
 
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form frm1 = new Form1();
+            Form frm1 = new Form1(ref Courses, ref userList);
             frm1.Show();
             this.Close();
         }
