@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class pastcourse
+public class pastcourse : ICourse<pastcourse>
 {
     public string Coursename;
     public string Term;
@@ -15,6 +15,13 @@ public class pastcourse
         Grade = grade;
 	}
 
-    public bool Equals(pastcourse course) { return Coursename.Substring(0, Coursename.Length - 3) == course.Coursename.Substring(0, course.Coursename.Length - 3); }
-    public bool Equals(courseinfo course) { return Coursename.Substring(0, Coursename.Length - 3) == course.Coursename.Substring(0, course.Coursename.Length - 3); }
+    public bool Equals(pastcourse course)
+    {
+        return this.Coursename.Substring(0, Coursename.Length - 3) == course.Coursename.Substring(0, course.Coursename.Length - 3);
+    }
+
+    public bool Equals(courseinfo course)
+    {
+        return this.Coursename.Substring(0, Coursename.Length - 3) == course.Coursename.Substring(0, course.Coursename.Length - 3);
+    }
 }
