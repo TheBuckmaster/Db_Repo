@@ -40,18 +40,15 @@ namespace WindowsFormsApplication1
 
             listView.View = View.Details;
             listView.FullRowSelect = true;
-            
-            int i = 0;
           
-            for ( i = 0; i < 5; i++)
+            foreach (courseinfo course in student.Next)
             {
                 ListViewItem lvi = new ListViewItem();
-                lvi.Text = CourseList[i].Coursetitle.ToString();
-                lvi.SubItems.Add(CourseList[i].Coursename.ToString());
-                lvi.SubItems.Add(CourseList[i].Instructor.ToString());
-                lvi.SubItems.Add(CourseList[i].Times.ToString());
-
-                //i++;
+                lvi.Text = course.Coursetitle.ToString();
+                lvi.SubItems.Add(course.Coursename.ToString());
+                lvi.SubItems.Add(course.Instructor.ToString());
+                lvi.SubItems.Add(course.Times.days.ToString());
+                lvi.SubItems.Add(Item.Times.showtime(Item.Times.start) + "-" + Item.Times.showtime(Item.Times.end));
             }
         }
         private void AddCourseBttn_Click(object sender, EventArgs e)
@@ -81,20 +78,20 @@ namespace WindowsFormsApplication1
             listView.Columns.Add("Seats", 75);
             listView.Columns.Add("Credit", 75);
             listView.Columns.Add("Days", 75);
-            listView.Columns.Add("TIme", 120);
-            int i = 0;
-
+            listView.Columns.Add("Time", 120);
+            
             foreach(var Item in CourseList)
             {
                 ListViewItem lvi = new ListViewItem();
-                lvi.Text = CourseList[i].Coursetitle.ToString();
-                lvi.SubItems.Add(CourseList[i].Coursename.ToString());
-                lvi.SubItems.Add(CourseList[i].Instructor.ToString());
-                lvi.SubItems.Add(CourseList[i].Times[0].showtime(int.Parse(CourseList[i].Times[0].ToString())));
+                lvi.Text = Item.Coursetitle.ToString();
+                lvi.SubItems.Add(Item.Coursename.ToString());
+                lvi.SubItems.Add(Item.Instructor.ToString());
+                lvi.SubItems.Add(Item.Seats.ToString());
+                lvi.SubItems.Add(Item.Credit.ToString());
+                lvi.SubItems.Add(Item.Times.days.ToString());
+                lvi.SubItems.Add(Item.Times.showtime(Item.Times.start) + "-" + Item.Times.showtime(Item.Times.end));
                 //lvi.SubItems.Add(CourseList[i].Days.tostring());
                 //lvi.SubItems.Add(CourseList[i].Times.ToString());
-
-                i++;
             }
         }
 
