@@ -292,13 +292,12 @@ public class VFaculty : VUser
     //    next
     //}
 
-    private List<VStudent> advisees = new List<VStudent>();
-    private List<courseinfo> currentClasses = new List<courseinfo>();
-    private List<courseinfo> nextClasses = new List<courseinfo>();
+    public List<VStudent> Advisees = new List<VStudent>();
+    public List<courseinfo> NextClasses = new List<courseinfo>();
 
-    public List<VStudent> Advisees { get { return advisees; } }
-    public List<courseinfo> CurrentClasses { get { return currentClasses; } }
-    public List<courseinfo> NextClasses { get { return nextClasses; } }
+    //public List<VStudent> Advisees { get { return advisees; } }
+    //public List<courseinfo> CurrentClasses { get { return currentClasses; } }
+    //public List<courseinfo> NextClasses { get { return nextClasses; } }
 
     VFaculty(string uname, string pswd, string fname, string mname, string lname)
         : base(uname, pswd, fname, mname, lname, "faculty")
@@ -311,9 +310,8 @@ public class VFaculty : VUser
         List<VStudent> advs, List<courseinfo> curcourses, List<courseinfo> nxtcourses)
         : base(uname, pswd, fname, mname, lname, "faculty")
     {
-        advisees = new List<VStudent>(advs);
-        currentClasses = new List<courseinfo>(curcourses);
-        nextClasses = new List<courseinfo>(nxtcourses);
+        Advisees = new List<VStudent>(advs);
+        NextClasses = new List<courseinfo>(nxtcourses);
     }
 
 
@@ -334,6 +332,7 @@ public class VFaculty : VUser
 
     //    return nextStudents;
     //}
+
 
     public List<pastcourse> VerifyAdviseeCurrentSchedule(ref VStudent advisee)
     {
