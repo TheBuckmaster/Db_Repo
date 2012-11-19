@@ -15,6 +15,8 @@ namespace WindowsFormsApplication1
     {
         public List<courseinfo> Courses = new List<courseinfo>();
         private List<VUser> UserList = new List<VUser>();
+        private List<VFaculty> faculty = new List<VFaculty>();
+ 
         const int total = 2000;
         public int numCourses = 0;
 
@@ -83,6 +85,7 @@ namespace WindowsFormsApplication1
             bool valid = false;
             int userNdx = -1;
             int length = UserList.Count;
+
             for(int i = 0; i < length; ++i)
             {
                 if (UsernameText.Text == UserList[i].UserName)
@@ -98,14 +101,16 @@ namespace WindowsFormsApplication1
 
                 if (UserList[userNdx].Status == "faculty")
                 {
-                    FacultyMain fctmain = new FacultyMain(UserList);
+                    FacultyMain fctmain = new FacultyMain(Courses, UserList[userNdx] );
                     fctmain.Show();
                     this.Hide();
                 }
 
                 else if (UserList[userNdx].Status == "admin")
                 {
-
+                    AdminForm adm = new AdminForm(UserList);
+                    adm.Show();
+                    this.Hide();
                 }
                 else
                 {

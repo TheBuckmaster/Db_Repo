@@ -38,6 +38,7 @@ namespace WindowsFormsApplication1
             listView.FullRowSelect = true;
             
             int i = 0;
+          
             for ( i = 0; i < 5; i++)
             {
                 ListViewItem lvi = new ListViewItem();

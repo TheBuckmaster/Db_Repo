@@ -31,11 +31,14 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.teachingScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentSemesterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nextSemesterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ViewEnrolledStudents = new System.Windows.Forms.Button();
+            this.mainMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,6 +56,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainMenuToolStripMenuItem,
             this.teachingScheduleToolStripMenuItem,
             this.logoutToolStripMenuItem,
             this.exitToolStripMenuItem});
@@ -62,9 +66,25 @@
             // 
             // teachingScheduleToolStripMenuItem
             // 
+            this.teachingScheduleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.currentSemesterToolStripMenuItem,
+            this.nextSemesterToolStripMenuItem});
             this.teachingScheduleToolStripMenuItem.Name = "teachingScheduleToolStripMenuItem";
             this.teachingScheduleToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.teachingScheduleToolStripMenuItem.Text = "Teaching Schedule";
+            // 
+            // currentSemesterToolStripMenuItem
+            // 
+            this.currentSemesterToolStripMenuItem.Name = "currentSemesterToolStripMenuItem";
+            this.currentSemesterToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.currentSemesterToolStripMenuItem.Text = "Current Semester";
+            this.currentSemesterToolStripMenuItem.Click += new System.EventHandler(this.currentSemesterToolStripMenuItem_Click);
+            // 
+            // nextSemesterToolStripMenuItem
+            // 
+            this.nextSemesterToolStripMenuItem.Name = "nextSemesterToolStripMenuItem";
+            this.nextSemesterToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.nextSemesterToolStripMenuItem.Text = "Next Semester";
             // 
             // logoutToolStripMenuItem
             // 
@@ -95,22 +115,29 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
-            // button1
+            // ViewEnrolledStudents
             // 
-            this.button1.Location = new System.Drawing.Point(662, 385);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "View Enrolled Students";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ViewEnrolledStudents.Location = new System.Drawing.Point(662, 385);
+            this.ViewEnrolledStudents.Name = "ViewEnrolledStudents";
+            this.ViewEnrolledStudents.Size = new System.Drawing.Size(160, 23);
+            this.ViewEnrolledStudents.TabIndex = 2;
+            this.ViewEnrolledStudents.Text = "View Enrolled Students";
+            this.ViewEnrolledStudents.UseVisualStyleBackColor = true;
+            this.ViewEnrolledStudents.Click += new System.EventHandler(this.ViewEnrolledStudents_Click);
+            // 
+            // mainMenuToolStripMenuItem
+            // 
+            this.mainMenuToolStripMenuItem.Name = "mainMenuToolStripMenuItem";
+            this.mainMenuToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.mainMenuToolStripMenuItem.Text = "Main Menu";
+            this.mainMenuToolStripMenuItem.Click += new System.EventHandler(this.mainMenuToolStripMenuItem_Click);
             // 
             // FacultyMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(867, 432);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ViewEnrolledStudents);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -132,6 +159,9 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ViewEnrolledStudents;
+        private System.Windows.Forms.ToolStripMenuItem currentSemesterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nextSemesterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mainMenuToolStripMenuItem;
     }
 }

@@ -16,6 +16,13 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
+        List<VUser> userList = new List<VUser>();
+        public AdminForm(List<VUser> usr)
+        {
+            InitializeComponent();
+            userList = usr;
+        }
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
