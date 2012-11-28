@@ -9,7 +9,7 @@ public class courseinfo : ICourse<courseinfo>
     private string instructor;
     private float credit;
     private int seats;
-    private coursetime times; // as initialized, these are ddttks in order of entry.
+    private List<coursetime> times = new List<coursetime>(); // as initialized, these are ddttks in order of entry.
     private List<VStudent> students = new List<VStudent>(); // Becase we'll need this; 
 
     public string Coursename { get { return coursename; } }
@@ -17,7 +17,7 @@ public class courseinfo : ICourse<courseinfo>
     public string Instructor { get { return instructor; } }
     public float Credit { get { return credit; } }
     public int Seats { get { return seats; } }
-    public coursetime Times { get { return times; } }
+    public List<coursetime> Times { get { return times; } }
     public List<VStudent> Students { get { return students; } }
 
 
@@ -36,7 +36,7 @@ public class courseinfo : ICourse<courseinfo>
 
     //VUser/VStudent constructor for this class. 
     public courseinfo(string name, string title, string prof, float cred, int spots,
-        coursetime timeslist, List<VStudent> studs)
+        List<coursetime> timeslist, List<VStudent> studs)
     {
         coursename = name;
         coursetitle = title;
