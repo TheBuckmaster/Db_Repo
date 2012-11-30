@@ -120,7 +120,7 @@ namespace WindowsFormsApplication1
                         instructor = currstring.Substring(0, 10);
                         currstring.Remove(0, 10);
                         currstring.TrimStart();
-                        credit = float.Parse(currstring.Substring(0, 4));
+                        credit = double.Parse(currstring.Substring(0, 4));
                         currstring.Remove(0, 4);
                         currstring.TrimStart();
                         seats = int.Parse(currstring.Substring(0, 3));
@@ -131,7 +131,7 @@ namespace WindowsFormsApplication1
                         currstring.TrimStart();
 
                         times = new List<coursetime>();
-                        for (int counter = 0; counter < timeblocks; counter++)
+                        for (int i = 0; i < timeblocks; ++i)
                         {
                             string littlestring = currstring.Substring(0, 5);
                             times.Add(new coursetime(littlestring));

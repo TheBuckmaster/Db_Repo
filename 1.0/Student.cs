@@ -55,7 +55,7 @@ public class Student
                 bool retaken = false;
                 foreach (pastcourse course2 in History)
                 {
-                    if ( course.Coursename == course2.Coursename && course2.Grade.Contains("R") )
+                    if ( course.Equals(course2) && course2.Grade.Contains("R") )
                     {
                         if ( (course.Year == course2.Year && course.Term != 'F')
                             || (course.Year < course2.Year))

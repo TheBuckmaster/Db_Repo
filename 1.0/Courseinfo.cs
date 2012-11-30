@@ -7,10 +7,11 @@ public class courseinfo : ICourse<courseinfo>
     public string Coursename;
     public string Coursetitle;
     public string Instructor;
-    public float Credit;
+    public double Credit;
     public int Seats;
     public int Enrolled = 0;
-    public List<coursetime> Times { get { return times; } }
+    public List<coursetime> Times = new List<coursetime>();
+    public List<string> Prereqs = new List<string>();
 
 
     //timeslist should be ddttk strings, later termed 'TerryStrings' after their creator.
@@ -27,7 +28,7 @@ public class courseinfo : ICourse<courseinfo>
 
 
     //VUser/VStudent constructor for this class. 
-    public courseinfo(string name, string title, string prof, float cred, int seats,
+    public courseinfo(string name, string title, string prof, double cred, int seats,
         List<coursetime> timeslist)
     {
         Coursename = name;
@@ -48,24 +49,9 @@ public class courseinfo : ICourse<courseinfo>
     //    seats = 0;
     //}
 
-    public int Enrolled()
-    { 
-        return students.Count;
-    }
-
     public bool isFull()
     {
-        return seats <= students.Count;
-    }
-
-    public bool enrollStudent(ref VStudent student)
-    {   // returns true is successful, false otherwise (ex. already enrolled)
-        if (!students.Contains(student))
-        {
-            students.Add(student);
-            return true;
-        }
-        else return false;
+        return Seats <= Enrolled;
     }
 
     public bool Equals(courseinfo course)
