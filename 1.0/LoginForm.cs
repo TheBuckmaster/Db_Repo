@@ -18,6 +18,27 @@ namespace Registration
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
+            if (admin)
+            {
+                Application.Run(new AdminForm());
+                AdminForm adm = new AdminForm();
+                adm.Show();
+                this.Hide();
+            }
+            else if (faculty)
+            {
+                Application.Run(new FacultyForm());
+                FacultyForm fac = new FacultyForm();
+                fac.Show();
+                this.Hide();
+            }
+            else
+            {
+                Application.Run(new StudentForm());
+                StudentForm stud = new StudentForm();
+                stud.Show();
+                this.Hide();
+            }
 
         }
 
