@@ -5,13 +5,13 @@ public class pastcourse : ICourse<pastcourse>
     public string Coursename;
     public char Term;
     public int Year;
-    public float Credit;
+    public double Credit;
     public string Grade;
-    public float GPoints;
+    public double GPoints;
     public bool Earned;
     public bool GPAble;
 
-	public pastcourse(string coursename, string term, float credit, string grade)
+	public pastcourse(string coursename, string term, double credit, string grade)
 	{
         Coursename = coursename;
         Term = term[0];

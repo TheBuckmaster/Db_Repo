@@ -13,6 +13,7 @@ public class Student
     public string Status;
 
     public List<string> Next = new List<string>();
+    public float EnrolledCredits = 0.0;
     public List<pastcourse> Current = new List<pastcourse>();
     public List<pastcourse> History = new List<pastcourse>();
     public List<string> Conflicts = new List<string>();
@@ -27,26 +28,23 @@ public class Student
         Status = stat;
     }
 
-    public double enrolledCredits()
+    public double EarnedCredits()
     {
         double credits = 0.00;
-        foreach (courseinfo course in Next)
-            credits += course.Credit;
-        return credits;
-    }
 
-    public double earnedCredits()
-    {
-        double credits = 0.00;
         foreach (pastcourse course in History)
-            credits += course.Credit;
+        {
+            if(course.Earned)
+                credits += course.Credit;
+        }
+
         return credits;
     }
 
-    public double gpa()
+    public double GPA()
     {
-        float total = 0.0;
-        float creds = 0.0;
+        double total = 0.000;
+        double creds = 0.000;
 
         foreach (pastcourse course in History)
         {
