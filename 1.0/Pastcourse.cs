@@ -45,9 +45,9 @@ public class pastcourse : ICourse<pastcourse>
             GPAble = true;
 
             if (Grade.Contains("A-"))
-                GPoints = Credit * 4.0;
-            else if (Grade.Contains("A"))
                 GPoints = Credit * 3.7;
+            else if (Grade.Contains("A"))
+                GPoints = Credit * 4.0;
 
             else if (Grade.Contains("B+"))
                 GPoints = Credit * 3.3;
