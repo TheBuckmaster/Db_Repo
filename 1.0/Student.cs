@@ -45,19 +45,35 @@ public class Student
 
     public double gpa()
     {
+        float total = 0.0;
+        float creds = 0.0;
+
         foreach (pastcourse course in History)
         {
-            if(course.Grade.Contains("R"))
+            // if a gpa factor
+            if (course.GPAble)
             {
-                foreach(pastcourse course2 in History)
+                // check if later retaken
+                bool retaken = false;
+                foreach (pastcourse course2 in History)
                 {
-                    string mxgrade = course.Grade;
-                    if(course.Coursename == course2.Coursename)
+                    if ( course.Coursename == course2.Coursename && course2.Grade.Contains("R") )
                     {
-
+                        if ( (course.Year == course2.Year && course.Term != 'F')
+                            || (course.Year < course2.Year))
+                            retaken = true;
                     }
+                }
+
+                // skip retaken classes
+                if (!retaken)
+                {
+                    total += course.GPoints;
+                    creds += course.Credit;
                 }
             }
         }
+
+        return total / creds;
     }
 }
