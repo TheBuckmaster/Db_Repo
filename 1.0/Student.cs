@@ -74,4 +74,30 @@ public class Student
 
         return total / creds;
     }
+
+    public string UserDatabaseString()
+    {
+        Stringbuilder udbstring = new Stringbuilder(UserName);
+        udbstring.Insert(12, Password);
+        udbstring.Insert(22, FirstName);
+        udbstring.Insert(34, MiddleName);
+        udbstring.Insert(56, LastName);
+        udbstring.Insert(68, Status);
+        udbstring.Append('\n');
+
+        return udbstring.ToString();
+    }
+
+    public string HistoryDatabaseString()
+    {
+        Stringbuilder hdbstring = new Stringbuilder(Username);
+        hdbstring.Insert(10, Next.Count);
+
+        foreach(pastcourse course in Next)
+        {
+            hdbstring.Append('\n'+ course.Coursename);
+            hdbstring.Insert(12, "S13");
+            hdbstring.Insert(17, "
+        }
+    }
 }
