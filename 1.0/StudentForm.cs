@@ -14,6 +14,7 @@ namespace Registration
         public StudentForm()
         {
             InitializeComponent();
+            CreateListView();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -26,6 +27,33 @@ namespace Registration
             LoginForm lgn = new LoginForm();
             lgn.Show();
             this.Close();
+        }
+
+        private void addCourseBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void CreateListView()
+        {
+            listView1.Columns.Add("Course Title", 120);
+            listView1.Columns.Add("Course Name", 150);
+            listView1.Columns.Add("Professer", 120);
+            listView1.Columns.Add("Days", 75);
+            listView1.Columns.Add("Time", 120);
+
+            listView1.View = View.Details;
+            listView1.FullRowSelect = true;
+
+            foreach (courseinfo course in student)
+            {
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = course.Coursetitle.ToString();
+                lvi.SubItems.Add(course.Coursename.ToString());
+                lvi.SubItems.Add(course.Instructor.ToString());
+                lvi.SubItems.Add(course.Times.days.ToString());
+                lvi.SubItems.Add(course.Times.showtime(course.Times.start) + "-" + course.Times.showtime(course.Times.end));
+                // lvi.SubItems.Add(Item.Times.showtime(Item.Times.start) + "-" + Item.Times.showtime(Item.Times.end));
+            }
         }
     }
 }
