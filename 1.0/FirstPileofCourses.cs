@@ -56,6 +56,7 @@ namespace WindowsFormsApplication1
             return OutString.ToString(); 
         }
 
+
     
     }
     
@@ -177,9 +178,71 @@ namespace WindowsFormsApplication1
     }
 
 
-    class PastCourse
+    public class PastCourse
     {
+        struct GradeReport
+        {
+            public String Student;
+            public Char Grade;
+        }
+
+
+        private String cName;
+        private double credits = 1.0;
+        private List<GradeReport> StudentGrades = new List<GradeReport>(); 
+
+
+        public String CourseName { get { return cName; } }
+        public double Credits { get { return credits; } }
+
+
+
+        public PastCourse()
+        {
+            cName = "No Name";
+        }
+
+        public void ReportGrade(String StudentName, Char Grade)
+        {
+            GradeReport toChange;
+            toChange.Student = "";
+            toChange.Grade = Grade;
+            int index = 0;
  
+            //Was this student previously reported?
+            foreach (GradeReport rpt in StudentGrades)
+                if (rpt.Student == StudentName)
+                {
+                    toChange.Student = rpt.Student;
+                    index = StudentGrades.IndexOf(rpt); 
+                }
+
+            //If the student wasn't already here, we'll add them. 
+            if (toChange.Student == "")
+            {
+                toChange.Student = StudentName;
+                StudentGrades.Add(toChange);
+            }
+            else //If they were, we change their grade. 
+            {
+                int a = StudentGrades.IndexOf(toChange);
+                StudentGrades[index] = toChange; 
+            }
+ 
+        }
+
+        public Char GetGrade(String studentName)
+        {
+            foreach (GradeReport x in StudentGrades)
+                if (x.Student == studentName)
+                    return x.Grade; 
+
+            return 'E'; 
+        }
+        
+        
+        
+
 
     }
 
