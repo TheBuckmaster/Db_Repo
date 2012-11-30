@@ -5,10 +5,10 @@ public class pastcourse : ICourse<pastcourse>
     public string Coursename;
     public string Term;
     public float Credit;
-    public bool Earned;
-    public float Gpoints;
     public string Grade;
-    public string Marks;
+    public float GPoints;
+    public bool Earned;
+    public bool GPAble;
 
 	public pastcourse(string coursename, string term, float credit, string grade)
 	{
@@ -16,46 +16,49 @@ public class pastcourse : ICourse<pastcourse>
         Term = term;
         Credit = credit;
         Grade = grade;
+        Earned = true;
+        GPAble = true;
+        GPoints = 0.0;
 
-        if (Grade.Contains("F") || Grade.Contains("W") || Grade.Contains("U") || Grade.Contains("X") || Grade.Contains("I") || Grade.Contains("O"))
+        if ( Grade.Contains("W") || Grade.Contains("U") || Grade.Contains("X") || Grade.Contains("I") || Grade.Contains("O") || Grade.Contains("EQ") )
         {
             Earned = false;
-            Gpoints = 0.0;
+            GPAble = false;
         }
-        else if (Grade.Contains("S")
-        else
+        else if ( Grade.Contains("S") )
+            GPAble = false;
+
+
+        if (Grade.Contains("F"))
         {
-            Earned = true;
-
-            if (Grade.Contains("A-"))
-                Gpoints = 4.0;
-            else if (Grade.Contains("A"))
-                Gpoints = 3.7;
-
-            if (Grade.Contains("B+"))
-                Gpoints = 3.3;
-            else if (Grade.Contains("B-"))
-                Gpoints = 2.7;
-            else if (Grade.Contains("B"))
-                Gpoints = 3.0;
-
-            if (Grade.Contains("C+"))
-                Gpoints = 2.3;
-            else if (Grade.Contains("C-"))
-                Gpoints = 1.7;
-            else if (Grade.Contains("C"))
-                Gpoints = 2.0;
-
-            if (Grade.Contains("D+"))
-                Gpoints = 1.3;
-            else if (Grade.Contains("D-"))
-                Gpoints = 0.7;
-            else if (Grade.Contains("D"))
-                Gpoints = 1.0;
-
-            else if(Grade.Contains("F"))
-                Gpoints = 0.0
+            Earned = false;
+            GPAble = true;
         }
+        else if (Grade.Contains("A-"))
+            GPoints = Credit * 4.0;
+        else if (Grade.Contains("A"))
+            GPoints = Credit * 3.7;
+
+        else if (Grade.Contains("B+"))
+            GPoints = Credit * 3.3;
+        else if (Grade.Contains("B-"))
+            GPoints = Credit * 2.7;
+        else if (Grade.Contains("B"))
+            GPoints = Credit * 3.0;
+
+        else if (Grade.Contains("C+"))
+            GPoints = Credit * 2.3;
+        else if (Grade.Contains("C-"))
+            GPoints = Credit * 1.7;
+        else if (Grade.Contains("C"))
+            GPoints = Credit * 2.0;
+
+        else if (Grade.Contains("D+"))
+            GPoints = Credit * 1.3;
+        else if (Grade.Contains("D-"))
+            GPoints = Credit * 0.7;
+        else if (Grade.Contains("D"))
+            GPoints = Credit * 1.0;
 	}
 
     public bool Equals(pastcourse course)
