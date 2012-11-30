@@ -4,21 +4,13 @@ using System.Text;
 
 public class courseinfo : ICourse<courseinfo>
 {
-    private string coursename;
-    private string coursetitle;
-    private string instructor;
-    private float credit;
-    private int seats;
-    private List<coursetime> times = new List<coursetime>(); // as initialized, these are ddttks in order of entry.
-    private List<VStudent> students = new List<VStudent>(); // Becase we'll need this; 
-
-    public string Coursename { get { return coursename; } }
-    public string Coursetitle { get { return coursetitle; } }
-    public string Instructor { get { return instructor; } }
-    public float Credit { get { return credit; } }
-    public int Seats { get { return seats; } }
+    public string Coursename;
+    public string Coursetitle;
+    public string Instructor;
+    public float Credit;
+    public int Seats;
+    public int Enrolled = 0;
     public List<coursetime> Times { get { return times; } }
-    public List<VStudent> Students { get { return students; } }
 
 
     //timeslist should be ddttk strings, later termed 'TerryStrings' after their creator.
@@ -35,16 +27,15 @@ public class courseinfo : ICourse<courseinfo>
 
 
     //VUser/VStudent constructor for this class. 
-    public courseinfo(string name, string title, string prof, float cred, int spots,
-        List<coursetime> timeslist, List<VStudent> studs)
+    public courseinfo(string name, string title, string prof, float cred, int seats,
+        List<coursetime> timeslist)
     {
-        coursename = name;
-        coursetitle = title;
-        instructor = prof;
-        credit = cred;
-        seats = spots;
-        times = timeslist;
-        students = new List<VStudent>(studs);
+        Coursename = name;
+        Coursetitle = title;
+        Instructor = prof;
+        Credit = cred;
+        Seats = seats;
+        Times = timeslist;
     }
 
     //// psuedo-casting

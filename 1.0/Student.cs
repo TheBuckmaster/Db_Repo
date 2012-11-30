@@ -45,6 +45,19 @@ public class Student
 
     public double gpa()
     {
+        foreach (pastcourse course in History)
+        {
+            if(course.Grade.Contains("R"))
+            {
+                foreach(pastcourse course2 in History)
+                {
+                    string mxgrade = course.Grade;
+                    if(course.Coursename == course2.Coursename)
+                    {
 
+                    }
+                }
+            }
+        }
     }
 }
