@@ -56,7 +56,6 @@ namespace Registration
             return OutString.ToString(); 
         }
 
-
     
     }
     
@@ -178,40 +177,9 @@ namespace Registration
     }
 
 
-    public class PastCourse
+    class PastCourse
     {
-        private String cName;
-        private double credits = 1.0;
-        private String sg = "N";
-        private String term; 
  
-        
-
-        public String CourseName { get { return cName; } }
-        public double Credits { get { return credits; } }
-        public String Grade { get { return sg; } }
-        public String Term { get { return term; } } 
- 
-
-
-        public PastCourse()
-        {
-            cName = "No Name";
-        }
-
-        public PastCourse(String cn, String Trm, String Grd)
-        {
-            cName = cn;
-            sg = Grd;
-            term = Trm; 
-        }
-
-        public PastCourse(String cn, String trm, String grd, double pts)
-            : this(cn, trm, grd)
-        {
-            credits = pts; 
-        }
-
 
     }
 
