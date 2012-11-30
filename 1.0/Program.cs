@@ -196,16 +196,18 @@ namespace WindowsFormsApplication1
                         currstring.Remove(0, 2);
                         currstring.TrimStart();
 
+                        // find index of student
                         int i = 0;
                         foreach (Student stud in StudentList)
                         {
-                            if (stude.Username == username)
+                            if (stud.Username == username)
                             {
                                 undx = i;
                                 break;
                             }
                             ++i;
                         }
+
                         for(int i = 0; i < numcourses; ++i)
                         {
                             coursename = currstring.Substring(0, 10);
@@ -214,7 +216,7 @@ namespace WindowsFormsApplication1
                             term = currstring.Substring(0, 3);
                             currstring.Remove(0, 3);
                             currstring.TrimStart();
-                            credit = float.Parse(currstring.Substring(0, 4));
+                            credit = double.Parse(currstring.Substring(0, 4));
                             currstring.Remove(0, 4);
                             currstring.TrimStart();
                             grade = currstring.Substring(0, 3);
@@ -223,7 +225,7 @@ namespace WindowsFormsApplication1
 
 
                             // fixed maybe?
-                            if(grade == "N")
+                            if( grade.Contains("N") )
                             {
                                 if(term == curterm)
                                     StudentList[undx].Current.Add(new pastcourse(coursename, term, credit, grade));
@@ -231,6 +233,7 @@ namespace WindowsFormsApplication1
                                 else
                                 {
                                     StudentList[undx].Next.Add(coursename);
+                                    StudentList[undx].EnrolledCredit += credit;
                                 }
                             }
                             else StudentList[undx].History.Add(new pastcourse(coursename, term, credit, grade));

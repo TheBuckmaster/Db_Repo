@@ -15,7 +15,7 @@ public class pastcourse : ICourse<pastcourse>
 	{
         Coursename = coursename;
         Term = term[0];
-        Year = Int.Parse(term.Substring(1));
+        Year = int.Parse(term.Substring(1));
         Credit = credit;
         Grade = grade;
 
