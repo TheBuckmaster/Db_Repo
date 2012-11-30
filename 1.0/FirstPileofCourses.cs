@@ -180,21 +180,18 @@ namespace Registration
 
     public class PastCourse
     {
-        struct GradeReport
-        {
-            public String Student;
-            public Char Grade;
-        }
-
-
         private String cName;
         private double credits = 1.0;
-        private List<GradeReport> StudentGrades = new List<GradeReport>(); 
-
+        private String sg = "N";
+        private String term; 
+ 
+        
 
         public String CourseName { get { return cName; } }
         public double Credits { get { return credits; } }
-
+        public String Grade { get { return sg; } }
+        public String Term { get { return term; } } 
+ 
 
 
         public PastCourse()
@@ -202,46 +199,18 @@ namespace Registration
             cName = "No Name";
         }
 
-        public void ReportGrade(String StudentName, Char Grade)
+        public PastCourse(String cn, String Trm, String Grd)
         {
-            GradeReport toChange;
-            toChange.Student = "";
-            toChange.Grade = Grade;
-            int index = 0;
- 
-            //Was this student previously reported?
-            foreach (GradeReport rpt in StudentGrades)
-                if (rpt.Student == StudentName)
-                {
-                    toChange.Student = rpt.Student;
-                    index = StudentGrades.IndexOf(rpt); 
-                }
-
-            //If the student wasn't already here, we'll add them. 
-            if (toChange.Student == "")
-            {
-                toChange.Student = StudentName;
-                StudentGrades.Add(toChange);
-            }
-            else //If they were, we change their grade. 
-            {
-                int a = StudentGrades.IndexOf(toChange);
-                StudentGrades[index] = toChange; 
-            }
- 
+            cName = cn;
+            sg = Grd;
+            term = Trm; 
         }
 
-        public Char GetGrade(String studentName)
+        public PastCourse(String cn, String trm, String grd, double pts)
+            : this(cn, trm, grd)
         {
-            foreach (GradeReport x in StudentGrades)
-                if (x.Student == studentName)
-                    return x.Grade; 
-
-            return 'E'; 
+            credits = pts; 
         }
-        
-        
-        
 
 
     }
