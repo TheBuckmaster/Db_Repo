@@ -35,6 +35,9 @@ namespace Registration
         }
         private void CreateListView()
         {
+            listView1.Columns.Clear();
+            listView1.Clear();
+
             listView1.Columns.Add("Course Title", 120);
             listView1.Columns.Add("Course Name", 150);
             listView1.Columns.Add("Professer", 120);
@@ -52,7 +55,30 @@ namespace Registration
                 lvi.SubItems.Add(course.Instructor.ToString());
                 lvi.SubItems.Add(course.Times.days.ToString());
                 lvi.SubItems.Add(course.Times.showtime(course.Times.start) + "-" + course.Times.showtime(course.Times.end));
-                // lvi.SubItems.Add(Item.Times.showtime(Item.Times.start) + "-" + Item.Times.showtime(Item.Times.end));
+            }
+        }
+
+        private void addCourseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listView1.Columns.Clear();
+            listView1.Clear();
+            
+            listView1.Columns.Add("Course Title", 120);
+            listView1.Columns.Add("Course Name", 150);
+            listView1.Columns.Add("Professer", 120);
+            listView1.Columns.Add("Days", 75);
+            listView1.Columns.Add("Time", 120);
+            listView1.Columns.Add("Seats", 50);
+
+            foreach (courseinfo course in student)
+            {
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = course.Coursetitle.ToString();
+                lvi.SubItems.Add(course.Coursename.ToString());
+                lvi.SubItems.Add(course.Instructor.ToString());
+                lvi.SubItems.Add(course.Times.days.ToString());
+                lvi.SubItems.Add(course.Times.showtime(course.Times.start) + "-" + course.Times.showtime(course.Times.end));
+                lvi.SubItems.Add(course.enrolled.ToString() + "/" + course.seats.ToString());
             }
         }
     }
