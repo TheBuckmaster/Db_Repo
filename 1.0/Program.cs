@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO;
 
-namespace WindowsFormsApplication1
+namespace Registration
 {
     static class Program
     {
@@ -73,9 +73,9 @@ namespace WindowsFormsApplication1
                         line.Remove(0, 10);
 
                         // add user info
-                        if(stat == "admin")
+                        if (stat == "admin")
                             AdminList.Add(new Admin(uname, pswd, fname, mname, lname, stat));
-                        else if(stat == "faculty")
+                        else if (stat == "faculty")
                             FacultyList.Add(new Faculty(uname, pswd, fname, mname, lname, stat));
                         else StudentList.Add(new Student(uname, pswd, fname, mname, lname, stat));
 
@@ -159,10 +159,13 @@ namespace WindowsFormsApplication1
                 foreach (Student stud in StudentList)
                 {
 
-            //Application.Run(frm3);
-            //Application.Run(FctMn);
+                    //Application.Run(frm3);
+                    //Application.Run(FctMn);
+                }
+            }
         }
     }
 }
+
 
 

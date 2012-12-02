@@ -15,45 +15,79 @@ namespace Registration
         List<Faculty> FacultyList = new List<Faculty>();
         List<Student> StudentList = new List<Student>();
         List<courseinfo> Courses = new List<courseinfo>();
+        List<courserecord> crsRecord = new List<courserecord>();
+        List<coursetime> crsTime = new List<coursetime>();
+        List<PastCourse> pastCourse = new List<PastCourse>();
 
         public LoginForm()
         {
             InitializeComponent();
         }
 
-        public LoginForm(ref List<Admin> adm, ref List<Faculty> fac, ref List<Student> stud, ref List<courseinfo> crs)
+        public LoginForm( List<Admin> adm, List<Faculty> fac,
+            List<Student> stud, List<courseinfo> crs, List<courserecord> crecord,
+            List<coursetime> ctime, List<PastCourse> pcourse )
         {
             InitializeComponent();
             AdminList = adm;
             FacultyList = fac;
             StudentList = stud;
             Courses = crs;
+            crsRecord = crecord;
+            crsTime = ctime;
+            pastCourse = pcourse;
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            if (admin)
+            foreach(Admin adm in AdminList)
             {
-                Application.Run(new AdminForm());
-                AdminForm adm = new AdminForm();
-                adm.Show();
-                this.Hide();
+                if (usrNmeTxtBx == Adm.UserName)
+                {
+                    if(passTxtBx == Adm.password)
+                    {
+                        Application.Run(new AdminForm());
+                        AdminForm ad = new AdminForm();
+                        ad.Show();
+                        this.Hide();
+                    }
+                    else
+                        incorrectLabel.Visible = true;
+                }
             }
-            else if (faculty)
+            foreach(Faculty fac in FacultyList)
             {
-                Application.Run(new FacultyForm());
-                FacultyForm fac = new FacultyForm();
-                fac.Show();
-                this.Hide();
+                if(fac.UserName == usrNmeTxtBx.Text)
+                {
+                    if(fac.Password == passTxtBx.Text)
+                    {
+                        Application.Run(new FacultyForm());
+                        FacultyForm fc = new FacultyForm();
+                        fc.Show();
+                        this.Hide();
+                    }
+                    else
+                        incorrectLabel.Visible = true;
+                }
             }
-            else
+                    
+            foreach(Student std in StudentList)
             {
-                Application.Run(new StudentForm());
-                StudentForm stud = new StudentForm();
-                stud.Show();
-                this.Hide();
+                if (std.UserName == usrNmeTxtBx.Text)
+                {
+                    if (std.Password == passTxtBx.Text)
+                    {
+                        Application.Run(new StudentForm(std, Courses,
+                            crsRecord,crsTime ));
+                        StudentForm stud = new StudentForm();
+                        stud.Show();
+                        this.Hide();
+                    }
+                    else
+                        incorrectLabel.Visible = true;
+                }
             }
-
+            incorrectLabel.Visible = true;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

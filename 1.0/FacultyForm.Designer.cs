@@ -36,9 +36,9 @@
             this.teachingScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.currentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nextSemesterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adviseesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.adviseesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,6 +95,7 @@
             this.teachingScheduleToolStripMenuItem.Name = "teachingScheduleToolStripMenuItem";
             this.teachingScheduleToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.teachingScheduleToolStripMenuItem.Text = "Teaching Schedule";
+            this.teachingScheduleToolStripMenuItem.Click += new System.EventHandler(this.teachingScheduleToolStripMenuItem_Click);
             // 
             // currentToolStripMenuItem
             // 
@@ -108,6 +109,12 @@
             this.nextSemesterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.nextSemesterToolStripMenuItem.Text = "Next Semester";
             // 
+            // adviseesToolStripMenuItem
+            // 
+            this.adviseesToolStripMenuItem.Name = "adviseesToolStripMenuItem";
+            this.adviseesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.adviseesToolStripMenuItem.Text = "Advisees";
+            // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
@@ -119,12 +126,6 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            // 
-            // adviseesToolStripMenuItem
-            // 
-            this.adviseesToolStripMenuItem.Name = "adviseesToolStripMenuItem";
-            this.adviseesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.adviseesToolStripMenuItem.Text = "Advisees";
             // 
             // FacultyForm
             // 

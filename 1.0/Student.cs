@@ -1,11 +1,13 @@
-﻿using Registration;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-/// <summary>
-/// Summary description for Class1
-/// </summary>
-public class Student
-{ 
-    public string UserName;
+namespace Registration
+{
+    class Student
+    {
+        public string UserName;
     public string Password;
     public string FirstName;
     public string MiddleName;
@@ -97,7 +99,8 @@ public class Student
         {
             hdbstring.Append('\n'+ course.Coursename);
             hdbstring.Insert(12, "S13");
-            hdbstring.Insert(17, "
+            hdbstring.Insert(17, "   
         }
+    }
     }
 }

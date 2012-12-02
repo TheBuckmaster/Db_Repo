@@ -15,5 +15,10 @@ namespace Registration
         {
             InitializeComponent();
         }
+
+        private void teachingScheduleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

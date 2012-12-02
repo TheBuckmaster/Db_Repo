@@ -11,6 +11,15 @@ namespace Registration
 {
     public partial class StudentForm : Form
     {
+        Student student;
+        List<courseinfo> crsInfo = new List<courseinfo>();
+        List<courserecord> crsRecord = new List<courserecord>();
+        List<coursetime> crsTime = new List<coursetime>();
+
+        public StudentForm( Student stud, List<courseinfo> cinfo,
+            List<courserecord> crecord, List<coursetime> ctime)
+        {
+        }
         public StudentForm()
         {
             InitializeComponent();
@@ -31,7 +40,7 @@ namespace Registration
 
         private void addCourseBtn_Click(object sender, EventArgs e)
         {
-
+            
         }
         private void CreateListView()
         {
@@ -53,8 +62,7 @@ namespace Registration
                 lvi.Text = course.Coursetitle.ToString();
                 lvi.SubItems.Add(course.Coursename.ToString());
                 lvi.SubItems.Add(course.Instructor.ToString());
-                lvi.SubItems.Add(course.Times.days.ToString());
-                lvi.SubItems.Add(course.Times.showtime(course.Times.start) + "-" + course.Times.showtime(course.Times.end));
+                lvi.SubItems.Add(course.Times.ToString());
             }
         }
 
@@ -72,6 +80,7 @@ namespace Registration
             listView1.Columns.Add("Days", 75);
             listView1.Columns.Add("Time", 120);
             listView1.Columns.Add("Seats", 50);
+            listView1.Columns.Add("Credit", 75);
 
             foreach (courseinfo course in student)
             {
@@ -79,9 +88,10 @@ namespace Registration
                 lvi.Text = course.Coursetitle.ToString();
                 lvi.SubItems.Add(course.Coursename.ToString());
                 lvi.SubItems.Add(course.Instructor.ToString());
-                lvi.SubItems.Add(course.Times.days.ToString());
-                lvi.SubItems.Add(course.Times.showtime(course.Times.start) + "-" + course.Times.showtime(course.Times.end));
-                lvi.SubItems.Add(course.enrolled.ToString() + "/" + course.seats.ToString());
+                lvi.SubItems.Add(course.Times.ToString());
+                //lvi.SubItems.Add(course.Times.showtime(course.Times.start) + "-" + course.Times.showtime(course.Times.end));
+                lvi.SubItems.Add(course.Enrolled.ToString() + "/" + course.Seats.ToString());
+                lvi.SubItems.Add(course.Credit.ToString());
             }
         }
 
