@@ -27,8 +27,9 @@ namespace Registration
 
 
 
+            int lcount = 0;
             // read in UserDatabase
-            string filename = "UserInput.txt";
+            string filename = "C:\\Users\\apblume\\Documents\\GitHub\\Db_Repo\\1.0\\UserInput.txt";
             if (File.Exists(filename))
             {
                 FileStream input = new FileStream(filename, FileMode.Open, FileAccess.Read);
@@ -45,6 +46,7 @@ namespace Registration
 
                     while (!sr.EndOfStream)
                     {
+                        ++lcount;
                         line = sr.ReadLine();
 
                         // username
@@ -93,7 +95,7 @@ namespace Registration
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Invalid User Input File");
+                    Console.WriteLine("Invalid User Input File: {0}", lcount);
                     Console.WriteLine(e.Message);
                 }
             }
@@ -102,10 +104,8 @@ namespace Registration
                 Console.WriteLine("User file does not Exist.");
             }
 
-
-
-
-            filename = "ClassInput.txt";
+            lcount = 0;
+            filename = "C:\\Users\\apblume\\Documents\\GitHub\\Db_Repo\\1.0\\ClassInput.txt";
             if (File.Exists(filename))
             {
                 FileStream input = new FileStream(filename, FileMode.Open, FileAccess.Read);
@@ -124,6 +124,7 @@ namespace Registration
 
                     while (!sr.EndOfStream)
                     {
+                        ++lcount;
                         line = sr.ReadLine();
 
                         term = line.Substring(0, 3);
@@ -175,7 +176,7 @@ namespace Registration
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Invalid Class Input File");
+                    Console.WriteLine("Invalid Class Input File: {0}", lcount);
                     Console.WriteLine(e.Message);
                 }
             }
@@ -198,9 +199,9 @@ namespace Registration
                         prof.Next.Add(course.Coursename);
                 }
             }
+            lcount = 0;
 
-
-            filename = "HistoryInput.txt";
+            filename = "C:\\Users\\apblume\\Documents\\GitHub\\Db_Repo\\1.0\\HistoryInput.txt";
             if (File.Exists(filename))
             {
                 FileStream input = new FileStream(filename, FileMode.Open, FileAccess.Read);
@@ -218,6 +219,7 @@ namespace Registration
 
                     while (!sr.EndOfStream)
                     {
+                        ++lcount;
                         line = sr.ReadLine();
                         username = line.Substring(0, 10);
                         line.Remove(0, 10);
@@ -265,7 +267,7 @@ namespace Registration
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Invalid History Input File");
+                    Console.WriteLine("Invalid History Input File: {0}", lcount);
                     Console.WriteLine(e.Message);
                 }
             }
@@ -286,9 +288,9 @@ namespace Registration
                 }
             }
 
-
+            lcount = 0;
             // read course prereq database
-            filename = "PrereqInput.txt";
+            filename = "C:\\Users\\apblume\\Documents\\GitHub\\Db_Repo\\1.0\\PrereqInput.txt";
             if (File.Exists(filename))
             {
                 FileStream input = new FileStream(filename, FileMode.Open, FileAccess.Read);
@@ -303,6 +305,7 @@ namespace Registration
 
                     while (!sr.EndOfStream)
                     {
+                        ++lcount;
                         line = sr.ReadLine();
 
                         coursename = line.Substring(0, 7);
@@ -332,7 +335,7 @@ namespace Registration
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Invalid Prereq Input File");
+                    Console.WriteLine("Invalid Prereq Input File: {0}", lcount);
                     Console.WriteLine(e.Message);
                 }
             }
@@ -347,31 +350,26 @@ namespace Registration
             Application.Run(new LoginForm(AdminList, FacultyList, StudentList, NextCourses, PrevCourses));
 
         }
-        static class AddRemove
-        {
-            public static void AddStudenttoCourse(Student S, Course C)
-            {
-                    if (S.Current.Contains(C.CourseName))
-                    MessageBox.Show("You've Already Registered for this Course!");
+        //static class AddRemove
+        //{
+        //    public static void AddStudenttoCourse(Student S, Course C)
+        //    {
+        //            if (S.Current.Contains(C.CourseName))
+        //            MessageBox.Show("You've Already Registered for this Course!");
 
-                    if (C.CurrSeats >= C.MaxSeats)
-                        MessageBox.Show("Class is Full!");
+        //            if (C.CurrSeats >= C.MaxSeats)
+        //                MessageBox.Show("Class is Full!");
 
-            }
+        //    }
 
-            public static void AddStudenttoCourse(Student S, Course C, Admin Me)
-            {
+        //    public static void RemoveStudentfromCourse(Student S, courseinfo C)
+        //    {
+        //        C.Enrolled--;
+        //        S.Current.Remove(C.Coursename);
+        //        MessageBox.Show("You are no longer registered for " + C.Coursename + " .");
 
-            }
-
-            public static void RemoveStudentfromCourse(Student S, courseinfo C)
-            {
-                C.Enrolled--;
-                S.Current.Remove(C.Coursename);
-                MessageBox.Show("You are no longer registered for " + C.Coursename + " .");
-
-            }
-        }
+        //    }
+        //}
 
 
         //    //output new databases
