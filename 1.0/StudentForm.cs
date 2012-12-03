@@ -15,10 +15,16 @@ namespace Registration
         List<courseinfo> crsInfo = new List<courseinfo>();
         List<courserecord> crsRecord = new List<courserecord>();
         List<coursetime> crsTime = new List<coursetime>();
+        List<PastCourse> pastCourse = new List<PastCourse>();
 
         public StudentForm( Student stud, List<courseinfo> cinfo,
-            List<courserecord> crecord, List<coursetime> ctime)
+            List<courserecord> crecord, List<coursetime> ctime, List<PastCourse> pcourse)
         {
+            student = stud;
+            crsInfo = cinfo;
+            crsRecord = crecord;
+            pastCourse = pcourse;
+            ctime = crsTime;
         }
         public StudentForm()
         {
@@ -56,13 +62,16 @@ namespace Registration
             listView1.View = View.Details;
             listView1.FullRowSelect = true;
 
-            foreach (courseinfo course in student)
+            foreach ()
             {
-                ListViewItem lvi = new ListViewItem();
-                lvi.Text = course.Coursetitle.ToString();
-                lvi.SubItems.Add(course.Coursename.ToString());
-                lvi.SubItems.Add(course.Instructor.ToString());
-                lvi.SubItems.Add(course.Times.ToString());
+                if (pst.term.ToString == "12")
+                {
+                    ListViewItem lvi = new ListViewItem();
+                    lvi.Text = pst.Coursetitle.ToString();
+                    lvi.SubItems.Add(pst.Coursename.ToString());
+                    lvi.SubItems.Add(pst.Instructor.ToString());
+                    lvi.SubItems.Add(pst.Times.ToString());
+                }
             }
         }
 
@@ -82,16 +91,16 @@ namespace Registration
             listView1.Columns.Add("Seats", 50);
             listView1.Columns.Add("Credit", 75);
 
-            foreach (courseinfo course in student)
+            foreach (var Item in crsInfo)
             {
                 ListViewItem lvi = new ListViewItem();
-                lvi.Text = course.Coursetitle.ToString();
-                lvi.SubItems.Add(course.Coursename.ToString());
-                lvi.SubItems.Add(course.Instructor.ToString());
-                lvi.SubItems.Add(course.Times.ToString());
+                lvi.Text = Item.Coursetitle.ToString();
+                lvi.SubItems.Add(Item.Coursename.ToString());
+                lvi.SubItems.Add(Item.Instructor.ToString());
+                lvi.SubItems.Add(Item.Times.ToString());
                 //lvi.SubItems.Add(course.Times.showtime(course.Times.start) + "-" + course.Times.showtime(course.Times.end));
-                lvi.SubItems.Add(course.Enrolled.ToString() + "/" + course.Seats.ToString());
-                lvi.SubItems.Add(course.Credit.ToString());
+                lvi.SubItems.Add(Item.Enrolled.ToString() + "/" + Item.Seats.ToString());
+                lvi.SubItems.Add(Item.Credit.ToString());
             }
         }
 

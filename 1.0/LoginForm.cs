@@ -26,7 +26,7 @@ namespace Registration
 
         public LoginForm( List<Admin> adm, List<Faculty> fac,
             List<Student> stud, List<courseinfo> crs, List<courserecord> crecord,
-            List<coursetime> ctime, List<PastCourse> pcourse )
+            List<coursetime> ctime, List<PastCourse> pcourse)
         {
             InitializeComponent();
             AdminList = adm;
@@ -44,7 +44,7 @@ namespace Registration
             {
                 if (usrNmeTxtBx == Adm.UserName)
                 {
-                    if(passTxtBx == Adm.password)
+                    if(passTxtBx == Adm.Password)
                     {
                         Application.Run(new AdminForm());
                         AdminForm ad = new AdminForm();
@@ -78,7 +78,7 @@ namespace Registration
                     if (std.Password == passTxtBx.Text)
                     {
                         Application.Run(new StudentForm(std, Courses,
-                            crsRecord,crsTime ));
+                            crsRecord, crsTime, pastCourse));
                         StudentForm stud = new StudentForm();
                         stud.Show();
                         this.Hide();
