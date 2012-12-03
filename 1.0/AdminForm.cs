@@ -78,7 +78,7 @@ namespace Registration
             foreach (Student stud in StudentList)
             {
                 if(prof.UserName == stud.Status)
-                    stud.Status == "Staff";
+                    stud.Status = "Staff";
             }
 
             foreach(courseinfo course in NextCourses)
