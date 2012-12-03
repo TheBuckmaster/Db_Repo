@@ -5,7 +5,8 @@ using Registration;
 public class courserecord : ICourse<courserecord>
 {
     public string Coursename;
-    public char Term;
+    public string Term;
+    public char Semester;
     public int Year;
     public double Credit;
     public string Grade;
@@ -16,7 +17,8 @@ public class courserecord : ICourse<courserecord>
 	public courserecord(string coursename, string term, double credit, string grade)
 	{
         Coursename = coursename;
-        Term = term[0];
+        Term = term;
+        Semester = term[0];
         Year = int.Parse(term.Substring(1));
         Credit = credit;
         Grade = grade;

@@ -60,6 +60,26 @@ public class coursetime
         return ReturnString.ToString();
     }
 
+    public string DayString()
+    {
+        string daystring = "";
+
+        foreach (char d in days)
+            daystring += d;
+
+        return daystring;
+    }
+
+    public string StartTime()
+    {
+        return showtime(start);
+    }
+
+    public string EndTime()
+    {
+        return showtime(end);
+    }
+
     public override string ToString()
     {
         StringBuilder TerryString = new StringBuilder();
