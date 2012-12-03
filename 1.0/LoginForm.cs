@@ -14,37 +14,32 @@ namespace Registration
         List<Admin> AdminList = new List<Admin>();
         List<Faculty> FacultyList = new List<Faculty>();
         List<Student> StudentList = new List<Student>();
-        List<courseinfo> Courses = new List<courseinfo>();
-        List<courserecord> crsRecord = new List<courserecord>();
-        List<coursetime> crsTime = new List<coursetime>();
-        List<PastCourse> pastCourse = new List<PastCourse>();
+        List<courseinfo> PrevCourses = new List<courseinfo>();
+        List<courseinfo> NextCourses = new List<courseinfo>();
 
         public LoginForm()
         {
             InitializeComponent();
         }
 
-        public LoginForm( List<Admin> adm, List<Faculty> fac,
-            List<Student> stud, List<courseinfo> crs, List<courserecord> crecord,
-            List<coursetime> ctime, List<courserecord> pcourse)
+        public LoginForm(List<Admin> adm,List<Faculty> fac, List<Student> stud,
+            List<courseinfo> nxt, List<courseinfo> PrevC)
         {
             InitializeComponent();
             AdminList = adm;
             FacultyList = fac;
             StudentList = stud;
-            Courses = crs;
-            crsRecord = crecord;
-            crsTime = ctime;
-            pastCourse = pcourse;
+            NextCourses = nxt;
+            PrevCourses = PrevC;
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
             foreach(Admin adm in AdminList)
             {
-                if (usrNmeTxtBx == Adm.UserName)
+                if (usrNmeTxtBx.Text == adm.UserName)
                 {
-                    if(passTxtBx == Adm.Password)
+                    if(passTxtBx.Text == adm.Password)
                     {
                         Application.Run(new AdminForm());
                         AdminForm ad = new AdminForm();

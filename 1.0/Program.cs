@@ -349,7 +349,14 @@ namespace Registration
             {
                 Console.WriteLine("The history database could not be written:");
                 Console.WriteLine(e.Message);
-            }
+            }  
+
+            LoginForm lgn = new LoginForm(AdminList, FacultyList, StudentList, NextCourses,
+            PrevCourses);
+            lgn.Show();
         }
+
+
     }
+    
 }
