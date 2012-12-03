@@ -13,15 +13,14 @@ namespace Registration
     {
         Student student;
         List<courseinfo> coursesNextYear = new List<courseinfo>();
-        List<courseinfo> courseHistory = new List<courseinfo>();
-        List<coursetime> crsTime = new List<coursetime>();
+        List<courseinfo> prevCourses = new List<courseinfo>();
 
         public StudentForm( Student stud, List<courseinfo> nxt,
             List<courseinfo> his)
         {
             student = stud;
             coursesNextYear = nxt;
-            courseHistory = his;
+            prevCourses = his;
         }
         public StudentForm()
         {
@@ -43,21 +42,59 @@ namespace Registration
 
         private void addCourseBtn_Click(object sender, EventArgs e)
         {
-            
+
+            AddStudenttoCourse(student, coursesNextYear[dataGridView1.SelectedRows[0].Index]);
+            NextViewer(); 
+
         }
+
         private void CourseView()
+        {
+            dataGridView1.Hide();
+            dataGridView1.DataSource = student.Current;
+            dataGridView1.Refresh();
+            dataGridView1.Show();
+        }
+
+        private void NextViewer()
         {
             dataGridView1.Hide();
             dataGridView1.DataSource = coursesNextYear;
             dataGridView1.Refresh();
             dataGridView1.Show();
-            dataGridView1.Hide(); 
         }
 
         private void addCourseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataGridView1.Hide();
-            dataGridView1.DataSource = courseHistory;
+            NextViewer();
+        }
+
+        public void AddStudenttoCourse(Student S, courseinfo C)
+        {
+            
+            if (S.Current.Contains(C.Coursename))
+                MessageBox.Show("You've Already Registered for this Course!");
+
+            if (C.Enrolled >= C.Seats)
+                MessageBox.Show("Class is Full!");
+            else
+                Add(S, C);
+
+        }
+
+        public void Add(Student S, courseinfo C)
+        {
+            S.Next.Add(C.Coursename);
+            S.EnrolledCredits += C.Credit;
+            C.Enrolled++;
+        }
+
+        public void RemoveStudentfromCourse(Student S, courseinfo C)
+        {
+            C.Enrolled--;
+            S.Current.Remove(C.Coursename);
+            MessageBox.Show("You are no longer registered for " + C.Coursename + " .");
+
         }
 
     }

@@ -361,12 +361,11 @@ namespace Registration
 
             }
 
-            public static void RemoveStudentfromCourse(UserStudent S, Course C)
+            public static void RemoveStudentfromCourse(Student S, courseinfo C)
             {
-                MessageBox.Show("Removing " + S.UserName + " from " + C.CourseName + " .");
-                C.RemoveStudent(S);
-                S.MyCourses.Remove(C.CourseName);
-                MessageBox.Show("You are no longer registered for " + C.CourseName + " .");
+                C.Enrolled--;
+                S.Current.Remove(C.Coursename);
+                MessageBox.Show("You are no longer registered for " + C.Coursename + " .");
 
             }
         }
