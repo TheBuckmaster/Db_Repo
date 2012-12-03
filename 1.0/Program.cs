@@ -255,9 +255,9 @@ namespace Registration
                             if( grade.Contains("N") )
                             {
                                 if(term == curterm)
-                                    StudentList[undx].Current.Add(new courserecord(coursename, term, credit, grade));
+                                    StudentList[undx].Current.Add(coursename);
                                    // Users[undx].Add(new courserecord(coursename, term, credit, grade);
-                                else StudentList[undx].Next.Add(new courserecord(coursename, term, credit, grade);
+                                else StudentList[undx].Next.Add(coursename);
                             }
                             else StudentList[undx].History.Add(new courserecord(coursename, term, credit, grade));
                         }

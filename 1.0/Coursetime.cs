@@ -4,15 +4,28 @@ using System.Collections.Generic;
 
 public class coursetime
 {
-    public List<char> days = new List<char>();    // MTWRF
+    public string Days
+    {
+        get { return DayString(); }
+    }
+    public string StartTime
+    {
+        get { return showtime(start); }
+    }
+    public string EndTime
+    {
+        get { return showtime(end); }
+    }
+
+    public List<char> daylist = new List<char>();    // MTWRF
     public int start;   // #tt format
     public int end;     // #tt format
 
     public coursetime()
     {
-        days.Add('M');
-        days.Add('W');
-        days.Add('F');
+        daylist.Add('M');
+        daylist.Add('W');
+        daylist.Add('F');
         start = 10;
         end = 11;
     }
@@ -29,15 +42,15 @@ public class coursetime
 
         //this should do it 
         if ((dd & 1) == 1)
-            days.Add('M');
+            daylist.Add('M');
         if ((dd & 2) == 2)
-            days.Add('T');
+            daylist.Add('T');
         if ((dd & 4) == 4)
-            days.Add('W');
+            daylist.Add('W');
         if ((dd & 8) == 8)
-            days.Add('R');
+            daylist.Add('R');
         if ((dd & 16) == 16)
-            days.Add('F');
+            daylist.Add('F');
 
 
         end = start + l;
@@ -64,36 +77,27 @@ public class coursetime
     {
         string daystring = "";
 
-        foreach (char d in days)
+        foreach (char d in daylist)
             daystring += d;
 
         return daystring;
     }
 
-    public string StartTime()
-    {
-        return showtime(start);
-    }
-
-    public string EndTime()
-    {
-        return showtime(end);
-    }
 
     public override string ToString()
     {
         StringBuilder TerryString = new StringBuilder();
 
         int dd = 0;
-        if (days.Contains("M"))
+        if (daylist.Contains("M"))
             dd += 1;
-        if (days.Contains("T"))
+        if (daylist.Contains("T"))
             dd += 2;
-        if (days.Contains("W"))
+        if (daylist.Contains("W"))
             dd += 4;
-        if (days.Contains("R"))
+        if (daylist.Contains("R"))
             dd += 8;
-        if (days.Contains("F"))
+        if (daylist.Contains("F"))
             dd += 16;
 
         TerryString.Append(dd);

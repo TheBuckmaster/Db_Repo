@@ -9,9 +9,9 @@ public class Admin
 {
     public string UserName;
     public string Password;
-    public string FirstName;
-    public string MiddleName;
-    public string LastName;
+    public string FirstName { get; }
+    public string MiddleName { get; }
+    public string LastName { get; }
     public string Status;
 
     public Admin(string uname, string pswrd, string fname, string mname, string lname, string stat)

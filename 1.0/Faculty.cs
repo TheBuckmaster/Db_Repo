@@ -10,9 +10,9 @@ public class Faculty
 {
     public string UserName;
     public string Password;
-    public string FirstName;
-    public string MiddleName;
-    public string LastName;
+    public string FirstName { get; }
+    public string MiddleName { get; }
+    public string LastName { get; }
     public string Status;
 
     public List<string> Next = new List<string>();
@@ -30,7 +30,7 @@ public class Faculty
 
     public string UserDatabaseString()
     {
-        StringBuilder udbstring = new StringBuilder(UserName);
+        Stringbuilder udbstring = new Stringbuilder(UserName);
         udbstring.Insert(12, Password);
         udbstring.Insert(22, FirstName);
         udbstring.Insert(34, MiddleName);
