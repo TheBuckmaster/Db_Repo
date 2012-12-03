@@ -88,7 +88,7 @@ public class Student
 
     public string UserDatabaseString()
     {
-        Stringbuilder udbstring = new Stringbuilder(UserName);
+        StringBuilder udbstring = new StringBuilder(UserName);
         udbstring.Insert(12, Password);
         udbstring.Insert(22, FirstName);
         udbstring.Insert(34, MiddleName);
@@ -101,7 +101,7 @@ public class Student
 
     public string HistoryDatabaseString()
     {
-        Stringbuilder hdbstring = new Stringbuilder(Username);
+        StringBuilder hdbstring = new StringBuilder(Username);
         hdbstring.Insert(10, Next.Count);
 
         foreach (courserecord course in Next)

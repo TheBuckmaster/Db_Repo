@@ -112,7 +112,7 @@ namespace Registration
                 StreamReader sr = new StreamReader(input);
                 try
                 {
-                    string curstring;
+                    string line;
                     string term;
                     string coursename;
                     string coursetitle;
@@ -124,48 +124,48 @@ namespace Registration
 
                     while (!sr.EndOfStream)
                     {
-                        currstring = sr.ReadLine();
+                        line = sr.ReadLine();
 
-                        term = currstring.Substring(0, 3);
+                        term = line.Substring(0, 3);
                         term.TrimEnd();
-                        currstring.Remove(0, 3);
+                        line.Remove(0, 3);
 
-                        currstring.TrimStart();
-                        coursename = currstring.Substring(0, 10);
+                        line.TrimStart();
+                        coursename = line.Substring(0, 10);
                         coursename.TrimEnd();
-                        currstring.Remove(0, 10);
+                        line.Remove(0, 10);
 
-                        currstring.TrimStart();
-                        coursetitle = currstring.Substring(0, 15);
+                        line.TrimStart();
+                        coursetitle = line.Substring(0, 15);
                         coursetitle.TrimEnd();
-                        currstring.Remove(0, 15);
+                        line.Remove(0, 15);
 
-                        currstring.TrimStart();
-                        instructor = currstring.Substring(0, 10);
+                        line.TrimStart();
+                        instructor = line.Substring(0, 10);
                         instructor.TrimEnd();
-                        currstring.Remove(0, 10);
+                        line.Remove(0, 10);
 
-                        currstring.TrimStart();
-                        credit = double.Parse(currstring.Substring(0, 4));
-                        currstring.Remove(0, 4);
+                        line.TrimStart();
+                        credit = double.Parse(line.Substring(0, 4));
+                        line.Remove(0, 4);
 
-                        currstring.TrimStart();
-                        seats = int.Parse(currstring.Substring(0, 3));
-                        currstring.Remove(0, 3);
+                        line.TrimStart();
+                        seats = int.Parse(line.Substring(0, 3));
+                        line.Remove(0, 3);
 
-                        currstring.TrimStart();
-                        timeblocks = int.Parse(currstring.Substring(0, 1));
-                        currstring.Remove(0, 1);
-                        currstring.TrimStart();
+                        line.TrimStart();
+                        timeblocks = int.Parse(line.Substring(0, 1));
+                        line.Remove(0, 1);
+                        line.TrimStart();
 
                         times = new List<coursetime>();
                         for (int i = 0; i < timeblocks; ++i)
                         {
-                            string littlestring = currstring.Substring(0, 5);
+                            string littlestring = line.Substring(0, 5);
                             times.Add(new coursetime(littlestring));
 
-                            currstring.Remove(0, 5);
-                            currstring.TrimStart();
+                            line.Remove(0, 5);
+                            line.TrimStart();
                         }
 
                         if(term == nxtterm)
@@ -189,12 +189,12 @@ namespace Registration
             {
                 foreach (Student stud in StudentList)
                 {
-                    if (prof.Username == stud.Status)
-                        prof.Advisees.Add(stud.Username);
+                    if (prof.UserName == stud.Status)
+                        prof.Advisees.Add(stud.UserName);
                 }
                 foreach (courseinfo course in NextCourses)
                 {
-                    if (prof.Username == course.Instructor)
+                    if (prof.UserName == course.Instructor)
                         prof.Next.Add(course.Coursename);
                 }
             }
@@ -208,7 +208,7 @@ namespace Registration
 
                 try
                 {
-                    string currstring;
+                    string line;
                     string username;
                     int numcourses;
                     string coursename;
@@ -218,40 +218,37 @@ namespace Registration
 
                     while (!sr.EndOfStream)
                     {
-                        currstring = sr.ReadLine();
-                        username = currstring.Substring(0, 10);
-                        currstring.Remove(0, 10);
-                        currstring.TrimStart();
-                        numcourses = int.Parse(currstring.Substring(0, 2));
-                        currstring.Remove(0, 2);
-                        currstring.TrimStart();
+                        line = sr.ReadLine();
+                        username = line.Substring(0, 10);
+                        line.Remove(0, 10);
+                        line.TrimStart();
+                        numcourses = int.Parse(line.Substring(0, 2));
+                        line.Remove(0, 2);
+                        line.TrimStart();
 
                         // find index of student
-                        int i = 0;
+                        int undx = 0;
                         foreach (Student stud in StudentList)
                         {
-                            if (stud.Username == username)
-                            {
-                                undx = i;
+                            if (stud.UserName == username)
                                 break;
-                            }
-                            ++i;
+                            ++undx;
                         }
 
                         for(int i = 0; i < numcourses; ++i)
                         {
-                            coursename = currstring.Substring(0, 10);
-                            currstring.Remove(0, 10);
-                            currstring.TrimStart();
-                            term = currstring.Substring(0, 3);
-                            currstring.Remove(0, 3);
-                            currstring.TrimStart();
-                            credit = double.Parse(currstring.Substring(0, 4));
-                            currstring.Remove(0, 4);
-                            currstring.TrimStart();
-                            grade = currstring.Substring(0, 3);
-                            currstring.Remove(0, 3);
-                            currstring.TrimStart();
+                            coursename = line.Substring(0, 10);
+                            line.Remove(0, 10);
+                            line.TrimStart();
+                            term = line.Substring(0, 3);
+                            line.Remove(0, 3);
+                            line.TrimStart();
+                            credit = double.Parse(line.Substring(0, 4));
+                            line.Remove(0, 4);
+                            line.TrimStart();
+                            grade = line.Substring(0, 3);
+                            line.Remove(0, 3);
+                            line.TrimStart();
 
 
                             // fixed maybe?
@@ -277,9 +274,65 @@ namespace Registration
                 Console.WriteLine("History file does not Exist.");
             }
 
+
+            // read course prereq database
+            filename = "PrereqInput.txt";
+            if (File.Exists(filename))
+            {
+                FileStream input = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                StreamReader sr = new StreamReader(input);
+
+                try
+                {
+                    string line;
+                    string coursename;
+                    int numprereq;
+                    string prereq;
+
+                    while(!sr.EndOfStream)
+                    {
+                        line = sr.ReadLine();
+
+                        course = line.Substring(0, 7);
+                        line.Remove(0, 7);
+                        line.TrimStart();
+                        numprereq = int.Parse(line.Substring(0, 2));
+                        line.Remove(0, 2);
+                        line.TrimStart();
+
+                        int cndx = 0;
+                        foreach(courseinfo course in NextCourses)
+                        {
+                            if(course.SecLessName == coursename)
+                                break;
+                            ++cndx;
+                        }
+
+                        for(int i = 0; i < numprereq; ++i)
+                        {
+                            prereq = line.Substring(0, 7);
+                            line.Remove(0, 7);
+                            line.TrimStart();
+
+                            NextCourses[cndx].Prereqs.Add(prereq);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Invalid Prereq Input File");
+                    Console.WriteLine(e.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Prereq file does not Exist.");
+            }
+
             //LAUNCH FORMS AND THINGS HERE
-            //Application.Run(frm3);
-            //Application.Run(FctMn);
+            Application.EnableVisualStyles();
+            Applications.SetCompatibleTextRenderDefault(false);
+            Application.Run(new LoginForm(AdminList, FacultyList, StudentList, NextCourses, PrevCourses));
             //
             //
             //

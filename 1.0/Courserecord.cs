@@ -10,6 +10,7 @@ public class courserecord : ICourse<courserecord>
     public int Year;
     public double Credit;
     public string Grade;
+    public string SecLessName;
     public double GPoints;
     public bool Earned;
     public bool GPAble;
@@ -22,6 +23,7 @@ public class courserecord : ICourse<courserecord>
         Year = int.Parse(term.Substring(1));
         Credit = credit;
         Grade = grade;
+        SecLessName = Coursename.Substring(0, 7);
 
 
 
@@ -78,7 +80,7 @@ public class courserecord : ICourse<courserecord>
 
     public string HistoryDatabseString()
     {
-        Stringbuilder hdbstring = new Stringbuilder(Coursename);
+        StringBuilder hdbstring = new StringBuilder(Coursename);
         hdbstring.Insert(12, Term.ToString() + Year.ToString());
         hdbstring.Insert(17, Credit.ToString());
         hdbstring.Insert(23, Grade);
