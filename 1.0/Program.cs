@@ -17,29 +17,40 @@ namespace Registration
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // our "databases
+            // our "databases"
             List<Admin> AdminList = new List<Admin>();
             List<Faculty> FacultyList = new List<Faculty>();
             List<Student> StudentList = new List<Student>();
-            List<courseinfo> Courses = new List<courseinfo>();
-            string curterm = "F12";
+            List<courseinfo> NextCourses = new List<courseinfo>();
+            List<courseinfo> PrevCourses = new List<courseinfo>();
+            string nxtterm = "S13";
 
+            
 
             // read in UserDatabase
-            try
+            string filename = "UserInput.txt";
+            if (File.Exists(filename))
             {
-                using (StreamReader sr = new StreamReader("UserInput.txt"))
+                FileStream input = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                StreamReader sr = new StreamReader(input);
+                try
                 {
-                    String line = sr.ReadLine();
+                    string line;
+                    string username;
+                    string pswd;
+                    string fname;
+                    string mname;
+                    string lname;
+                    string stat;
 
                     while (!sr.EndOfStream)
                     {
-                        string uname, fname, mname, lname, pswd, stat;
+                        line = sr.ReadLine();
 
                         // username
                         line.TrimStart();
-                        uname = line.Substring(0, 10);
-                        uname.TrimEnd();
+                        username = line.Substring(0, 10);
+                        username.TrimEnd();
                         line.Remove(0, 10);
 
                         // password
@@ -73,58 +84,75 @@ namespace Registration
                         line.Remove(0, 10);
 
                         // add user info
-                        if (stat == "admin")
-                            AdminList.Add(new Admin(uname, pswd, fname, mname, lname, stat));
-                        else if (stat == "faculty")
-                            FacultyList.Add(new Faculty(uname, pswd, fname, mname, lname, stat));
-                        else StudentList.Add(new Student(uname, pswd, fname, mname, lname, stat));
-
-                        line = sr.ReadLine();
+                        if(stat == "admin")
+                            AdminList.Add(new Admin(username, pswd, fname, mname, lname, stat));
+                        else if(stat == "faculty")
+                            FacultyList.Add(new Faculty(username, pswd, fname, mname, lname, stat));
+                        else StudentList.Add(new Student(username, pswd, fname, mname, lname, stat));
                     }
                 }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Invalid User Input File");
+                    Console.WriteLine(e.Message);
+                }
             }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
+                Console.WriteLine("User file does not Exist.");
             }
 
 
-            string filename = "ClassInput.txt";
+            
+
+            filename = "ClassInput.txt";
             if (File.Exists(filename))
             {
-                string currstring;
-                string coursename;
-                string coursetitle;
-                string instructor;
-                float credit;
-                int seats;
-                int timeblocks;
-                List<coursetime> times = new List<coursetime>();
-
                 FileStream input = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                StreamReader filereader = new StreamReader(input);
+                StreamReader sr = new StreamReader(input);
                 try
                 {
+                    string curstring;
+                    string term;
+                    string coursename;
+                    string coursetitle;
+                    string instructor;
+                    float credit;
+                    int seats;
+                    int timeblocks;
+                    List<coursetime> times = new List<coursetime>();
 
-                    while (!filereader.EndOfStream)
+                    while (!sr.EndOfStream)
                     {
+                        currstring = sr.ReadLine();
 
-                        currstring = filereader.ReadLine();
+                        term = currstring.Substring(0, 3);
+                        term.TrimEnd();
+                        currstring.Remove(0, 3);
+
+                        currstring.TrimStart();
                         coursename = currstring.Substring(0, 10);
+                        coursename.TrimEnd();
                         currstring.Remove(0, 10);
+
                         currstring.TrimStart();
                         coursetitle = currstring.Substring(0, 15);
+                        coursetitle.TrimEnd();
                         currstring.Remove(0, 15);
+
                         currstring.TrimStart();
                         instructor = currstring.Substring(0, 10);
+                        instructor.TrimEnd();
                         currstring.Remove(0, 10);
+
                         currstring.TrimStart();
                         credit = double.Parse(currstring.Substring(0, 4));
                         currstring.Remove(0, 4);
+
                         currstring.TrimStart();
                         seats = int.Parse(currstring.Substring(0, 3));
                         currstring.Remove(0, 3);
+
                         currstring.TrimStart();
                         timeblocks = int.Parse(currstring.Substring(0, 1));
                         currstring.Remove(0, 1);
@@ -139,18 +167,21 @@ namespace Registration
                             currstring.Remove(0, 5);
                             currstring.TrimStart();
                         }
-                        Courses.Add(new courseinfo(coursename, coursetitle, instructor, credit, seats, times));
+
+                        if(term == nxtterm)
+                            NextCourses.Add(new courseinfo(coursename, coursetitle, instructor, credit, seats, times));
+                        else PrevCourses.Add(new courseinfo(coursename, coursetitle, instructor, credit, seats, times));
                     }
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Invalid Input File");
+                    Console.WriteLine("Invalid Class Input File");
                     Console.WriteLine(e.Message);
                 }
             }
             else
             {
-                Console.WriteLine("Your File does not Exist.");
+                Console.WriteLine("Class file does not Exist.");
             }
 
             //add advisees/schedule to faculty
@@ -158,14 +189,167 @@ namespace Registration
             {
                 foreach (Student stud in StudentList)
                 {
-
-                    //Application.Run(frm3);
-                    //Application.Run(FctMn);
+                    if (prof.Username == stud.Status)
+                        prof.Advisees.Add(stud.Username);
                 }
+                foreach (courseinfo course in NextCourses)
+                {
+                    if (prof.Username == course.Instructor)
+                        prof.Next.Add(course.Coursename);
+                }
+            }
+
+ 
+            filename = "HistoryInput.txt";
+            if (File.Exists(filename))
+            {
+                FileStream input = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                StreamReader sr = new StreamReader(input);
+
+                try
+                {
+                    string currstring;
+                    string username;
+                    int numcourses;
+                    string coursename;
+                    string term;
+                    double credit;
+                    string grade;
+
+                    while (!sr.EndOfStream)
+                    {
+                        currstring = sr.ReadLine();
+                        username = currstring.Substring(0, 10);
+                        currstring.Remove(0, 10);
+                        currstring.TrimStart();
+                        numcourses = int.Parse(currstring.Substring(0, 2));
+                        currstring.Remove(0, 2);
+                        currstring.TrimStart();
+
+                        // find index of student
+                        int i = 0;
+                        foreach (Student stud in StudentList)
+                        {
+                            if (stud.Username == username)
+                            {
+                                undx = i;
+                                break;
+                            }
+                            ++i;
+                        }
+
+                        for(int i = 0; i < numcourses; ++i)
+                        {
+                            coursename = currstring.Substring(0, 10);
+                            currstring.Remove(0, 10);
+                            currstring.TrimStart();
+                            term = currstring.Substring(0, 3);
+                            currstring.Remove(0, 3);
+                            currstring.TrimStart();
+                            credit = double.Parse(currstring.Substring(0, 4));
+                            currstring.Remove(0, 4);
+                            currstring.TrimStart();
+                            grade = currstring.Substring(0, 3);
+                            currstring.Remove(0, 3);
+                            currstring.TrimStart();
+
+
+                            // fixed maybe?
+                            if( grade.Contains("N") )
+                            {
+                                if(term == curterm)
+                                    StudentList[undx].Current.Add(new courserecord(coursename, term, credit, grade));
+                                   // Users[undx].Add(new courserecord(coursename, term, credit, grade);
+                                else StudentList[undx].Next.Add(new courserecord(coursename, term, credit, grade);
+                            }
+                            else StudentList[undx].History.Add(new courserecord(coursename, term, credit, grade));
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Invalid History Input File");
+                    Console.WriteLine(e.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("History file does not Exist.");
+            }
+
+            //LAUNCH FORMS AND THINGS HERE
+            //Application.Run(frm3);
+            //Application.Run(FctMn);
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+
+
+
+            //output new databases
+            filename = "UserInput.txt";
+            FileStream userdata = new FileStream(filename, FileMode.Truncate, FileAccess.Write);
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(userdata))
+                {
+                    foreach(Admin adm in AdminList)
+                        sw.WriteLine(adm.UserDatabaseString(), true);
+
+                    foreach(Faculty prof in FacultyList)
+                        sw.WriteLine(prof.UserDatabaseString(), true);
+
+                    foreach(Student stud in StudentList)
+                        sw.WriteLine(stud.UserDatabaseString(), true);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The user database could not be written:");
+                Console.WriteLine(e.Message);
+            }
+            
+            filename = "ClassInput.txt";
+            FileStream classdata = new FileStream(filename, FileMode.Truncate, FileAccess.Write);
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(classdata))
+                {
+                    foreach(courseinfo course in NextCourses)
+                        sw.WriteLine(course.CourseDatabaseString());
+                    foreach(courseinfo course in PrevCourses)
+                        sw.WriteLine(course.CourseDatabaseString());
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The course database could not be written:");
+                Console.WriteLine(e.Message);
+            }
+            
+            filename = "HistoryInput.txt";
+            FileStream historydata = new FileStream(filename, FileMode.Truncate, FileAccess.Write);
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(historydata))
+                {
+                    foreach(Student stud in StudentList)
+                        sw.WriteLine(stud.HistoryDatabaseString());
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The history database could not be written:");
+                Console.WriteLine(e.Message);
             }
         }
     }
 }
-
-
-

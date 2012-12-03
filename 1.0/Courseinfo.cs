@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Registration;
 
 public class courseinfo : ICourse<courseinfo>
 {
@@ -52,6 +53,21 @@ public class courseinfo : ICourse<courseinfo>
     public bool isFull()
     {
         return Seats <= Enrolled;
+    }
+
+    public string CourseDatabaseString()
+    {
+        Stringbuilder cdbstring = new Stringbuilder(Term);
+        cdbstring.Insert(5, Coursename);
+        cdbstring.Insert(17, Coursetitle);
+        cdbstring.Insert(34, Instructor);
+        cdbstring.Insert(46, Credit.ToString());
+        cdbstring.Insert(52, Seats.ToString());
+        cdbstring.Insert(57, Times.Count);
+        foreach (coursetime time in Times)
+            cdbstring.Append(time.ToString() + "  ");
+
+        return cdbstring.ToString();
     }
 
     public bool Equals(courseinfo course)

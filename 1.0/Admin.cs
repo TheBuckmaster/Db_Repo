@@ -5,7 +5,7 @@ using Registration;
 /// <summary>
 /// Summary description for Class1
 /// </summary>
-public class Faculty
+public class Admin
 {
     public string UserName;
     public string Password;
@@ -14,11 +14,7 @@ public class Faculty
     public string LastName;
     public string Status;
 
-    public List<string> Next = new List<string>();
-    public List<string> Current = new List<pastcourse>();
-    public List<string> Advisees = new List<string>();
-
-    public Faculty(string uname, string pswrd, string fname, string mname, string lname, string stat)
+    public Admin(string uname, string pswrd, string fname, string mname, string lname, string stat)
     {
         UserName = uname;
         Password = pswrd;

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using Registration;
 
 public class courserecord : ICourse<courserecord>
 {
@@ -71,6 +73,16 @@ public class courserecord : ICourse<courserecord>
                 GPoints = Credit * 1.0;
         }
 	}
+
+    public string HistoryDatabseString()
+    {
+        Stringbuilder hdbstring = new Stringbuilder(Coursename);
+        hdbstring.Insert(12, Term.ToString() + Year.ToString());
+        hdbstring.Insert(17, Credit.ToString());
+        hdbstring.Insert(23, Grade);
+
+        return hdbstring.ToString();
+    }
 
     public bool Equals(courserecord course)
     {
