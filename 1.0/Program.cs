@@ -344,6 +344,32 @@ namespace Registration
             Application.Run(new LoginForm(AdminList, FacultyList, StudentList, NextCourses, PrevCourses));
 
         }
+        static class AddRemove
+        {
+            public static void AddStudenttoCourse(Student S, Course C)
+            {
+                    if (S.Current.Contains(C.CourseName))
+                    MessageBox.Show("You've Already Registered for this Course!");
+
+                    if (C.CurrSeats >= C.MaxSeats)
+                        MessageBox.Show("Class is Full!");
+
+            }
+
+            public static void AddStudenttoCourse(Student S, Course C, Admin Me)
+            {
+
+            }
+
+            public static void RemoveStudentfromCourse(UserStudent S, Course C)
+            {
+                MessageBox.Show("Removing " + S.UserName + " from " + C.CourseName + " .");
+                C.RemoveStudent(S);
+                S.MyCourses.Remove(C.CourseName);
+                MessageBox.Show("You are no longer registered for " + C.CourseName + " .");
+
+            }
+        }
 
 
         //    //output new databases
