@@ -333,81 +333,71 @@ namespace Registration
             Application.EnableVisualStyles();
             Applications.SetCompatibleTextRenderDefault(false);
             Application.Run(new LoginForm(AdminList, FacultyList, StudentList, NextCourses, PrevCourses));
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
+     
 
 
 
-            //output new databases
-            filename = "UserInput.txt";
-            FileStream userdata = new FileStream(filename, FileMode.Truncate, FileAccess.Write);
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(userdata))
-                {
-                    foreach(Admin adm in AdminList)
-                        sw.WriteLine(adm.UserDatabaseString(), true);
+        //    //output new databases
+        //    filename = "UserInput.txt";
+        //    FileStream userdata = new FileStream(filename, FileMode.Truncate, FileAccess.Write);
+        //    try
+        //    {
+        //        using (StreamWriter sw = new StreamWriter(userdata))
+        //        {
+        //            foreach(Admin adm in AdminList)
+        //                sw.WriteLine(adm.UserDatabaseString(), true);
 
-                    foreach(Faculty prof in FacultyList)
-                        sw.WriteLine(prof.UserDatabaseString(), true);
+        //            foreach(Faculty prof in FacultyList)
+        //                sw.WriteLine(prof.UserDatabaseString(), true);
 
-                    foreach(Student stud in StudentList)
-                        sw.WriteLine(stud.UserDatabaseString(), true);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The user database could not be written:");
-                Console.WriteLine(e.Message);
-            }
+        //            foreach(Student stud in StudentList)
+        //                sw.WriteLine(stud.UserDatabaseString(), true);
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine("The user database could not be written:");
+        //        Console.WriteLine(e.Message);
+        //    }
             
-            filename = "ClassInput.txt";
-            FileStream classdata = new FileStream(filename, FileMode.Truncate, FileAccess.Write);
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(classdata))
-                {
-                    foreach(courseinfo course in NextCourses)
-                        sw.WriteLine(course.CourseDatabaseString());
-                    foreach(courseinfo course in PrevCourses)
-                        sw.WriteLine(course.CourseDatabaseString());
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The course database could not be written:");
-                Console.WriteLine(e.Message);
-            }
+        //    filename = "ClassInput.txt";
+        //    FileStream classdata = new FileStream(filename, FileMode.Truncate, FileAccess.Write);
+        //    try
+        //    {
+        //        using (StreamWriter sw = new StreamWriter(classdata))
+        //        {
+        //            foreach(courseinfo course in NextCourses)
+        //                sw.WriteLine(course.CourseDatabaseString());
+        //            foreach(courseinfo course in PrevCourses)
+        //                sw.WriteLine(course.CourseDatabaseString());
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine("The course database could not be written:");
+        //        Console.WriteLine(e.Message);
+        //    }
             
-            filename = "HistoryInput.txt";
-            FileStream historydata = new FileStream(filename, FileMode.Truncate, FileAccess.Write);
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(historydata))
-                {
-                    foreach(Student stud in StudentList)
-                        sw.WriteLine(stud.HistoryDatabaseString());
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The history database could not be written:");
-                Console.WriteLine(e.Message);
-            }  
+        //    filename = "HistoryInput.txt";
+        //    FileStream historydata = new FileStream(filename, FileMode.Truncate, FileAccess.Write);
+        //    try
+        //    {
+        //        using (StreamWriter sw = new StreamWriter(historydata))
+        //        {
+        //            foreach(Student stud in StudentList)
+        //                sw.WriteLine(stud.HistoryDatabaseString());
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine("The history database could not be written:");
+        //        Console.WriteLine(e.Message);
+        //    }  
 
-            LoginForm lgn = new LoginForm(AdminList, FacultyList, StudentList, NextCourses,
-            PrevCourses);
-            lgn.Show();
-        }
+        //    LoginForm lgn = new LoginForm(AdminList, FacultyList, StudentList, NextCourses,
+        //    PrevCourses);
+        //    lgn.Show();
+        //}
 
 
     }
