@@ -17,7 +17,6 @@ public class Student
     public List<courserecord> Next = new List<courserecord>();
     public List<courserecord> Current = new List<courserecord>();
     public List<courserecord> History = new List<courserecord>();
-    public List<string> Conflicts = new List<string>();
 
     public Student(string uname, string pswrd, string fname, string mname, string lname, string stat)
     {

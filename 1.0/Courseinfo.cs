@@ -15,20 +15,7 @@ public class courseinfo : ICourse<courseinfo>
     public List<string> Prereqs = new List<string>();
 
 
-    //timeslist should be ddttk strings, later termed 'TerryStrings' after their creator.
-    //See the one parameter constructor for coursetimes for more information. 
-    //public courseinfo(string name, string title, string prof, float cred, int spots, List<coursetime> timeslist)
-    //{   
-    //    coursename = name;
-    //    coursetitle = title;
-    //    instructor = prof;
-    //    credit = cred;
-    //    seats = spots;
-    //    times = timeslist;
-    //}
 
-
-    //VUser/VStudent constructor for this class. 
     public courseinfo(string name, string title, string prof, double cred, int seats,
         List<coursetime> timeslist)
     {
@@ -40,19 +27,38 @@ public class courseinfo : ICourse<courseinfo>
         Times = timeslist;
     }
 
-    //// psuedo-casting
-    //public courseinfo(pastcourse course)
-    //{
-    //    coursename = course.Coursename;
-    //    coursetitle = "";
-    //    instructor = "";
-    //    credit = 0.0f;
-    //    seats = 0;
-    //}
-
     public bool isFull()
     {
         return Seats <= Enrolled;
+    }
+
+    public bool isConflict(courseinfo course)
+    {
+        bool conflict = false;
+
+        foreach (coursetime time in Times)   //Each time the course is offered
+        {
+            foreach (coursetime time2 in course.Times)     //And each time of that class. 
+            {
+                if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
+                {   //Does this time overlap?
+                    foreach (char day in time.days)
+                    {   //Is it on the same day? 
+                        if (time2.days.Contains(day))
+                        {   
+                            conflict = true;
+                            break;
+                        }
+                    }
+                }
+                if (conflict)
+                    break;
+            }
+            if (conflict)
+                break;
+        }
+
+        return conflict;
     }
 
     public string CourseDatabaseString()
