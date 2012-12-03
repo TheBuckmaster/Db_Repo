@@ -24,21 +24,21 @@ namespace Registration
 
         private void RemoveCourse(courseinfo course)
         {
-            foreach (Faculty prof in FacultyList)
-            {
-                foreach (string course2 in prof.Next)
-                {
-                    if (course.Coursename == course2)
-                        prof.Next.Remove(course2);
-                }
-            }
-
             foreach (Student stud in StudentList)
             {
                 foreach (string course2 in stud.Next)
                 {
                     if (course.Coursename == course2)
                         stud.Next.Remove(course2);
+                }
+            }
+
+            foreach (Faculty prof in FacultyList)
+            {
+                foreach (string course2 in prof.Next)
+                {
+                    if (course.Coursename == course2)
+                        prof.Next.Remove(course2);
                 }
             }
 
@@ -70,6 +70,27 @@ namespace Registration
             {
                 if (stud.UserName == stud2.UserName)
                     StudentList.Remove(stud2);
+            }
+        }
+
+        private void RemoveFaculty(Faculty prof)
+        {
+            foreach (Student stud in StudentList)
+            {
+                if(prof.UserName == stud.Status)
+                    stud.Status == "Staff";
+            }
+
+            foreach(courseinfo course in NextCourses)
+            {
+                if (prof.UserName == course.Instructor)
+                    course.Instructor = "Staff";
+            }
+
+            foreach (Faculty prof2 in FacultyList)
+            {
+                if (prof.UserName == prof2.UserName)
+                    FacultyList.Remove(prof2);
             }
         }
 

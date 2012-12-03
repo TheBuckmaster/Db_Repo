@@ -14,6 +14,7 @@ public class Student
     public string MiddleName { get; set; }
     public string LastName { get; set; }
     public string Status;
+    public double EnrolledCredits;
 
     public List<string> Next = new List<string>();
     public List<string> Current = new List<string>();
@@ -27,30 +28,21 @@ public class Student
         MiddleName = mname;
         LastName = lname;
         Status = stat;
+        EnrolledCredits = 0;
     }
 
-    //public double EnrolledCredits()
-    //{
-    //    double credits = 0.00;
+    public double EarnedCredits()
+    {
+        double credits = 0.00;
 
-    //    foreach (string course in Next)
-    //        credits += course.Credit;
+        foreach (courserecord course in History)
+        {
+            if (course.Earned)
+                credits += course.Credit;
+        }
 
-    //    return credits;
-    //}
-
-    //public double EarnedCredits()
-    //{
-    //    double credits = 0.00;
-
-    //    foreach (courserecord course in History)
-    //    {
-    //        if(course.Earned)
-    //            credits += course.Credit;
-    //    }
-
-    //    return credits;
-    //}
+        return credits;
+    }
 
     public double GPA()
     {
