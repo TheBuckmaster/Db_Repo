@@ -15,7 +15,6 @@ public class Faculty
     public string Status;
 
     public List<string> Next = new List<string>();
-    public List<string> Current = new List<pastcourse>();
     public List<string> Advisees = new List<string>();
 
     public Faculty(string uname, string pswrd, string fname, string mname, string lname, string stat)
