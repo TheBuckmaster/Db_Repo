@@ -21,7 +21,7 @@ namespace Registration
         {
             InitializeComponent();
         }
-
+        
         public LoginForm(List<Admin> adm,List<Faculty> fac, List<Student> stud,
             List<courseinfo> nxt, List<courseinfo> PrevC)
         {
@@ -31,6 +31,7 @@ namespace Registration
             StudentList = stud;
             NextCourses = nxt;
             PrevCourses = PrevC;
+            passTxtBx.PasswordChar = '•';
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
@@ -45,6 +46,7 @@ namespace Registration
                         AdminForm ad = new AdminForm();
                         ad.Show();
                         this.Hide();
+                        break;
                     }
                     else
                         incorrectLabel.Visible = true;
@@ -60,6 +62,7 @@ namespace Registration
                         FacultyForm fc = new FacultyForm();
                         fc.Show();
                         this.Hide();
+                        break;
                     }
                     else
                         incorrectLabel.Visible = true;
@@ -72,11 +75,9 @@ namespace Registration
                 {
                     if (std.Password == passTxtBx.Text)
                     {
-                        Application.Run(new StudentForm(std, Courses,
-                            crsRecord, crsTime, pastCourse));
-                        StudentForm stud = new StudentForm();
-                        stud.Show();
+                        Application.Run(new StudentForm(std, NextCourses, PrevCourses));
                         this.Hide();
+                        break;
                     }
                     else
                         incorrectLabel.Visible = true;

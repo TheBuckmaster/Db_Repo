@@ -13,11 +13,11 @@ namespace Registration
     {
         Student student;
         List<courseinfo> coursesNextYear = new List<courseinfo>();
-        List<courserecord> courseHistory = new List<courserecord>();
+        List<courseinfo> courseHistory = new List<courseinfo>();
         List<coursetime> crsTime = new List<coursetime>();
 
         public StudentForm( Student stud, List<courseinfo> nxt,
-            List<courserecord> his)
+            List<courseinfo> his)
         {
             student = stud;
             coursesNextYear = nxt;
@@ -48,16 +48,16 @@ namespace Registration
         private void CourseView()
         {
             dataGridView1.Hide();
-            dataGridView1.DataSource = crsInfo;
+            dataGridView1.DataSource = coursesNextYear;
             dataGridView1.Refresh();
-            dataGridView1.Show(); 
-    
+            dataGridView1.Show();
+            dataGridView1.Hide(); 
         }
 
         private void addCourseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dataGridView1.Hide();
-            dataGridView1.DataSource = crsInfo;
+            dataGridView1.DataSource = courseHistory;
         }
 
     }
