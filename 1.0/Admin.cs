@@ -26,7 +26,7 @@ public class Admin
 
     public string UserDatabaseString()
     {
-        Stringbuilder udbstring = new Stringbuilder(UserName);
+        StringBuilder udbstring = new StringBuilder(UserName);
         udbstring.Insert(12, Password);
         udbstring.Insert(22, FirstName);
         udbstring.Insert(34, MiddleName);
