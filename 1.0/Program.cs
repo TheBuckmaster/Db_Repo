@@ -274,6 +274,15 @@ namespace Registration
                 Console.WriteLine("History file does not Exist.");
             }
 
+            foreach (courseinfo course in NextCourses)
+            {
+                foreach (Student stud in StudentList)
+                {
+                    if (stud.Next.Contains(course.Coursename))
+                        ++course.Enrolled;
+                }
+            }
+
 
             // read course prereq database
             filename = "PrereqInput.txt";

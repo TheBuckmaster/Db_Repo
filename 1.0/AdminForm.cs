@@ -51,19 +51,25 @@ namespace Registration
 
         private void RemoveStudent(Student stud)
         {
-            foreach (Student stud2 in StudentList)
-            {
-                if (stud.UserName == stud2.UserName)
-                    StudentList.Remove(stud2);
-            }
-
-            foreach(Faculty prof in FacultyList)
+            foreach (Faculty prof in FacultyList)
             {
                 foreach (string stud2 in prof.Advisees)
                 {
                     if (stud.UserName == stud2)
-                        prof.Advisees.REmove(stud2);
+                        prof.Advisees.Remove(stud2);
                 }
+            }
+
+            foreach (courseinfo course in NextCourses)
+            {
+                if (stud.Next.Contains(course.Coursename))
+                    --course.Enrolled;
+            }
+
+            foreach (Student stud2 in StudentList)
+            {
+                if (stud.UserName == stud2.UserName)
+                    StudentList.Remove(stud2);
             }
         }
 
