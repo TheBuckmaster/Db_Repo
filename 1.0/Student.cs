@@ -10,9 +10,9 @@ public class Student
 { 
     public string UserName;
     public string Password;
-    public string FirstName { get; }
-    public string MiddleName { get; }
-    public string LastName { get; }
+    public string FirstName { get; set; }
+    public string MiddleName { get; set; }
+    public string LastName { get; set; }
     public string Status;
 
     public List<string> Next = new List<string>();

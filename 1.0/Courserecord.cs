@@ -4,10 +4,10 @@ using Registration;
 
 public class courserecord : ICourse<courserecord>
 {
-    public string Coursename { get; }
-    public string Term { get; }
-    public double Credit { get; }
-    public string Grade { get; }
+    public string Coursename { get; set; }
+    public string Term { get; set; }
+    public double Credit { get; set; }
+    public string Grade { get; set; }
     public char Semester;
     public int Year;
     public string SecLessName;

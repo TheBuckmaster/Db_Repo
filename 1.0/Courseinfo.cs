@@ -5,13 +5,13 @@ using Registration;
 
 public class courseinfo 
 {
-    public string Coursename { get; }
-    public string Coursetitle { get; }
-    public string Instructor { get; }
-    public double Credit { get; }
-    public int Seats { get; }
-    public int Enrolled { get; }
-    public List<coursetime> Times {get; }
+    public string Coursename { get; set; }
+    public string Coursetitle { get; set; }
+    public string Instructor { get; set; }
+    public double Credit { get; set; }
+    public int Seats { get; set; }
+    public int Enrolled { get; set; }
+    public List<coursetime> Times { get; set; }
     public List<string> Prereqs = new List<string>();
     public string SecLessName;
 

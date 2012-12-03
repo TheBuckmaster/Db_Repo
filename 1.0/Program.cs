@@ -25,7 +25,7 @@ namespace Registration
             List<courseinfo> PrevCourses = new List<courseinfo>();
             string nxtterm = "S13";
 
-            
+
 
             // read in UserDatabase
             string filename = "UserInput.txt";
@@ -84,9 +84,9 @@ namespace Registration
                         line.Remove(0, 10);
 
                         // add user info
-                        if(stat == "admin")
+                        if (stat == "admin")
                             AdminList.Add(new Admin(username, pswd, fname, mname, lname, stat));
-                        else if(stat == "faculty")
+                        else if (stat == "faculty")
                             FacultyList.Add(new Faculty(username, pswd, fname, mname, lname, stat));
                         else StudentList.Add(new Student(username, pswd, fname, mname, lname, stat));
                     }
@@ -103,7 +103,7 @@ namespace Registration
             }
 
 
-            
+
 
             filename = "ClassInput.txt";
             if (File.Exists(filename))
@@ -168,7 +168,7 @@ namespace Registration
                             line.TrimStart();
                         }
 
-                        if(term == nxtterm)
+                        if (term == nxtterm)
                             NextCourses.Add(new courseinfo(coursename, coursetitle, instructor, credit, seats, times));
                         else PrevCourses.Add(new courseinfo(coursename, coursetitle, instructor, credit, seats, times));
                     }
@@ -199,7 +199,7 @@ namespace Registration
                 }
             }
 
- 
+
             filename = "HistoryInput.txt";
             if (File.Exists(filename))
             {
@@ -235,7 +235,7 @@ namespace Registration
                             ++undx;
                         }
 
-                        for(int i = 0; i < numcourses; ++i)
+                        for (int i = 0; i < numcourses; ++i)
                         {
                             coursename = line.Substring(0, 10);
                             line.Remove(0, 10);
@@ -252,11 +252,11 @@ namespace Registration
 
 
                             // fixed maybe?
-                            if( grade.Contains("N") )
+                            if (grade.Contains("N"))
                             {
-                                if(term == curterm)
+                                if (term == curterm)
                                     StudentList[undx].Current.Add(coursename);
-                                   // Users[undx].Add(new courserecord(coursename, term, credit, grade);
+                                // Users[undx].Add(new courserecord(coursename, term, credit, grade);
                                 else StudentList[undx].Next.Add(coursename);
                             }
                             else StudentList[undx].History.Add(new courserecord(coursename, term, credit, grade));
@@ -289,7 +289,7 @@ namespace Registration
                     int numprereq;
                     string prereq;
 
-                    while(!sr.EndOfStream)
+                    while (!sr.EndOfStream)
                     {
                         line = sr.ReadLine();
 
@@ -301,14 +301,14 @@ namespace Registration
                         line.TrimStart();
 
                         int cndx = 0;
-                        foreach(courseinfo course in NextCourses)
+                        foreach (courseinfo course in NextCourses)
                         {
-                            if(course.SecLessName == coursename)
+                            if (course.SecLessName == coursename)
                                 break;
                             ++cndx;
                         }
 
-                        for(int i = 0; i < numprereq; ++i)
+                        for (int i = 0; i < numprereq; ++i)
                         {
                             prereq = line.Substring(0, 7);
                             line.Remove(0, 7);
@@ -331,10 +331,10 @@ namespace Registration
 
             //LAUNCH FORMS AND THINGS HERE
             Application.EnableVisualStyles();
-            Applications.SetCompatibleTextRenderDefault(false);
+            Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm(AdminList, FacultyList, StudentList, NextCourses, PrevCourses));
-     
 
+        }
 
 
         //    //output new databases
