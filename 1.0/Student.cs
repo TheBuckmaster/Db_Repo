@@ -29,28 +29,28 @@ public class Student
         Status = stat;
     }
 
-    public double EnrolledCredits()
-    {
-        double credits = 0.00;
+    //public double EnrolledCredits()
+    //{
+    //    double credits = 0.00;
 
-        foreach (courserecord course in Next)
-            credits += course.Credit;
+    //    foreach (string course in Next)
+    //        credits += course.Credit;
 
-        return credits;
-    }
+    //    return credits;
+    //}
 
-    public double EarnedCredits()
-    {
-        double credits = 0.00;
+    //public double EarnedCredits()
+    //{
+    //    double credits = 0.00;
 
-        foreach (courserecord course in History)
-        {
-            if(course.Earned)
-                credits += course.Credit;
-        }
+    //    foreach (courserecord course in History)
+    //    {
+    //        if(course.Earned)
+    //            credits += course.Credit;
+    //    }
 
-        return credits;
-    }
+    //    return credits;
+    //}
 
     public double GPA()
     {
@@ -68,7 +68,7 @@ public class Student
                 {
                     if ( course.Equals(course2) && course2.Grade.Contains("R") )
                     {
-                        if ( (course.Year == course2.Year && course.Term != 'F')
+                        if ( (course.Year == course2.Year && course.Semester != 'F')
                             || (course.Year < course2.Year))
                             retaken = true;
                     }
@@ -99,14 +99,14 @@ public class Student
         return udbstring.ToString();
     }
 
-    public string HistoryDatabaseString()
-    {
-        StringBuilder hdbstring = new StringBuilder(Username);
-        hdbstring.Insert(10, Next.Count);
+    //public string HistoryDatabaseString()
+    //{
+    //    StringBuilder hdbstring = new StringBuilder(UserName);
+    //    hdbstring.Insert(10, Next.Count);
 
-        foreach (courserecord course in Next)
-            hdbstring.Append('\n' + course.HistoryDatabaseString());
+    //    foreach (courserecord course in Next)
+    //        hdbstring.Append('\n' + course.HistoryDatabaseString());
 
-        return hdbstring.ToString();
-    }
+    //    return hdbstring.ToString();
+    //}
 }

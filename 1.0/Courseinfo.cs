@@ -14,6 +14,7 @@ public class courseinfo
     public List<coursetime> Times { get; set; }
     public List<string> Prereqs = new List<string>();
     public string SecLessName;
+    public string Term { get; set; }
 
 
 
@@ -45,9 +46,9 @@ public class courseinfo
             {
                 if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
                 {   //Does this time overlap?
-                    foreach (char day in time.days)
+                    foreach (char day in time.daylist)
                     {   //Is it on the same day? 
-                        if (time2.days.Contains(day))
+                        if (time2.daylist.Contains(day))
                         {   
                             conflict = true;
                             break;

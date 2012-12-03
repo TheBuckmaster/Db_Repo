@@ -117,7 +117,7 @@ namespace Registration
                     string coursename;
                     string coursetitle;
                     string instructor;
-                    float credit;
+                    double credit;
                     int seats;
                     int timeblocks;
                     List<coursetime> times = new List<coursetime>();
@@ -254,7 +254,7 @@ namespace Registration
                             // fixed maybe?
                             if (grade.Contains("N"))
                             {
-                                if (term == curterm)
+                                if (term == nxtterm)
                                     StudentList[undx].Current.Add(coursename);
                                 // Users[undx].Add(new courserecord(coursename, term, credit, grade);
                                 else StudentList[undx].Next.Add(coursename);
@@ -293,7 +293,7 @@ namespace Registration
                     {
                         line = sr.ReadLine();
 
-                        course = line.Substring(0, 7);
+                        coursename = line.Substring(0, 7);
                         line.Remove(0, 7);
                         line.TrimStart();
                         numprereq = int.Parse(line.Substring(0, 2));

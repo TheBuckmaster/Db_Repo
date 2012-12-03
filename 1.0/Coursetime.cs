@@ -32,10 +32,9 @@ public class coursetime
 
     public coursetime(string TerryString)
     {
-
-        int dd = int.Parse(TerryString.Substring(0, 2), 10);
-        int tt = int.Parse(TerryString.Substring(2, 2), 10);
-        int l = int.Parse(TerryString.Substring(4, 1), 10);
+        int dd = int.Parse(TerryString.Substring(0, 2));
+        int tt = int.Parse(TerryString.Substring(2, 2));
+        int l = int.Parse(TerryString.Substring(4, 1));
 
         start = tt;
 
@@ -89,15 +88,15 @@ public class coursetime
         StringBuilder TerryString = new StringBuilder();
 
         int dd = 0;
-        if (daylist.Contains("M"))
+        if (daylist.Contains('M'))
             dd += 1;
-        if (daylist.Contains("T"))
+        if (daylist.Contains('T'))
             dd += 2;
-        if (daylist.Contains("W"))
+        if (daylist.Contains('W'))
             dd += 4;
-        if (daylist.Contains("R"))
+        if (daylist.Contains('R'))
             dd += 8;
-        if (daylist.Contains("F"))
+        if (daylist.Contains('F'))
             dd += 16;
 
         TerryString.Append(dd);

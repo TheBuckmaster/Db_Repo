@@ -2,7 +2,7 @@
 using System.Text;
 using Registration;
 
-public class courserecord : ICourse<courserecord>
+public class courserecord
 {
     public string Coursename { get; set; }
     public string Term { get; set; }
