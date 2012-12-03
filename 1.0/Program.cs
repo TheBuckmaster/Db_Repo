@@ -279,7 +279,10 @@ namespace Registration
                 foreach (Student stud in StudentList)
                 {
                     if (stud.Next.Contains(course.Coursename))
+                    {
                         ++course.Enrolled;
+                        stud.EnrolledCredits += course.Credit;
+                    }
                 }
             }
 
