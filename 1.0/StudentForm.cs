@@ -18,7 +18,7 @@ namespace Registration
         List<PastCourse> pastCourse = new List<PastCourse>();
 
         public StudentForm( Student stud, List<courseinfo> cinfo,
-            List<courserecord> crecord, List<coursetime> ctime, List<PastCourse> pcourse)
+            List<courserecord> crecord, List<coursetime> ctime, List<courserecord> pcourse)
         {
             student = stud;
             crsInfo = cinfo;

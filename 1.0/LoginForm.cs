@@ -26,7 +26,7 @@ namespace Registration
 
         public LoginForm( List<Admin> adm, List<Faculty> fac,
             List<Student> stud, List<courseinfo> crs, List<courserecord> crecord,
-            List<coursetime> ctime, List<PastCourse> pcourse)
+            List<coursetime> ctime, List<courserecord> pcourse)
         {
             InitializeComponent();
             AdminList = adm;

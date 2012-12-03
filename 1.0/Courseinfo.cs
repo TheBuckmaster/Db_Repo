@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Registration;
 
-public class courseinfo : ICourse<courseinfo>
+public class courseinfo 
 {
     public string Coursename;
     public string Coursetitle;
@@ -63,7 +63,7 @@ public class courseinfo : ICourse<courseinfo>
 
     public string CourseDatabaseString()
     {
-        Stringbuilder cdbstring = new Stringbuilder(Term);
+        StringBuilder cdbstring = new StringBuilder(Term);
         cdbstring.Insert(5, Coursename);
         cdbstring.Insert(17, Coursetitle);
         cdbstring.Insert(34, Instructor);
@@ -76,13 +76,13 @@ public class courseinfo : ICourse<courseinfo>
         return cdbstring.ToString();
     }
 
-    public bool Equals(courseinfo course)
-    {
-        return this.Coursename.Substring(0, Coursename.Length - 3) == course.Coursename.Substring(0, course.Coursename.Length - 3);
-    }
+    //public bool Equals(courseinfo course)
+    //{
+    //    return this.Coursename.Substring(0, Coursename.Length - 3) == course.Coursename.Substring(0, course.Coursename.Length - 3);
+    //}
 
-    public bool Equals(pastcourse course)
-    {
-        return this.Coursename.Substring(0, Coursename.Length - 3) == course.Coursename.Substring(0, course.Coursename.Length - 3);
-    }
+    //public bool Equals(pastcourse course)
+    //{
+    //    return this.Coursename.Substring(0, Coursename.Length - 3) == course.Coursename.Substring(0, course.Coursename.Length - 3);
+    //}
 }
