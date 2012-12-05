@@ -50,39 +50,33 @@ namespace Registration
                         line = sr.ReadLine();
 
                         // username
-                        line = line = line = line.TrimStart();
-                        username = line.Substring(0, 10);
-                        username = username.Trim();
+                        line = line.TrimStart();
+                        username = line.Substring(0, 10).Trim();
                         line.Remove(0, 10);
 
                         // password
-                        line = line = line = line.TrimStart();
-                        pswd = line.Substring(0, 10);
-                        pswd = pswd.Trim();
+                        line = line.TrimStart();
+                        pswd = line.Substring(0, 10).Trim();
                         line.Remove(0, 10);
 
                         // first name
-                        line = line = line = line.TrimStart();
-                        fname = line.Substring(0, 15);
-                        fname = fname.Trim();
+                        line = line.TrimStart();
+                        fname = line.Substring(0, 15).Trim();
                         line.Remove(0, 15);
 
                         // middle name
-                        line = line = line = line.TrimStart();
-                        mname = line.Substring(0, 15);
-                        mname = mname.Trim();
+                        line = line.TrimStart();
+                        mname = line.Substring(0, 15).Trim();
                         line.Remove(0, 15);
 
                         // last name
-                        line = line = line = line.TrimStart();
-                        lname = line.Substring(0, 15);
-                        lname = lname.Trim();
+                        line = line.TrimStart();
+                        lname = line.Substring(0, 15).Trim();
                         line.Remove(0, 15);
 
                         // status
-                        line = line = line = line.TrimStart();
-                        stat = line.Substring(0, 10);
-                        stat = stat.Trim();
+                        line = line.TrimStart();
+                        stat = line.Substring(0, 10).Trim();
                         line.Remove(0, 10);
 
                         // add user info
@@ -129,33 +123,33 @@ namespace Registration
                         term = term.Trim();
                         line.Remove(0, 3);
 
-                        line = line = line.TrimStart();
+                        line = line.TrimStart();
                         coursename = line.Substring(0, 10);
                         coursename = coursename.Trim();
                         line.Remove(0, 10);
 
-                        line = line = line.TrimStart();
+                        line = line.TrimStart();
                         coursetitle = line.Substring(0, 15);
                         coursetitle = coursetitle.Trim();
                         line.Remove(0, 15);
 
-                        line = line = line.TrimStart();
+                        line = line.TrimStart();
                         instructor = line.Substring(0, 10);
                         instructor.Trim();
                         line.Remove(0, 10);
 
-                        line = line = line.TrimStart();
+                        line = line.TrimStart();
                         credit = double.Parse(line.Substring(0, 4));
                         line.Remove(0, 4);
 
-                        line = line = line.TrimStart();
+                        line = line.TrimStart();
                         seats = int.Parse(line.Substring(0, 3));
                         line.Remove(0, 3);
 
-                        line = line = line.TrimStart();
+                        line = line.TrimStart();
                         timeblocks = int.Parse(line.Substring(0, 1));
                         line.Remove(0, 1);
-                        line = line = line.TrimStart();
+                        line = line.TrimStart();
 
                         times = new List<coursetime>();
                         for (int i = 0; i < timeblocks; ++i)
@@ -164,7 +158,7 @@ namespace Registration
                             times.Add(new coursetime(littlestring));
 
                             line.Remove(0, 5);
-                            line = line = line.TrimStart();
+                            line = line.TrimStart();
                         }
 
                         if (term == nxtterm)
@@ -215,10 +209,10 @@ namespace Registration
                         line = sr.ReadLine();
                         username = line.Substring(0, 10);
                         line.Remove(0, 10);
-                        line = line = line.TrimStart();
+                        line = line.TrimStart();
                         numcourses = int.Parse(line.Substring(0, 2));
                         line.Remove(0, 2);
-                        line = line = line.TrimStart();
+                        line = line.TrimStart();
 
                         // find index of student
                         int undx = 0;
@@ -233,16 +227,16 @@ namespace Registration
                         {
                             coursename = line.Substring(0, 10);
                             line.Remove(0, 10);
-                            line = line = line.TrimStart();
+                            line = line.TrimStart();
                             term = line.Substring(0, 3);
                             line.Remove(0, 3);
-                            line = line = line.TrimStart();
+                            line = line.TrimStart();
                             credit = double.Parse(line.Substring(0, 4));
                             line.Remove(0, 4);
-                            line = line = line.TrimStart();
+                            line = line.TrimStart();
                             grade = line.Substring(0, 3);
                             line.Remove(0, 3);
-                            line = line = line.TrimStart();
+                            line = line.TrimStart();
 
 
                             // fixed maybe?
@@ -293,10 +287,10 @@ namespace Registration
 
                         coursename = line.Substring(0, 7);
                         line.Remove(0, 7);
-                        line = line = line.TrimStart();
+                        line = line.TrimStart();
                         numprereq = int.Parse(line.Substring(0, 2));
                         line.Remove(0, 2);
-                        line = line = line.TrimStart();
+                        line = line.TrimStart();
 
                         int cndx = 0;
                         foreach (courseinfo course in NextCourses)
@@ -310,7 +304,7 @@ namespace Registration
                         {
                             prereq = line.Substring(0, 7);
                             line.Remove(0, 7);
-                            line = line = line.TrimStart();
+                            line = line.TrimStart();
 
                             NextCourses[cndx].Prereqs.Add(prereq);
                         }
