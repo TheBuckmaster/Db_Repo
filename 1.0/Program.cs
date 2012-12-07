@@ -93,7 +93,6 @@ namespace Registration
 
                         try
                         {
-                            string term;
                             string coursename;
                             string coursetitle;
                             string instructor;
@@ -106,14 +105,13 @@ namespace Registration
                             {
                                 while (line != null)
                                 {
-                                    term = line.Substring(0, 4).Trim();
-                                    coursename = line.Substring(4, 11).Trim();
-                                    coursetitle = line.Substring(15, 16).Trim();
-                                    instructor = line.Substring(31, 11).Trim();
-                                    credit = double.Parse(line.Substring(42, 5).Trim());
-                                    seats = int.Parse(line.Substring(47, 4).Trim());
-                                    timeblocks = int.Parse(line.Substring(51, 2).Trim());
-                                    string timeline = line.Substring(53).Trim();
+                                    coursename = line.Substring(0, 11).Trim();
+                                    coursetitle = line.Substring(11, 16).Trim();
+                                    instructor = line.Substring(27, 11).Trim();
+                                    credit = double.Parse(line.Substring(38, 5).Trim());
+                                    seats = int.Parse(line.Substring(43, 4).Trim());
+                                    timeblocks = int.Parse(line.Substring(47, 2).Trim());
+                                    string timeline = line.Substring(49).Trim();
                                     int numTimes = timeblocks;
 
                                     for (int i = 0; i < numTimes; i++)
