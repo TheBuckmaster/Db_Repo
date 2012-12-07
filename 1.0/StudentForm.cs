@@ -92,7 +92,7 @@ namespace Registration
 
             if (S.EnrolledCredits <= 5.0 - C.Credit)
             {
-                message.Add("Can't Enroll for 5 Credits or More!");
+                message.Add("Trying to Enroll for 5 Credits or More!");
                 enroll = false;
             }
 
@@ -158,7 +158,7 @@ namespace Registration
                                 {   //Is it on the same day? 
                                     if (time2.days.Contains(day))
                                     {   //Throw warning message. 
-                                        message.Add("Conflicts with " + course.Coursename);
+                                        message.Add("Conflicts with Another Class!");
                                         iscnflct = true;
                                         break;
                                     }
