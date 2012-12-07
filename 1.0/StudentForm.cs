@@ -69,15 +69,16 @@ namespace Registration
             NextViewer();
         }
 
-        public void AddStudenttoCourse(Student S, courseinfo C)
+        public void AddStudenttoCourse(ref Student S, ref courseinfo C)
         {
             bool enroll = true;
+            List<string> messages = new List<string>();
 
             foreach (string course in S.Current)
             {
                 if (course.Substring(0, course.Length - 3) == C.SecLessName)
                 {
-                    MessageBox.Show("You've Already Registered for this Course!");
+                    message.Add("You've Already Registered for this Course!");
                     enroll = false;
                     break;
                 }
@@ -85,22 +86,109 @@ namespace Registration
 
             if (C.Enrolled >= C.Seats)
             {
-                MessageBox.Show("Class is Full!");
+                message.Add("Class is Full!");
                 enroll = false;
             }
 
             if (S.EnrolledCredits <= 5.0 - C.Credit)
             {
-                MessageBox.Show("Can't enroll for 5 credits or more");
+                message.Add("Can't Enroll for 5 Credits or More!");
                 enroll = false;
             }
 
-            if(enroll)
-                Add(S, C);
+            foreach (string req in C.Prereqs)
+            {
+                bool taken = false;
+                foreach (courserecord pastcourse in S.History)
+                {
+                    if (pastcourse.SecLessName == req)
+                    {
+                        taken = true;
+                        break;
+                    }
+                }
+                foreach (string curcourse in S.Current)
+                {
+                    if (curcourse.Substring(0, curcourse.Length - 3) == req)
+                    {
+                        taken = true;
+                        break;
+                    }
+                }
+                if (!taken)
+                {
+                    message.Add("You Don't Meet the Prerequisites!");
+                    enroll = false;
+                    break;
+                }
+            }
 
+            bool retake = false;
+            foreach (string course in S.Current)
+            {
+                if (C.SecLessName == course.Substring(0, cuorse.Length - 3))
+                {
+                    retake = true;
+                    break;
+                }
+            }
+            foreach (courserecord course in S.Current)
+            {
+                if (C.SecLessName == course.SecLessName)
+                {
+                    retake = true;
+                    break;
+                }
+            }
+            if (retake)
+                message.Add("You're Retaking this Class!");
+
+            foreach (courseinfo course in coursesNextYear)    //Compare to each already added class
+            {
+                bool iscnflct = false;
+                if (S.Next.Contains(course.CourseName))
+                {
+                    foreach (coursetime time in C.Times)   //Each time the course is offered
+                    {
+                        foreach (coursetime time2 in course.Times)     //And each time of that class. 
+                        {
+                            if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
+                            {   //Does this time overlap?
+                                foreach (char day in time.days)
+                                {   //Is it on the same day? 
+                                    if (time2.days.Contains(day))
+                                    {   //Throw warning message. 
+                                        message.Add("Conflicts with " + course.Coursename);
+                                        iscnflct = true;
+                                        break;
+                                    }
+                                }
+                                if (iscnflct)
+                                    break;
+                            }
+                        }
+                        if (iscnflct)
+                            break;
+                    }
+                    if (iscnflct)
+                        break;
+                }
+            }
+
+            if (enroll)
+            {
+                Add(S, C);
+                message.Add("Successfully Enrolled in Class.");
+            }
+            else message.Add("Can't Enroll in Class.");
+
+            string text = "";
+            foreach (string str in message)
+                text += str + '\n';
+            MessageBox.Show(text);
         }
 
-        public void Add(Student S, courseinfo C)
+        public void Add(ref Student S, ref courseinfo C)
         {
             S.Next.Add(C.Coursename);
             S.EnrolledCredits += C.Credit;
@@ -108,11 +196,13 @@ namespace Registration
             ++C.Enrolled;
         }
 
-        public void RemoveStudentfromCourse(Student S, courseinfo C)
+        public void RemoveStudentfromCourse(ref Student S, ref courseinfo C)
         {
+            S.Next.Remove(C.Coursename);
+            S.EnrolledCredits -= C.Credit;
+            C.Students.Remove(S.UserName);
             C.Enrolled--;
-            S.Current.Remove(C.Coursename);
-            MessageBox.Show("You are no longer registered for " + C.Coursename + " .");
+            MessageBox.Show("You are no longer registered for " + C.Coursename + ".");
 
         }
 
