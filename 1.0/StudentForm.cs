@@ -71,13 +71,31 @@ namespace Registration
 
         public void AddStudenttoCourse(Student S, courseinfo C)
         {
-            
-            if (S.Current.Contains(C.Coursename))
-                MessageBox.Show("You've Already Registered for this Course!");
+            bool enroll = true;
+
+            foreach (string course in S.Current)
+            {
+                if (course.Substring(0, course.Length - 3) == C.SecLessName)
+                {
+                    MessageBox.Show("You've Already Registered for this Course!");
+                    enroll = false;
+                    break;
+                }
+            }
 
             if (C.Enrolled >= C.Seats)
+            {
                 MessageBox.Show("Class is Full!");
-            else
+                enroll = false;
+            }
+
+            if (S.EnrolledCredits <= 5.0 - C.Credit)
+            {
+                MessageBox.Show("Can't enroll for 5 credits or more");
+                enroll = false;
+            }
+
+            if(enroll)
                 Add(S, C);
 
         }
@@ -86,7 +104,8 @@ namespace Registration
         {
             S.Next.Add(C.Coursename);
             S.EnrolledCredits += C.Credit;
-            C.Enrolled++;
+            C.Students.Add(S.UserName);
+            ++C.Enrolled;
         }
 
         public void RemoveStudentfromCourse(Student S, courseinfo C)

@@ -12,6 +12,7 @@ public class courseinfo
     public int Seats { get; set; }
     public int Enrolled { get; set; }
     public List<coursetime> Times { get; set; }
+    public List<string> Students = new List<string>();
     public List<string> Prereqs = new List<string>();
     public string SecLessName;
     public string Term { get; set; }
@@ -28,7 +29,7 @@ public class courseinfo
         Seats = seats;
         Times = timeslist;
         Enrolled = 0;
-        SecLessName = Coursename.Substring(0, 7);
+        SecLessName = Coursename.Substring(0, Coursename.Length - 3);
     }
 
     public bool isFull()

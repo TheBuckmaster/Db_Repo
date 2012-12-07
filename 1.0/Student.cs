@@ -28,7 +28,7 @@ public class Student
         MiddleName = mname;
         LastName = lname;
         Status = stat;
-        EnrolledCredits = 0;
+        EnrolledCredits = 0.00;
     }
 
     public double EarnedCredits()
