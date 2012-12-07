@@ -9,7 +9,7 @@ using System.Collections.Generic;
 public class Student
 { 
     public string UserName;
-    public string Password;
+    private string Password;
     public string FirstName { get; set; }
     public string MiddleName { get; set; }
     public string LastName { get; set; }
@@ -29,6 +29,11 @@ public class Student
         LastName = lname;
         Status = stat;
         EnrolledCredits = 0.00;
+    }
+
+    public bool isPassword(string pswd)
+    {
+        return Password == pswd;
     }
 
     public double EarnedCredits()

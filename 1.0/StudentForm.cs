@@ -21,6 +21,7 @@ namespace Registration
             student = stud;
             coursesNextYear = nxt;
             prevCourses = his;
+            CourseView();
         }
         public StudentForm()
         {
@@ -42,10 +43,8 @@ namespace Registration
 
         private void addCourseBtn_Click(object sender, EventArgs e)
         {
-
             AddStudenttoCourse(student, coursesNextYear[dataGridView1.SelectedRows[0].Index]);
-            NextViewer(); 
-
+            NextViewer();
         }
 
         private void CourseView()
@@ -69,7 +68,7 @@ namespace Registration
             NextViewer();
         }
 
-        public void AddStudenttoCourse(ref Student S, ref courseinfo C)
+        public void AddStudenttoCourse(Student S, courseinfo C)
         {
             bool enroll = true;
             List<string> messages = new List<string>();
@@ -126,7 +125,7 @@ namespace Registration
             bool retake = false;
             foreach (string course in S.Current)
             {
-                if (C.SecLessName == course.Substring(0, cuorse.Length - 3))
+                if (C.SecLessName == course.Substring(0, course.Length - 3))
                 {
                     retake = true;
                     break;
@@ -143,7 +142,7 @@ namespace Registration
             if (retake)
                 message.Add("You're Retaking this Class!");
 
-            foreach (courseinfo course in coursesNextYear)    //Compare to each already added class
+            foreach (courseinfo Course in coursesNextYear)    //Compare to each already added class
             {
                 bool iscnflct = false;
                 if (S.Next.Contains(course.CourseName))
@@ -188,7 +187,7 @@ namespace Registration
             MessageBox.Show(text);
         }
 
-        public void Add(ref Student S, ref courseinfo C)
+        public void Add(Student S, courseinfo C)
         {
             S.Next.Add(C.Coursename);
             S.EnrolledCredits += C.Credit;
@@ -196,7 +195,7 @@ namespace Registration
             ++C.Enrolled;
         }
 
-        public void RemoveStudentfromCourse(ref Student S, ref courseinfo C)
+        public void RemoveStudentfromCourse(Student S, courseinfo C)
         {
             S.Next.Remove(C.Coursename);
             S.EnrolledCredits -= C.Credit;

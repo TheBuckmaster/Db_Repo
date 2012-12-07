@@ -27,14 +27,14 @@ namespace Registration
             PrevCourse = prev;
         }
 
-        private void EnrollStudent(ref Student stud, ref courseinfo course)
+        private void EnrollStudent(Student S, courseinfo C)
         {
             bool enroll = true;
             List<string> messages = new List<string>();
 
             foreach (string course in S.Current)
             {
-                if (course.Substring(0, course.Length - 3) == C.SecLessName)
+                if (course.Substring(0, course.Length - 3) == c.SecLessName)
                 {
                     message.Add("Student Already Registered for this Course!");
                     enroll = false;
@@ -44,13 +44,13 @@ namespace Registration
 
             if (enroll)
             {
-                if (C.Enrolled >= C.Seats)
+                if (c.Enrolled >= c.Seats)
                     message.Add("Class is Full!");
 
-                if (S.EnrolledCredits <= 5.0 - C.Credit)
+                if (S.EnrolledCredits <= 5.0 - c.Credit)
                     message.Add("Trying to Enroll for 5 Credits or More!");
 
-                foreach (string req in C.Prereqs)
+                foreach (string req in c.Prereqs)
                 {
                     bool taken = false;
                     foreach (courserecord pastcourse in S.History)
@@ -79,7 +79,7 @@ namespace Registration
                 bool retake = false;
                 foreach (string course in S.Current)
                 {
-                    if (C.SecLessName == course.Substring(0, cuorse.Length - 3))
+                    if (c.SecLessName == course.Substring(0, cuorse.Length - 3))
                     {
                         retake = true;
                         break;
@@ -87,7 +87,7 @@ namespace Registration
                 }
                 foreach (courserecord course in S.Current)
                 {
-                    if (C.SecLessName == course.SecLessName)
+                    if (c.SecLessName == course.SecLessName)
                     {
                         retake = true;
                         break;
@@ -101,7 +101,7 @@ namespace Registration
                     bool iscnflct = false;
                     if (S.Next.Contains(course.CourseName))
                     {
-                        foreach (coursetime time in C.Times)   //Each time the course is offered
+                        foreach (coursetime time in c.Times)   //Each time the course is offered
                         {
                             foreach (coursetime time2 in course.Times)     //And each time of that class. 
                             {
@@ -139,25 +139,25 @@ namespace Registration
             MessageBox.Show(text);
         }
 
-        private void Add(ref Student S, ref courseinfo C)
+        private void Add(Student S, courseinfo C)
         {
-            S.Next.Add(C.Coursename);
-            S.EnrolledCredits += C.Credit;
-            C.Students.Add(S.UserName);
-            ++C.Enrolled;
+            S.Next.Add(c.Coursename);
+            S.EnrolledCredits += c.Credit;
+            c.Students.Add(S.UserName);
+            ++c.Enrolled;
         }
 
-        private void RemoveStudentfromCourse(ref Student S, ref courseinfo C)
+        private void RemoveStudentfromCourse(Student S, courseinfo C)
         {
-            S.Next.Remove(C.Coursename);
-            S.EnrolledCredits -= C.Credit;
-            C.Students.Remove(S.UserName);
-            --C.Enrolled;
-            MessageBox.Show("Student is no longer registered for " + C.Coursename + ".");
+            S.Next.Remove(c.Coursename);
+            S.EnrolledCredits -= c.Credit;
+            c.Students.Remove(S.UserName);
+            --c.Enrolled;
+            MessageBox.Show("Student is no longer registered for " + c.Coursename + ".");
 
         }
 
-        private void ChangeInstructor(ref courseinfo course, ref Faculty prof)
+        private void ChangeInstructor(courseinfo course, Faculty prof)
         {
             foreach (Faculty oldProf in FacultyList)
                 oldProf.Next.Remove(course.Coursename);
@@ -166,7 +166,7 @@ namespace Registration
             prof.Next.Add(course.Coursename);
         }
 
-        private void ChangeAdvisor(ref Student stud, ref Faculty prof)
+        private void ChangeAdvisor(Student stud, Faculty prof)
         {
             foreach (Faculty oldProf in FacultyList)
                 oldProf.Advisees.Remove(stud.UserName);

@@ -8,7 +8,7 @@ using Registration;
 public class Admin
 {
     public string UserName;
-    public string Password;
+    private string Password;
     public string FirstName { get; set; }
     public string MiddleName { get; set; }
     public string LastName { get; set; }
@@ -22,6 +22,11 @@ public class Admin
         MiddleName = mname;
         LastName = lname;
         Status = stat;
+    }
+
+    public bool isPassword(string pswd)
+    {
+        return Password == pswd;
     }
 
     public string UserDatabaseString()

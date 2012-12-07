@@ -40,11 +40,9 @@ namespace Registration
             {
                 if (usrNmeTxtBx.Text == adm.UserName)
                 {
-                    if(passTxtBx.Text == adm.Password)
+                    if (adm.isPassword(passTxtBx.Text))
                     {
-                        Application.Run(new AdminForm());
-                        AdminForm ad = new AdminForm();
-                        ad.Show();
+                        Application.Run(new AdminForm(AdminList, FacultyList, StudentList, NextCourses, PrevCourses));
                         this.Hide();
                         break;
                     }
@@ -56,11 +54,9 @@ namespace Registration
             {
                 if(fac.UserName == usrNmeTxtBx.Text)
                 {
-                    if(fac.Password == passTxtBx.Text)
+                    if(fac.isPassword(passTxtBx.Text))
                     {
-                        Application.Run(new FacultyForm());
-                        FacultyForm fc = new FacultyForm();
-                        fc.Show();
+                        Application.Run(new FacultyForm(fac, StudentList, NextCourses, PrevCourses));
                         this.Hide();
                         break;
                     }
@@ -73,7 +69,7 @@ namespace Registration
             {
                 if (std.UserName == usrNmeTxtBx.Text)
                 {
-                    if (std.Password == passTxtBx.Text)
+                    if (std.isPassword(passTxtBx.Text))
                     {
                         Application.Run(new StudentForm(std, NextCourses, PrevCourses));
                         this.Hide();
