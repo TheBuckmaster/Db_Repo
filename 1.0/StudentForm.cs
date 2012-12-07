@@ -131,14 +131,15 @@ namespace Registration
                     break;
                 }
             }
-
-            foreach (courserecord course in S.Current)
+            //foreach (courserecord course in S.Current) CHANGED HERE
+            foreach (courserecord course in S.History)
             {
-                if (C.SecLessName == course.SecLessName)
-                {
-                    retake = true;
-                    break;
-                }
+                if (course.Term == "S13")
+                    if (C.SecLessName == course.SecLessName)
+                    {
+                        retake = true;
+                        break;
+                    }
             }
             if (retake)
                 messages.Add("You're Retaking this Class!");

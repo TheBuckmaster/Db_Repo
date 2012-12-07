@@ -85,19 +85,22 @@ namespace Registration
                         break;
                     }
                 }
-                foreach (courserecord course in S.Current)
+                //foreach (courserecord course in S.Current) changed here
+                foreach (courserecord course in S.History)
                 {
-                    if (C.SecLessName == course.SecLessName)
-                    {
-                        retake = true;
-                        break;
-                    }
+                    if (course.Term == "S13")
+                        if (C.SecLessName == course.SecLessName)
+                        {
+                            retake = true;
+                            break;
+                        }
                 }
+
                 if (retake)
                     messages.Add("Student Retaking this Class!");
-
+                
                 foreach (courseinfo course in S.Next)    //Compare to each already added class
-                {
+                {  
                     bool iscnflct = false;
                     if (S.Next.Contains(course.Coursename))
                     {
@@ -245,6 +248,34 @@ namespace Registration
                 if (prof.UserName == prof2.UserName)
                     FacultyList.Remove(prof2);
             }
+        }
+
+        private void viewStudentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = StudentList;
+        }
+
+        private void viewFacultyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = FacultyList;
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoginForm lgn = new LoginForm(AdminList, FacultyList, StudentList, NextCourses, PrevCourses);
+            this.Close();
+        }
+
+        private void DelCourseBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void vwSchedFacBtn_Click(object sender, EventArgs e)
+        {
+
         }
 
 

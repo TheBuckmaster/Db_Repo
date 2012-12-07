@@ -96,15 +96,18 @@ public class Student
         return udbstring.ToString();
     }
 
-    public string HistoryDatabaseString()
+    public string HistoryDatabaseString() 
     {
         StringBuilder hdbstring = new StringBuilder(UserName);
         hdbstring.Insert(10, Next.Count);
-
-        foreach (courserecord course in Next)
-        {
-            hdbstring.Append(" " + course.HistoryDatabseString());
-        }
+        //courserecord course;
+        for (int i = 0; i < Next.Count; i ++)
+            foreach(courserecord course in History)
+            hdbstring.Append(" " + course.HistoryDatabseString());  // CHANGED HERE
+            //foreach (course.Coursename in Next)
+            //{
+            //    hdbstring.Append(' ' + course.HistoryDatabseString());
+            //}
 
         return hdbstring.ToString();
     }
