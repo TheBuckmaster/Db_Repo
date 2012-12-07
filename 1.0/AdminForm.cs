@@ -24,10 +24,10 @@ namespace Registration
             FacultyList = profs;
             StudentList = studs;
             NextCourses = next;
-            PrevCourse = prev;
+            PrevCourses = prev;
         }
 
-        private void EnrollStudent(Student* S, courseinfo* C)
+        private void EnrollStudent(Student S, courseinfo C)
         {
             bool enroll = true;
             List<string> messages = new List<string>();
@@ -36,7 +36,7 @@ namespace Registration
             {
                 if (course.Substring(0, course.Length - 3) == C.SecLessName)
                 {
-                    message.Add("Student Already Registered for this Course!");
+                    messages.Add("Student Already Registered for this Course!");
                     enroll = false;
                     break;
                 }
@@ -45,10 +45,10 @@ namespace Registration
             if (enroll)
             {
                 if (C.Enrolled >= C.Seats)
-                    message.Add("Class is Full!");
+                    messages.Add("Class is Full!");
 
                 if (S.EnrolledCredits <= 5.0 - C.Credit)
-                    message.Add("Trying to Enroll for 5 Credits or More!");
+                    messages.Add("Trying to Enroll for 5 Credits or More!");
 
                 foreach (string req in C.Prereqs)
                 {
@@ -71,7 +71,7 @@ namespace Registration
                     }
                     if (!taken)
                     {
-                        message.Add("Student Meet the Prerequisites!");
+                        messages.Add("Student Meet the Prerequisites!");
                         break;
                     }
                 }
@@ -79,7 +79,7 @@ namespace Registration
                 bool retake = false;
                 foreach (string course in S.Current)
                 {
-                    if (C.SecLessName == course.Substring(0, cuorse.Length - 3))
+                    if (C.SecLessName == course.Substring(0, course.Length - 3))
                     {
                         retake = true;
                         break;
@@ -94,12 +94,12 @@ namespace Registration
                     }
                 }
                 if (retake)
-                    message.Add("Student Retaking this Class!");
+                    messages.Add("Student Retaking this Class!");
 
-                foreach (courseinfo course in coursesNextYear)    //Compare to each already added class
+                foreach (courseinfo course in S.Next)    //Compare to each already added class
                 {
                     bool iscnflct = false;
-                    if (S.Next.Contains(course.CourseName))
+                    if (S.Next.Contains(course.Coursename))
                     {
                         foreach (coursetime time in C.Times)   //Each time the course is offered
                         {
@@ -107,11 +107,11 @@ namespace Registration
                             {
                                 if (((time.start <= time2.start) && (time2.start <= time.end)) || ((time2.start <= time.start) && (time.start <= time2.end)))
                                 {   //Does this time overlap?
-                                    foreach (char day in time.days)
+                                    foreach (char day in time.daylist)
                                     {   //Is it on the same day? 
-                                        if (time2.days.Contains(day))
+                                        if (time2.daylist.Contains(day))
                                         {   //Throw warning message. 
-                                            message.Add("Conflicts with Another Class!");
+                                            messages.Add("Conflicts with Another Class!");
                                             iscnflct = true;
                                             break;
                                         }
@@ -129,12 +129,12 @@ namespace Registration
                 }
 
                 Add(S, C);
-                message.Add("Successfully Enrolled in Class.");
+                messages.Add("Successfully Enrolled in Class.");
             }
-            else message.Add("Can't Enroll in Class.");
+            else messages.Add("Can't Enroll in Class.");
 
             string text = "";
-            foreach (string str in message)
+            foreach (string str in messages)
                 text += str + '\n';
             MessageBox.Show(text);
         }

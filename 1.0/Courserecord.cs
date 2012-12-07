@@ -23,7 +23,7 @@ public class courserecord
         Year = int.Parse(term.Substring(1));
         Credit = credit;
         Grade = grade;
-        SecLessName = Coursename.Substring(0, Coursename.Length - 3));
+        SecLessName = Coursename.Substring(0, Coursename.Length - 3);
 
 
 

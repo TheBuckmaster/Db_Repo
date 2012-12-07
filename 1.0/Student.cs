@@ -102,7 +102,9 @@ public class Student
         hdbstring.Insert(10, Next.Count);
 
         foreach (courserecord course in Next)
-            hdbstring.Append(' ' + course.HistoryDatabaseString());
+        {
+            hdbstring.Append(" " + course.HistoryDatabseString());
+        }
 
         return hdbstring.ToString();
     }

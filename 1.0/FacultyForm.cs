@@ -22,7 +22,7 @@ namespace Registration
             faculty = fac;
             StudentList = studs;
             NextCourses = next;
-            PrevCourse = prev;
+            PrevCourses = prev;
         }
 
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -41,7 +41,6 @@ namespace Registration
                 if(course.Instructor == faculty.UserName)
                     schedule.Add(course);
             }
-
             dataGridView1.Hide();
             dataGridView1.DataSource = schedule;
             dataGridView1.Refresh();
