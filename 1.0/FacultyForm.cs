@@ -34,7 +34,34 @@ namespace Registration
 
         private void teachingScheduleToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            List<courseinfo> schedule = new List<courseinfo>();
 
+            foreach (courseinfo course in NextCourses)
+            {
+                if(course.Instructor == faculty.UserName)
+                    schedule.Add(course);
+            }
+
+            dataGridView1.Hide();
+            dataGridView1.DataSource = schedule;
+            dataGridView1.Refresh();
+            dataGridView1.Show();
+        }
+
+        private void viewAdvisees()
+        {
+            List<Student> advis = new List<Student>();
+
+            foreach (Student stud in StudentList)
+            {
+                if (stud.Status == faculty.UserName)
+                    advis.Add(stud);
+            }
+
+            dataGridView1.Hide();
+            dataGridView1.DataSource = advis;
+            dataGridView1.Refresh();
+            dataGridView1.Show();
         }
     }
 }

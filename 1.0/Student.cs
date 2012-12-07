@@ -96,14 +96,14 @@ public class Student
         return udbstring.ToString();
     }
 
-    //public string HistoryDatabaseString()
-    //{
-    //    StringBuilder hdbstring = new StringBuilder(UserName);
-    //    hdbstring.Insert(10, Next.Count);
+    public string HistoryDatabaseString()
+    {
+        StringBuilder hdbstring = new StringBuilder(UserName);
+        hdbstring.Insert(10, Next.Count);
 
-    //    foreach (courserecord course in Next)
-    //        hdbstring.Append('\n' + course.HistoryDatabaseString());
+        foreach (courserecord course in Next)
+            hdbstring.Append(' ' + course.HistoryDatabaseString());
 
-    //    return hdbstring.ToString();
-    //}
+        return hdbstring.ToString();
+    }
 }

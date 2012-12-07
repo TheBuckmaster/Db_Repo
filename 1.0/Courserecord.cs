@@ -81,7 +81,7 @@ public class courserecord
     public string HistoryDatabseString()
     {
         StringBuilder hdbstring = new StringBuilder(Coursename);
-        hdbstring.Insert(12, Term.ToString() + Year.ToString());
+        hdbstring.Insert(12, Term);
         hdbstring.Insert(17, Credit.ToString());
         hdbstring.Insert(23, Grade);
 

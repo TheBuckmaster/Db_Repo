@@ -229,8 +229,9 @@ namespace Registration
                         {
                             if (stud.Next.Contains(course.Coursename))
                             {
-                                ++course.Enrolled;
                                 stud.EnrolledCredits += course.Credit;
+                                course.Students.Add(stud.UserName);
+                                ++course.Enrolled;
                             }
                         }
                     }
