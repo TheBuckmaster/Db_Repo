@@ -37,9 +37,9 @@
             // 
             // RegisterButton
             // 
-            this.RegisterButton.Location = new System.Drawing.Point(12, 419);
+            this.RegisterButton.Location = new System.Drawing.Point(295, 248);
             this.RegisterButton.Name = "RegisterButton";
-            this.RegisterButton.Size = new System.Drawing.Size(396, 25);
+            this.RegisterButton.Size = new System.Drawing.Size(163, 22);
             this.RegisterButton.TabIndex = 0;
             this.RegisterButton.Text = "Add Selected Classes";
             this.RegisterButton.UseVisualStyleBackColor = true;
@@ -47,9 +47,9 @@
             // 
             // ScheduleButton
             // 
-            this.ScheduleButton.Location = new System.Drawing.Point(212, 10);
+            this.ScheduleButton.Location = new System.Drawing.Point(464, 247);
             this.ScheduleButton.Name = "ScheduleButton";
-            this.ScheduleButton.Size = new System.Drawing.Size(196, 174);
+            this.ScheduleButton.Size = new System.Drawing.Size(133, 23);
             this.ScheduleButton.TabIndex = 1;
             this.ScheduleButton.Text = "View Schedule";
             this.ScheduleButton.UseVisualStyleBackColor = true;
@@ -57,9 +57,9 @@
             // 
             // LogoutButton
             // 
-            this.LogoutButton.Location = new System.Drawing.Point(12, 12);
+            this.LogoutButton.Location = new System.Drawing.Point(603, 247);
             this.LogoutButton.Name = "LogoutButton";
-            this.LogoutButton.Size = new System.Drawing.Size(194, 172);
+            this.LogoutButton.Size = new System.Drawing.Size(87, 23);
             this.LogoutButton.TabIndex = 2;
             this.LogoutButton.Text = "Log Out";
             this.LogoutButton.UseVisualStyleBackColor = true;
@@ -67,19 +67,21 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 183);
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(395, 229);
+            this.dataGridView1.Size = new System.Drawing.Size(678, 229);
             this.dataGridView1.TabIndex = 3;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 456);
+            this.ClientSize = new System.Drawing.Size(702, 284);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.LogoutButton);
             this.Controls.Add(this.ScheduleButton);

@@ -37,9 +37,9 @@
             // 
             // Sbutton
             // 
-            this.Sbutton.Location = new System.Drawing.Point(389, 7);
+            this.Sbutton.Location = new System.Drawing.Point(451, 295);
             this.Sbutton.Name = "Sbutton";
-            this.Sbutton.Size = new System.Drawing.Size(152, 60);
+            this.Sbutton.Size = new System.Drawing.Size(116, 23);
             this.Sbutton.TabIndex = 0;
             this.Sbutton.Text = "View Schedule";
             this.Sbutton.UseVisualStyleBackColor = true;
@@ -47,9 +47,9 @@
             // 
             // LButton
             // 
-            this.LButton.Location = new System.Drawing.Point(389, 215);
+            this.LButton.Location = new System.Drawing.Point(703, 295);
             this.LButton.Name = "LButton";
-            this.LButton.Size = new System.Drawing.Size(155, 56);
+            this.LButton.Size = new System.Drawing.Size(88, 23);
             this.LButton.TabIndex = 1;
             this.LButton.Text = "Log Out";
             this.LButton.UseVisualStyleBackColor = true;
@@ -57,9 +57,9 @@
             // 
             // AButton
             // 
-            this.AButton.Location = new System.Drawing.Point(390, 70);
+            this.AButton.Location = new System.Drawing.Point(573, 295);
             this.AButton.Name = "AButton";
-            this.AButton.Size = new System.Drawing.Size(151, 141);
+            this.AButton.Size = new System.Drawing.Size(124, 23);
             this.AButton.TabIndex = 2;
             this.AButton.Text = "Advising";
             this.AButton.UseVisualStyleBackColor = true;
@@ -67,18 +67,19 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(6, 7);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(380, 260);
+            this.dataGridView1.Size = new System.Drawing.Size(785, 282);
             this.dataGridView1.TabIndex = 3;
             // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(547, 273);
+            this.ClientSize = new System.Drawing.Size(803, 330);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.AButton);
             this.Controls.Add(this.LButton);

@@ -119,7 +119,15 @@ namespace BensCRS
                     }
                     line = filereader.ReadLine();
                 }
-                MessageBox.Show("Complete");
+                //MessageBox.Show("Complete");
+            }
+            catch (EndOfStreamException)
+            { }
+
+
+            try
+            {
+
             }
             catch (EndOfStreamException)
             { }
