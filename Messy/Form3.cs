@@ -48,7 +48,7 @@ namespace BensCRS
 
         }
         
-        public Form3(List<UserStudent> S, UserStudent s,  UserFaculty F, List<Course> C ,int number)
+        public Form3(List<UserStudent> S, UserStudent s,  UserFaculty F, List<Course> C, int number)
         {
             Me = F;
             Stud = S;

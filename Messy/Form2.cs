@@ -87,8 +87,19 @@ namespace BensCRS
         {
             if (state == 0)
             {
-                benutil.AddStudenttoCourse(StudentUser, Courses[dataGridView1.SelectedRows[0].Index]);
-                CourseViewer(); 
+                double creds = Courses[dataGridView1.SelectedRows[0].Index].credits;
+                foreach (Course C in Courses)
+                {
+                    if (StudentUser.MyCourses.Contains(C.CourseName))
+                        creds += C.credits;
+                }
+
+                if (creds < 5.0)
+                {
+                    benutil.AddStudenttoCourse(StudentUser, Courses[dataGridView1.SelectedRows[0].Index]);
+                    CourseViewer();
+                }
+                else MessageBox.Show("Can't enroll for 5 or more credits!");
             }
 
             if (state == 1)
