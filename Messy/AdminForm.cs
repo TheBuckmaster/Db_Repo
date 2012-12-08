@@ -12,17 +12,52 @@ namespace BensCRS
     public partial class AdminForm : Form
     {
         UserAdmin admin;
+        private UserStudent asthisstudent;
         List<UserFaculty> FacultyList = new List<UserFaculty>();
         List<UserStudent> StudentList = new List<UserStudent>();
         List<Course> Courses = new List<Course>();
+        private adminstate state; 
+
+        private enum adminstate 
+        { 
+            asadmin,
+            asfaculty,
+            asstudent 
+        }
 
         public AdminForm(List<UserFaculty> fl, List<UserStudent> sl, List<Course> cl, UserAdmin adm)
         {
+            state = adminstate.asadmin; 
             InitializeComponent();
             admin = adm;
             FacultyList = fl;
             StudentList = sl;
             Courses = cl;
+            initdgv(); 
+            
+        }
+
+        private AdminForm(List<UserFaculty> fl, List<UserStudent> sl, List<Course> cl, UserAdmin adm, UserStudent std)
+        {
+
+            state = adminstate.asstudent;
+            asthisstudent = std;
+            button1.Text = "Add " + std.UserName + " to Course."; 
+            InitializeComponent();
+            admin = adm;
+            FacultyList = fl;
+            StudentList = sl;
+            Courses = cl;
+            initdgv(); 
+            
+        
+        }
+        private void initdgv()
+        {
+            if (state == adminstate.asadmin)
+                dataGridView1.DataSource = StudentList; 
+            if (state == adminstate.asstudent)
+                dataGridView1.DataSource = Courses;                 
         }
 
         private void logoutBtn_Click(object sender, EventArgs e)
@@ -30,55 +65,23 @@ namespace BensCRS
             this.Close();
         }
 
-        private void ChangeInstructor(Course C, UserFaculty prof)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            foreach (UserFaculty oldProf in FacultyList)
-                oldProf.MyClasses.Remove(C.CourseName);
 
-            C.Instructor = prof.UserName;
-            prof.MyClasses.Add(C.CourseName);
         }
 
-        private void ChangeAdvisor(UserStudent stud, UserFaculty prof)
+        private void button1_Click(object sender, EventArgs e)
         {
-            stud.Advisor = prof.UserName;
+            //if (state == adminstate.asadmin)
+            //    //call private adminform with student username
+            //    ;
+            //if (state == adminstate.asstudent)
+            //    benutil.AddStudenttoCourse(asthisstudent, ,admin); 
+
+
         }
 
-        private void RemoveFaculty(UserFaculty prof)
-        {
-            foreach (UserStudent stud in StudentList)
-                if (prof.UserName == stud.Advisor)
-                    stud.Advisor = "Staff";
 
-            foreach (Course C in Courses)
-                if (prof.UserName == C.Instructor)
-                    C.Instructor = "Staff";
-
-            FacultyList.Remove(prof);
-        }
-
-        private void RemoveCourse(Course C)
-        {
-            foreach (UserStudent stud in StudentList)
-                foreach (string C2 in stud.MyCourses)
-                    if (C.CourseName == C2)
-                        stud.MyCourses.Remove(C2);
-
-            foreach (UserFaculty prof in FacultyList)
-                foreach (string C2 in prof.MyClasses)
-                    if (C.CourseName == C2)
-                        prof.MyClasses.Remove(C2);
-
-            Courses.Remove(C);
-        }
-
-        private void RemoveStudent(UserStudent stud)
-        {
-            foreach (Course C in Courses)
-                C.RemoveStudent(stud);
-
-            StudentList.Remove(stud);
-        }
 
     }
 }
