@@ -88,6 +88,7 @@ namespace BensCRS
 
                 while (line != null)
                 {
+                    bool studentfound = false; 
                     name = line.Substring(0, 11).Trim();
 
                     UserStudent stud = new UserStudent();
@@ -96,10 +97,15 @@ namespace BensCRS
                         if (name == st.UserName)
                         {
                             stud = st;
+                            studentfound = true; 
                             break;
                         }
                     }
-
+                    if (!studentfound)
+                    {
+                        line = filereader.ReadLine();
+                        continue; 
+                    }
 
                     times = int.Parse(line.Substring(11, 2).Trim());
                     int x = 14;
@@ -138,8 +144,7 @@ namespace BensCRS
                 Application.Run(new LoginForm(A, F, S, C, past));
                 
             }
-
-            this.Close();
+                this.Close();
         }
 
     }
