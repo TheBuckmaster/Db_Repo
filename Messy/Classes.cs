@@ -7,8 +7,8 @@ namespace BensCRS
 {
     public class UserFaculty
     {
-        public String UserName = "BobF";
-        private string password = "FUCK";
+        public String UserName = "";
+        private string password = "";
         public String FirstName;
         public String LastName;
         public String MiddleName;
@@ -47,8 +47,8 @@ namespace BensCRS
 
     public class UserStudent
     {
-        public String UserName = "BobS";
-        private string password = "FUCK";
+        public String UserName = "";
+        private string password = "";
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public String MiddleName { get; set; }
@@ -84,8 +84,8 @@ namespace BensCRS
 
     public class UserAdmin
     {
-        public String UserName = "BobA";
-        private string password = "FUCK";
+        public String UserName = "";
+        private string password = "";
         public String FirstName;
         public String LastName;
         public String MiddleName; 

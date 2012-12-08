@@ -13,35 +13,29 @@ namespace BensCRS
     public partial class CourseParseForm : Form
     {
         List<String> timeblocks = new List<string>();
-
+        List<UserAdmin> A = new List<UserAdmin>();
+        List<UserFaculty> F = new List<UserFaculty>();
+        List<UserStudent> S = new List<UserStudent>();
         List<Course> Courses = new List<Course>();
 
         private StreamReader filereader;
-        DialogResult result;
-        private string filename;
-        FileStream input;
+        //DialogResult result;
+        //private string filename;
+        //FileStream input;
         private string line;
 
 
-        public CourseParseForm(List<Course> C)
+        public CourseParseForm(List<Course> C, List<UserAdmin> ad, List<UserFaculty> fac, List<UserStudent> std)
         {
             InitializeComponent();
             Courses = C;
+            A = ad;
+            F = fac;
+            S = std;
 
             try
             {
-                using (OpenFileDialog filechooser = new OpenFileDialog())
-                {
-                    result = filechooser.ShowDialog();
-                    filename = filechooser.FileName;
-                }
-
-                if (result == DialogResult.OK)
-                {
-                    input = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                    filereader = new StreamReader(input);
-
-                }
+                filereader = new StreamReader("ClassInput.txt");
 
                 line = filereader.ReadLine();
                 while (line != null)
@@ -72,13 +66,22 @@ namespace BensCRS
                     line = filereader.ReadLine();
                 }
                 filereader.Close();
-                MessageBox.Show("File is now complete.");
-                 
+                //MessageBox.Show("File is now complete.");
+
             }
             catch
             {
-                MessageBox.Show("There was an Error"); 
+                //MessageBox.Show("There was an Error");
             }
+
+            
+            LoginForm lgn = new LoginForm(A, F, S, C);
+            if (lgn.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new LoginForm(A,F,S,C));
+                
+            }
+            this.Close();
         }
 
     }
