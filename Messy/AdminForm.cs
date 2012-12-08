@@ -30,5 +30,55 @@ namespace BensCRS
             this.Close();
         }
 
+        private void ChangeInstructor(Course C, UserFaculty prof)
+        {
+            foreach (UserFaculty oldProf in FacultyList)
+                oldProf.MyClasses.Remove(C.CourseName);
+
+            C.Instructor = prof.UserName;
+            prof.MyClasses.Add(C.CourseName);
+        }
+
+        private void ChangeAdvisor(UserStudent stud, UserFaculty prof)
+        {
+            stud.Advisor = prof.UserName;
+        }
+
+        private void RemoveFaculty(UserFaculty prof)
+        {
+            foreach (UserStudent stud in StudentList)
+                if (prof.UserName == stud.Advisor)
+                    stud.Advisor = "Staff";
+
+            foreach (Course C in Courses)
+                if (prof.UserName == C.Instructor)
+                    C.Instructor = "Staff";
+
+            FacultyList.Remove(prof);
+        }
+
+        private void RemoveCourse(Course C)
+        {
+            foreach (UserStudent stud in StudentList)
+                foreach (string C2 in stud.MyCourses)
+                    if (C.CourseName == C2)
+                        stud.MyCourses.Remove(C2);
+
+            foreach (UserFaculty prof in FacultyList)
+                foreach (string C2 in prof.MyClasses)
+                    if (C.CourseName == C2)
+                        prof.MyClasses.Remove(C2);
+
+            Courses.Remove(C);
+        }
+
+        private void RemoveStudent(UserStudent stud)
+        {
+            foreach (Course C in Courses)
+                C.RemoveStudent(stud);
+
+            StudentList.Remove(stud);
+        }
+
     }
 }
