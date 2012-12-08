@@ -25,12 +25,5 @@ namespace BensCRS
             Courses = cl;
         }
 
-
-
-        // ?????????????
-        //private void AdminForm_Load(object sender, EventArgs e)
-        //{
-
-        //}
     }
 }

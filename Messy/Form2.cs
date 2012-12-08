@@ -14,10 +14,11 @@ namespace BensCRS
         List<Course> Courses = new List<Course>();
         UserStudent StudentUser; 
         int state;
-        List<Course> stdCourses = new List<Course>(); 
+        List<Course> stdCourses = new List<Course>();
+        List<PastCourse> Past = new List<PastCourse>();
 
 
-        public Form2(List<Course> C, UserStudent S1, int number)
+        public Form2(List<Course> C, UserStudent S1, int number, List<PastCourse> P)
         {
             InitializeComponent();
 
@@ -81,6 +82,11 @@ namespace BensCRS
 
         private void HistViewer()
         {
+            foreach(PastCourse p in Past)
+            {
+                
+            }
+
         }
 
         private void RegisterButton_Click(object sender, EventArgs e)
@@ -111,16 +117,17 @@ namespace BensCRS
 
         private void ScheduleButton_Click(object sender, EventArgs e)
         {
+
             if (state == 0)
             {
-                Form2 it = new Form2(Courses, StudentUser, 1);
+                Form2 it = new Form2(Courses, StudentUser, 1, Past);
                 it.Show();
                 this.Close();
             }
 
             if (state == 1)
             {
-                Form2 it = new Form2(Courses, StudentUser, 2);
+                Form2 it = new Form2(Courses, StudentUser, 2, Past);
                 it.Show();
                 this.Close(); 
             
@@ -131,13 +138,13 @@ namespace BensCRS
         {
             if (state == 2)
             {
-                Form2 it = new Form2(Courses, StudentUser, 1);
+                Form2 it = new Form2(Courses, StudentUser, 1, Past);
                 it.Show();
                 this.Close();
             }
             if (state == 1)
             {
-                Form2 it = new Form2(Courses, StudentUser, 0);
+                Form2 it = new Form2(Courses, StudentUser, 0, Past);
                 it.Show();
                 this.Close();
             }

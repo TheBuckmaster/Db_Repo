@@ -25,6 +25,7 @@ namespace BensCRS
             Past = P;
             Courses = new List<Course>(C);
             InitializeComponent();
+            textBox2.PasswordChar = '•';
         }
 
 
@@ -78,7 +79,7 @@ namespace BensCRS
 
                         //launch student form
                         Text = "Welcome " + s.UserName + ". ";
-                        Form2 SF = new Form2(Courses, s, 0);
+                        Form2 SF = new Form2(Courses, s, 0, Past);
                         SF.Show();
                         textBox1.Text = textBox2.Text = ""; 
                         //this.Close(); 

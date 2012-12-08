@@ -138,8 +138,8 @@ namespace BensCRS
                 Application.Run(new LoginForm(A, F, S, C, past));
                 
             }
-            else
-                this.Close();
+
+            this.Close();
         }
 
     }
