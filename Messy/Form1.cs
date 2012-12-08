@@ -31,6 +31,7 @@ namespace BensCRS
 
         private void button1_Click(object sender, EventArgs e)
         {
+            bool success = false;
             foreach (UserAdmin a in Admins)
                 if (textBox1.Text == a.UserName)
                 { 
@@ -53,6 +54,7 @@ namespace BensCRS
                     {
                         textBox2.Text = "";
                         label3.Show();
+                        success = true;
                     } //tell user login failed.
                 }
 
@@ -68,9 +70,9 @@ namespace BensCRS
                         Form3 formm = new Form3(Students,f,Courses,0);
                         formm.Show();
                         //this.Close();
-                        textBox1.Text = textBox2.Text = ""; 
- 
+                        textBox1.Text = textBox2.Text = "";
 
+                        success = true;
                     }
 
                     else
@@ -90,9 +92,9 @@ namespace BensCRS
                         Text = "Welcome " + s.UserName + ". ";
                         Form2 SF = new Form2(Courses, s, 0);
                         SF.Show();
-                        textBox1.Text = textBox2.Text = ""; 
+                        textBox1.Text = textBox2.Text = "";
                         //this.Close(); 
-
+                        success = true;
                     }
 
                     else
@@ -101,10 +103,11 @@ namespace BensCRS
                         label3.Show();
                     } //tell user login failed.
                 }
-            textBox2.Text = "";
-            label3.Show();
-             
-
+            if (!success)
+            {
+                textBox2.Text = "";
+                label3.Show();
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

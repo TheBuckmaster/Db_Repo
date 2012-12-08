@@ -32,6 +32,10 @@
             this.ScheduleButton = new System.Windows.Forms.Button();
             this.LogoutButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.GPAtxtbox = new System.Windows.Forms.TextBox();
+            this.CreditTxtBox = new System.Windows.Forms.TextBox();
+            this.Credits = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,11 +81,51 @@
             this.dataGridView1.Size = new System.Drawing.Size(678, 229);
             this.dataGridView1.TabIndex = 3;
             // 
+            // GPAtxtbox
+            // 
+            this.GPAtxtbox.Location = new System.Drawing.Point(231, 261);
+            this.GPAtxtbox.Name = "GPAtxtbox";
+            this.GPAtxtbox.Size = new System.Drawing.Size(58, 20);
+            this.GPAtxtbox.TabIndex = 4;
+            this.GPAtxtbox.Visible = false;
+            // 
+            // CreditTxtBox
+            // 
+            this.CreditTxtBox.Location = new System.Drawing.Point(159, 261);
+            this.CreditTxtBox.Name = "CreditTxtBox";
+            this.CreditTxtBox.Size = new System.Drawing.Size(66, 20);
+            this.CreditTxtBox.TabIndex = 5;
+            this.CreditTxtBox.Visible = false;
+            // 
+            // Credits
+            // 
+            this.Credits.AutoSize = true;
+            this.Credits.Location = new System.Drawing.Point(169, 247);
+            this.Credits.Name = "Credits";
+            this.Credits.Size = new System.Drawing.Size(39, 13);
+            this.Credits.TabIndex = 6;
+            this.Credits.Text = "Credits";
+            this.Credits.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(244, 247);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "GPA";
+            this.label1.Visible = false;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(702, 284);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Credits);
+            this.Controls.Add(this.CreditTxtBox);
+            this.Controls.Add(this.GPAtxtbox);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.LogoutButton);
             this.Controls.Add(this.ScheduleButton);
@@ -90,6 +134,7 @@
             this.Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -99,6 +144,10 @@
         private System.Windows.Forms.Button ScheduleButton;
         private System.Windows.Forms.Button LogoutButton;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.TextBox GPAtxtbox;
+        private System.Windows.Forms.TextBox CreditTxtBox;
+        private System.Windows.Forms.Label Credits;
+        private System.Windows.Forms.Label label1;
 
     }
 }

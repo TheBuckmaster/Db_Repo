@@ -45,8 +45,13 @@ namespace BensCRS
                 Text = "Course History"; 
                 HistViewer();
                 LogoutButton.Text = "Return to Schedule";
-                ScheduleButton.Hide(); 
-            
+                ScheduleButton.Hide();
+                GPAtxtbox.Text = StudentUser.GPA().ToString();
+                CreditTxtBox.Text = StudentUser.EarnedCredits().ToString();
+                GPAtxtbox.Visible = true;
+                CreditTxtBox.Visible = true;
+                label1.Visible = true;
+                Credits.Visible = true;
             }
 
   
@@ -94,7 +99,7 @@ namespace BensCRS
                     if (StudentUser.MyCourses.Contains(C.CourseName))
                     {
                         creds += C.credits;
-                        if (!conflict && C.checkConflicts(Courses[dataGridView1.SelectedRows[0].Index]))
+                        if (!conflict && C.checkConflict(Courses[dataGridView1.SelectedRows[0].Index]))
                             conflict = true;
                     }
                 }
