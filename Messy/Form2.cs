@@ -94,8 +94,9 @@ namespace BensCRS
                     if (StudentUser.MyCourses.Contains(C.CourseName))
                     {
                         creds += C.credits;
-                        if(!conflict && C.checkConflicts(Courses[dataGridView1.SelectedRows[0].Index]))
+                        if (!conflict && C.checkConflicts(Courses[dataGridView1.SelectedRows[0].Index]))
                             conflict = true;
+                    }
                 }
 
                 if (creds < 5.0)
