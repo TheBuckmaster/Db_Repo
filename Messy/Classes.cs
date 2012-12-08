@@ -88,7 +88,21 @@ namespace BensCRS
             foreach (PastCourse course in MyPastCourses)
             {
                 if (course.Earned)
-                    credits += course.Credit;
+                {
+                    bool retaken = false;
+                    foreach (PastCourse course2 in MyPastCourses)
+                    {
+                        if ((course.BaseClass == course2.BaseClass) && course2.Grade.Contains("R"))
+                        {
+                            if ((course.Year == course2.Year && course.Semester != 'F')
+                                || (course.Year < course2.Year))
+                                retaken = true;
+                        }
+                    }
+
+                    if(!retaken)
+                        credits += course.Credit;
+                }
             }
 
             return credits;
@@ -108,7 +122,7 @@ namespace BensCRS
                     bool retaken = false;
                     foreach (PastCourse course2 in MyPastCourses)
                     {
-                        if ((course.BaseClass == course2.BaseClass) && course2.Grade.Contains("R"))
+                        if ((course != course2) && (course.BaseClass == course2.BaseClass))
                         {
                             if ((course.Year == course2.Year && course.Semester != 'F')
                                 || (course.Year < course2.Year))
