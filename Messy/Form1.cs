@@ -15,14 +15,12 @@ namespace BensCRS
         List<UserFaculty> Faculty;
         List<UserStudent> Students;
         List<Course> Courses;
-        List<PastCourse> Past;
 
-        public LoginForm(List<UserAdmin> A, List<UserFaculty> F, List<UserStudent> S, List<Course> C, List<PastCourse> P)
+        public LoginForm(List<UserAdmin> A, List<UserFaculty> F, List<UserStudent> S, List<Course> C)
         {
             Admins = A;
             Faculty = F;
             Students = S;
-            Past = P;
             Courses = new List<Course>(C);
             InitializeComponent();
             textBox2.PasswordChar = '•';
@@ -41,8 +39,12 @@ namespace BensCRS
                         //launch admin form
                         //but for now:
 
-                        Text = "Welcome " + a.UserName + ". " ; 
+                        Text = "Welcome " + a.UserName + ". " ;
 
+                        AdminForm adm = new AdminForm(Faculty, Students, Courses, a);
+                        adm.Show();
+
+                        textBox1.Text = textBox2.Text = "";
                         //end form.
                     } 
 

@@ -15,10 +15,8 @@ namespace BensCRS
         UserStudent StudentUser; 
         int state;
         List<Course> stdCourses = new List<Course>();
-        List<PastCourse> Past = new List<PastCourse>();
 
-
-        public Form2(List<Course> C, UserStudent S1, int number, List<PastCourse> P)
+        public Form2(List<Course> C, UserStudent S1, int number)
         {
             InitializeComponent();
 
@@ -82,11 +80,7 @@ namespace BensCRS
 
         private void HistViewer()
         {
-            foreach(PastCourse p in Past)
-            {
-                
-            }
-
+            dataGridView1.DataSource = StudentUser.MyPastCourses;
         }
 
         private void RegisterButton_Click(object sender, EventArgs e)
@@ -129,8 +123,7 @@ namespace BensCRS
             {
                 Form2 it = new Form2(Courses, StudentUser, 2, Past);
                 it.Show();
-                this.Close(); 
-            
+                this.Close();            
             }
         }
 
