@@ -92,7 +92,7 @@ namespace BensCRS
                     bool retaken = false;
                     foreach (PastCourse course2 in MyPastCourses)
                     {
-                        if ((course.BaseClass == course2.BaseClass) && course2.Grade.Contains("R"))
+                        if ((course != course2) && (course.BaseClass == course2.BaseClass))
                         {
                             if ((course.Year == course2.Year && course.Semester != 'F')
                                 || (course.Year < course2.Year))
@@ -260,6 +260,7 @@ namespace BensCRS
                 foreach (Meeting meet2 in C.Meetings)
                 {
                     foreach (char day in meet.days)
+
                     {
                         if (meet2.days.Contains(day))
                         {

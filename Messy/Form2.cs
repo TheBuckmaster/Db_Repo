@@ -46,12 +46,17 @@ namespace BensCRS
                 HistViewer();
                 LogoutButton.Text = "Return to Schedule";
                 ScheduleButton.Hide();
-                GPAtxtbox.Text = StudentUser.GPA().ToString();
+                if (StudentUser.GPA().ToString().Length > 4)
+                    GPAtxtbox.Text = StudentUser.GPA().ToString().Substring(0, 4);
+                else
+                    GPAtxtbox.Text = StudentUser.GPA().ToString();
+
                 CreditTxtBox.Text = StudentUser.EarnedCredits().ToString();
-                GPAtxtbox.Visible = true;
-                CreditTxtBox.Visible = true;
-                label1.Visible = true;
-                Credits.Visible = true;
+                GPAtxtbox.Show();
+                CreditTxtBox.Show();
+                label1.Show();
+                Credits.Show();
+                RegisterButton.Hide();
             }
 
   

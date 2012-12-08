@@ -41,7 +41,7 @@
             // 
             // RegisterButton
             // 
-            this.RegisterButton.Location = new System.Drawing.Point(295, 248);
+            this.RegisterButton.Location = new System.Drawing.Point(240, 248);
             this.RegisterButton.Name = "RegisterButton";
             this.RegisterButton.Size = new System.Drawing.Size(163, 22);
             this.RegisterButton.TabIndex = 0;
@@ -51,7 +51,7 @@
             // 
             // ScheduleButton
             // 
-            this.ScheduleButton.Location = new System.Drawing.Point(464, 247);
+            this.ScheduleButton.Location = new System.Drawing.Point(409, 247);
             this.ScheduleButton.Name = "ScheduleButton";
             this.ScheduleButton.Size = new System.Drawing.Size(133, 23);
             this.ScheduleButton.TabIndex = 1;
@@ -61,9 +61,9 @@
             // 
             // LogoutButton
             // 
-            this.LogoutButton.Location = new System.Drawing.Point(603, 247);
+            this.LogoutButton.Location = new System.Drawing.Point(548, 247);
             this.LogoutButton.Name = "LogoutButton";
-            this.LogoutButton.Size = new System.Drawing.Size(87, 23);
+            this.LogoutButton.Size = new System.Drawing.Size(142, 23);
             this.LogoutButton.TabIndex = 2;
             this.LogoutButton.Text = "Log Out";
             this.LogoutButton.UseVisualStyleBackColor = true;
@@ -83,7 +83,7 @@
             // 
             // GPAtxtbox
             // 
-            this.GPAtxtbox.Location = new System.Drawing.Point(231, 261);
+            this.GPAtxtbox.Location = new System.Drawing.Point(84, 261);
             this.GPAtxtbox.Name = "GPAtxtbox";
             this.GPAtxtbox.Size = new System.Drawing.Size(58, 20);
             this.GPAtxtbox.TabIndex = 4;
@@ -91,7 +91,7 @@
             // 
             // CreditTxtBox
             // 
-            this.CreditTxtBox.Location = new System.Drawing.Point(159, 261);
+            this.CreditTxtBox.Location = new System.Drawing.Point(12, 261);
             this.CreditTxtBox.Name = "CreditTxtBox";
             this.CreditTxtBox.Size = new System.Drawing.Size(66, 20);
             this.CreditTxtBox.TabIndex = 5;
@@ -100,7 +100,7 @@
             // Credits
             // 
             this.Credits.AutoSize = true;
-            this.Credits.Location = new System.Drawing.Point(169, 247);
+            this.Credits.Location = new System.Drawing.Point(22, 244);
             this.Credits.Name = "Credits";
             this.Credits.Size = new System.Drawing.Size(39, 13);
             this.Credits.TabIndex = 6;
@@ -110,7 +110,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(244, 247);
+            this.label1.Location = new System.Drawing.Point(98, 244);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 7;
