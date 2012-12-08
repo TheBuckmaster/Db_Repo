@@ -87,11 +87,15 @@ namespace BensCRS
         {
             if (state == 0)
             {
+                bool conflict = false;
                 double creds = Courses[dataGridView1.SelectedRows[0].Index].credits;
                 foreach (Course C in Courses)
                 {
                     if (StudentUser.MyCourses.Contains(C.CourseName))
+                    {
                         creds += C.credits;
+                        if(!conflict && C.checkConflicts(Courses[dataGridView1.SelectedRows[0].Index]))
+                            conflict = true;
                 }
 
                 if (creds < 5.0)
@@ -100,6 +104,9 @@ namespace BensCRS
                     CourseViewer();
                 }
                 else MessageBox.Show("Can't enroll for 5 or more credits!");
+
+                if(conflict)
+                    MessageBox.Show("Course has a scheduling conflict!");
             }
 
             if (state == 1)

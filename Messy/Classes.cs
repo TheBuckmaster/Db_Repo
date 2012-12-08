@@ -179,17 +179,40 @@ namespace BensCRS
 
         public bool AddStudent(UserStudent S, UserAdmin A)
         {
-            if (studentNames.Contains(S.UserName))
-                return false;
-
-            studentNames.Add(S.UserName);
-            return true; 
+            if (!studentNames.Contains(S.UserName))
+                studentNames.Add(S.UserName);
+            if (!S.MyCourses.Contains(coursename))
+                S.MyCourses.Add(coursename);
+            return true;
         }
 
         public void RemoveStudent(UserStudent S)
         {
             if (studentNames.Contains(S.UserName))
                 studentNames.Remove(S.UserName);
+        }
+
+        public bool checkConflict(Course C)
+        {
+            foreach (Meeting meet in Meetings)
+            {
+                foreach (Meeting meet2 in C.Meetings)
+                {
+                    foreach (char day in meet.days)
+                    {
+                        if (meet2.days.Contains(day))
+                        {
+                            int start1 = int.Parse(meet.time.Substring(2, 2));
+                            int end1 = start1 + int.Parse(meet.time.Substring(4));
+                            int start2 = int.Parse(meet2.time.Substring(2, 2));
+                            int end2 = start1 + int.Parse(meet2.time.Substring(4));
+                            if (((start1 <= start2) && (end1 > start2)) || ((start2 <= start1) && (end2 > start1)))
+                                return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
 
         private void makeMeetings(List<String> ddttks)
