@@ -80,6 +80,53 @@ namespace BensCRS
         {
             return (maybePWD == password);
         }
+
+        public double EarnedCredits()
+        {
+            double credits = 0.00;
+
+            foreach (PastCourse course in MyPastCourses)
+            {
+                if (course.Earned)
+                    credits += course.Credit;
+            }
+
+            return credits;
+        }
+
+        public double GPA()
+        {
+            double total = 0.000;
+            double creds = 0.000;
+
+            foreach (PastCourse course in MyPastCourses)
+            {
+                // if a gpa factor
+                if (course.GPAble)
+                {
+                    // check if later retaken
+                    bool retaken = false;
+                    foreach (PastCourse course2 in MyPastCourses)
+                    {
+                        if ((course.BaseClass == course2.BaseClass) && course2.Grade.Contains("R"))
+                        {
+                            if ((course.Year == course2.Year && course.Semester != 'F')
+                                || (course.Year < course2.Year))
+                                retaken = true;
+                        }
+                    }
+
+                    // skip retaken classes
+                    if (!retaken)
+                    {
+                        total += course.GPoints;
+                        creds += course.Credit;
+                    }
+                }
+            }
+
+            return total / creds;
+        }
     
     }
 
