@@ -81,7 +81,7 @@ namespace BensCRS
 
                         //launch student form
                         Text = "Welcome " + s.UserName + ". ";
-                        Form2 SF = new Form2(Courses, s, 0, Past);
+                        Form2 SF = new Form2(Courses, s, 0);
                         SF.Show();
                         textBox1.Text = textBox2.Text = ""; 
                         //this.Close(); 

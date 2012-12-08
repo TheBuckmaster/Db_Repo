@@ -114,14 +114,14 @@ namespace BensCRS
 
             if (state == 0)
             {
-                Form2 it = new Form2(Courses, StudentUser, 1, Past);
+                Form2 it = new Form2(Courses, StudentUser, 1);
                 it.Show();
                 this.Close();
             }
 
             if (state == 1)
             {
-                Form2 it = new Form2(Courses, StudentUser, 2, Past);
+                Form2 it = new Form2(Courses, StudentUser, 2);
                 it.Show();
                 this.Close();            
             }
@@ -131,13 +131,13 @@ namespace BensCRS
         {
             if (state == 2)
             {
-                Form2 it = new Form2(Courses, StudentUser, 1, Past);
+                Form2 it = new Form2(Courses, StudentUser, 1);
                 it.Show();
                 this.Close();
             }
             if (state == 1)
             {
-                Form2 it = new Form2(Courses, StudentUser, 0, Past);
+                Form2 it = new Form2(Courses, StudentUser, 0);
                 it.Show();
                 this.Close();
             }
