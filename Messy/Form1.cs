@@ -24,6 +24,7 @@ namespace BensCRS
             Courses = new List<Course>(C);
             InitializeComponent();
             textBox2.PasswordChar = '•';
+            Text = "Welcome";
         }
 
 
@@ -49,7 +50,10 @@ namespace BensCRS
                     } 
 
                     else 
-                    {} //tell user login failed.
+                    {
+                        textBox2.Text = "";
+                        label3.Show();
+                    } //tell user login failed.
                 }
 
             foreach (UserFaculty f in Faculty)
@@ -70,7 +74,10 @@ namespace BensCRS
                     }
 
                     else
-                    { } //tell user login failed.
+                    {
+                        textBox2.Text = "";
+                        label3.Show();
+                    } //tell user login failed.
                 }
 
             foreach (UserStudent s in Students)
@@ -89,8 +96,13 @@ namespace BensCRS
                     }
 
                     else
-                    { } //tell user login failed.
+                    {
+                        textBox2.Text = "";
+                        label3.Show();
+                    } //tell user login failed.
                 }
+            textBox2.Text = "";
+            label3.Show();
              
 
         }
