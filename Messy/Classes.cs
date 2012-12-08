@@ -199,9 +199,78 @@ namespace BensCRS
     }
 
     public class PastCourse
-    { 
-    
-    
+    {
+        public String Term { get; set; }
+        private string coursename;
+        public String CourseName { get { return coursename; } }
+        public String Grade { get; set; }
+        public double Credit { get; set; }
+
+        public char Semester { get { return Term[0]; } }
+        public int Year { get { return int.Parse(Term.Substring(1)); } }
+        public string BaseClass { get { return coursename.Substring(0, coursename.Length - 3); } }
+        public string Section { get { return coursename.Substring(coursename.Length - 2); } }
+        public double GPoints;
+        public bool Earned;
+        public bool GPAble;
+
+        public PastCourse(String term, String name, String grade, double credit)
+        {
+            Term = term;
+            coursename = name;
+            Grade = grade;
+            Credit = credit;
+
+            if (Grade.Contains("F"))
+            {
+                Earned = false;
+                GPAble = true;
+                GPoints = 0.0;
+            }
+            else if (Grade.Contains("N") || Grade.Contains("W") || Grade.Contains("U") || Grade.Contains("X") || Grade.Contains("I") || Grade.Contains("O") || Grade.Contains("EQ"))
+            {
+                Earned = false;
+                GPAble = false;
+                GPoints = 0.0;
+            }
+            else if (Grade.Contains("S"))
+            {
+                Earned = true;
+                GPAble = false;
+                GPoints = 0.0;
+            }
+            else
+            {
+                Earned = true;
+                GPAble = true;
+
+                if (Grade.Contains("A-"))
+                    GPoints = Credit * 3.7;
+                else if (Grade.Contains("A"))
+                    GPoints = Credit * 4.0;
+
+                else if (Grade.Contains("B+"))
+                    GPoints = Credit * 3.3;
+                else if (Grade.Contains("B-"))
+                    GPoints = Credit * 2.7;
+                else if (Grade.Contains("B"))
+                    GPoints = Credit * 3.0;
+
+                else if (Grade.Contains("C+"))
+                    GPoints = Credit * 2.3;
+                else if (Grade.Contains("C-"))
+                    GPoints = Credit * 1.7;
+                else if (Grade.Contains("C"))
+                    GPoints = Credit * 2.0;
+
+                else if (Grade.Contains("D+"))
+                    GPoints = Credit * 1.3;
+                else if (Grade.Contains("D-"))
+                    GPoints = Credit * 0.7;
+                else if (Grade.Contains("D"))
+                    GPoints = Credit * 1.0;
+            }
+        }
     }
 
 }
