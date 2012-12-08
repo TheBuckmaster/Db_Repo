@@ -81,8 +81,6 @@ namespace BensCRS
 
         private void HistViewer()
         {
-            // put StudentUser.GPA() and StudentUser.EarnedCredits in boxes somewhere
-            dataGridView1.DataSource = StudentUser.History; 
         }
 
         private void RegisterButton_Click(object sender, EventArgs e)

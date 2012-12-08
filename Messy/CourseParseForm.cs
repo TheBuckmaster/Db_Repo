@@ -17,6 +17,7 @@ namespace BensCRS
         List<UserFaculty> F = new List<UserFaculty>();
         List<UserStudent> S = new List<UserStudent>();
         List<Course> Courses = new List<Course>();
+        List<PastCourse> past = new List<PastCourse>();
 
         private StreamReader filereader;
         //DialogResult result;
@@ -74,14 +75,59 @@ namespace BensCRS
                 //MessageBox.Show("There was an Error");
             }
 
+            try
+            {
+                filereader = new StreamReader("HistoryInput.txt");
+                line = filereader.ReadLine();
+                int times;
+                string name;
+                string title;
+                string term;
+                double credit;
+                string grade;
+
+                while (line != null)
+                {
+                    name = line.Substring(0, 11).Trim();
+
+                    UserStudent stud = new UserStudent();
+                    foreach(UserStudent st in S)
+                    {
+                        if (name == st.UserName)
+                        {
+                            stud = st;
+                            break;
+                        }
+                    }
+
+                    times = int.Parse(line.Substring(11, 2).Trim());
+                    int x = 14;
+                    for (int i = 0; i < times; i++)
+                    {
+                        title = line.Substring(x, 11).Trim();
+                        x += 11;
+                        term = line.Substring(x, 4).Trim();
+                        x += 4;
+                        credit = double.Parse(line.Substring(x, 5));
+                        x += 5;
+                        grade = line.Substring(35, 4).Trim();
+                        x += 4;
+                    }
+                    line = filereader.ReadLine();
+                }
+                MessageBox.Show("Complete");
+            }
+            catch (EndOfStreamException)
+            { }
             
-            LoginForm lgn = new LoginForm(A, F, S, C);
+            LoginForm lgn = new LoginForm(A, F, S, C, past);
             if (lgn.ShowDialog() == DialogResult.OK)
             {
-                Application.Run(new LoginForm(A,F,S,C));
+                Application.Run(new LoginForm(A, F, S, C, past));
                 
             }
-            this.Close();
+            else
+                this.Close();
         }
 
     }

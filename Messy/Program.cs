@@ -31,7 +31,8 @@ namespace BensCRS
             //std.Add(u3);
             List<String> timeblocks = new List<string>();
             List<Course> Courses = new List<Course>();
-            List<Course> crs = new List<Course>();
+            List<PastCourse> past = new List<PastCourse>();
+            
             //crs.Add(new Course()); 
 
             try
@@ -85,6 +86,8 @@ namespace BensCRS
             catch (EndOfStreamException)
             { }
 
+
+
             //try
             //{
             //    StreamReader freader;
@@ -137,7 +140,7 @@ namespace BensCRS
             //}
 
             //Application.Run(new Form4(ads, std,fcs));
-            Application.Run(new CourseParseForm(crs, ads, fcs, std));
+            Application.Run(new CourseParseForm(Courses, ads, fcs, std));
             //Application.Run(new Sloppyform(ads, std, fcs)); 
             //Application.Run(new LoginForm(ads,fcs,std,crs));
         }

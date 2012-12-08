@@ -54,8 +54,7 @@ namespace BensCRS
         public String MiddleName { get; set; }
         public String Advisor;
 
-        public List<String> MyCourses = new List<String>();
-        public List<PastCourse> History = new List<PastCourse>();
+        public List<String> MyCourses = new List<String>(); 
 
         public UserStudent(String UN, String PW, String FN, String MN, String LN, String ADV)
         {
@@ -79,53 +78,6 @@ namespace BensCRS
         public bool isPassword(String maybePWD)
         {
             return (maybePWD == password);
-        }
-
-        public double EarnedCredits()
-        {
-            double credits = 0.00;
-
-            foreach (PastCourse course in History)
-            {
-                if (course.Earned)
-                    credits += course.Credit;
-            }
-
-            return credits;
-        }
-
-        public double GPA()
-        {
-            double total = 0.000;
-            double creds = 0.000;
-
-            foreach (PastCourse course in History)
-            {
-                // if a gpa factor
-                if (course.GPAble)
-                {
-                    // check if later retaken
-                    bool retaken = false;
-                    foreach (PastCourse course2 in History)
-                    {
-                        if ((course.BaseClass == course2.BaseClass) && course2.Grade.Contains("R"))
-                        {
-                            if ((course.Year == course2.Year && course.Semester != 'F')
-                                || (course.Year < course2.Year))
-                                retaken = true;
-                        }
-                    }
-
-                    // skip retaken classes
-                    if (!retaken)
-                    {
-                        total += course.GPoints;
-                        creds += course.Credit;
-                    }
-                }
-            }
-
-            return total / creds;
         }
     
     }
@@ -247,78 +199,9 @@ namespace BensCRS
     }
 
     public class PastCourse
-    {
-        public String Term { get; set; }
-        private string coursename;
-        public String CourseName { get { return coursename; } }
-        public String Grade { get; set; }
-        public double Credit { get; set; }
-
-        public char Semester { get { return Term[0]; } }
-        public int Year { get { return int.Parse(Term.Substring(1)); } }
-        public string BaseClass { get { return coursename.Substring(0, coursename.Length - 3); } }
-        public string Section { get { return coursename.Substring(coursename.Length - 2); } }
-        public double GPoints;
-        public bool Earned;
-        public bool GPAble;
-
-        public PastCourse(String term, String name, String grade, double credit)
-        {
-            Term = term;
-            coursename = name;
-            Grade = grade;
-            Credit = credit;
-
-            if (Grade.Contains("F"))
-            {
-                Earned = false;
-                GPAble = true;
-                GPoints = 0.0;
-            }
-            else if (Grade.Contains("N") || Grade.Contains("W") || Grade.Contains("U") || Grade.Contains("X") || Grade.Contains("I") || Grade.Contains("O") || Grade.Contains("EQ"))
-            {
-                Earned = false;
-                GPAble = false;
-                GPoints = 0.0;
-            }
-            else if (Grade.Contains("S"))
-            {
-                Earned = true;
-                GPAble = false;
-                GPoints = 0.0;
-            }
-            else
-            {
-                Earned = true;
-                GPAble = true;
-
-                if (Grade.Contains("A-"))
-                    GPoints = Credit * 3.7;
-                else if (Grade.Contains("A"))
-                    GPoints = Credit * 4.0;
-
-                else if (Grade.Contains("B+"))
-                    GPoints = Credit * 3.3;
-                else if (Grade.Contains("B-"))
-                    GPoints = Credit * 2.7;
-                else if (Grade.Contains("B"))
-                    GPoints = Credit * 3.0;
-
-                else if (Grade.Contains("C+"))
-                    GPoints = Credit * 2.3;
-                else if (Grade.Contains("C-"))
-                    GPoints = Credit * 1.7;
-                else if (Grade.Contains("C"))
-                    GPoints = Credit * 2.0;
-
-                else if (Grade.Contains("D+"))
-                    GPoints = Credit * 1.3;
-                else if (Grade.Contains("D-"))
-                    GPoints = Credit * 0.7;
-                else if (Grade.Contains("D"))
-                    GPoints = Credit * 1.0;
-            }
-        }
+    { 
+    
+    
     }
 
 }

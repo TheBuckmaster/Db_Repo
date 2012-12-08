@@ -14,13 +14,15 @@ namespace BensCRS
         List<UserAdmin> Admins;
         List<UserFaculty> Faculty;
         List<UserStudent> Students;
-        List<Course> Courses; 
+        List<Course> Courses;
+        List<PastCourse> Past;
 
-        public LoginForm(List<UserAdmin> A, List<UserFaculty> F, List<UserStudent> S, List<Course> C)
+        public LoginForm(List<UserAdmin> A, List<UserFaculty> F, List<UserStudent> S, List<Course> C, List<PastCourse> P)
         {
             Admins = A;
             Faculty = F;
             Students = S;
+            Past = P;
             Courses = new List<Course>(C);
             InitializeComponent();
         }
