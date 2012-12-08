@@ -100,6 +100,7 @@ namespace BensCRS
                         }
                     }
 
+
                     times = int.Parse(line.Substring(11, 2).Trim());
                     int x = 14;
                     for (int i = 0; i < times; i++)
@@ -112,6 +113,9 @@ namespace BensCRS
                         x += 5;
                         grade = line.Substring(35, 4).Trim();
                         x += 4;
+
+                        PastCourse pst = new PastCourse(term, name, grade, credit);
+                        past.Add(pst);
                     }
                     line = filereader.ReadLine();
                 }
