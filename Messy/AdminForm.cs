@@ -37,13 +37,13 @@ namespace BensCRS
             
         }
 
-        private AdminForm(List<UserFaculty> fl, List<UserStudent> sl, List<Course> cl, UserAdmin adm, UserStudent std)
+        public AdminForm(List<UserFaculty> fl, List<UserStudent> sl, List<Course> cl, UserAdmin adm, UserStudent std)
         {
-
+            InitializeComponent();
             state = adminstate.asstudent;
             asthisstudent = std;
-            button1.Text = "Add " + std.UserName + " to Course."; 
-            InitializeComponent();
+            button1.Text = "Add " + asthisstudent.UserName + " to Course.";
+            logoutBtn.Text = "Logout as " + asthisstudent.UserName; 
             admin = adm;
             FacultyList = fl;
             StudentList = sl;
@@ -62,7 +62,14 @@ namespace BensCRS
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (state == adminstate.asadmin)
+                this.Close();
+            if (state == adminstate.asstudent)
+            {
+                AdminForm nextform = new AdminForm(FacultyList, StudentList, Courses, admin);
+                nextform.Show();
+                this.Close(); 
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -72,12 +79,17 @@ namespace BensCRS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //if (state == adminstate.asadmin)
-            //    //call private adminform with student username
-            //    ;
-            //if (state == adminstate.asstudent)
-            //    benutil.AddStudenttoCourse(asthisstudent, ,admin); 
-
+            if (state == adminstate.asadmin)
+            {
+                AdminForm anext = new AdminForm(FacultyList, StudentList, Courses, admin, StudentList[dataGridView1.SelectedRows[0].Index]);
+                anext.Show();
+                this.Close(); 
+            }
+            if (state == adminstate.asstudent)
+            {
+                benutil.AddStudenttoCourse(asthisstudent, Courses[dataGridView1.SelectedRows[0].Index], admin);
+                initdgv(); 
+            }
 
         }
 

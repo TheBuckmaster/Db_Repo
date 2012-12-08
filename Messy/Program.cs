@@ -166,8 +166,8 @@ namespace BensCRS
         }
 
         public static void AddStudenttoCourse(UserStudent S, Course C, UserAdmin Me)
-        { 
-            
+        {
+            C.AddStudent(S, Me); 
         }
 
         public static void RemoveStudentfromCourse(UserStudent S, Course C)
