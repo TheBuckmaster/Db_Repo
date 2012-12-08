@@ -17,7 +17,6 @@ namespace BensCRS
         List<UserFaculty> F = new List<UserFaculty>();
         List<UserStudent> S = new List<UserStudent>();
         List<Course> Courses = new List<Course>();
-        List<PastCourse> past = new List<PastCourse>();
 
         private StreamReader filereader;
         //DialogResult result;
@@ -121,7 +120,7 @@ namespace BensCRS
                         x += 4;
 
                         PastCourse pst = new PastCourse(term, name, grade, credit);
-                        past.Add(pst);
+                        stud.MyPastCourses.Add(pst);
                     }
                     line = filereader.ReadLine();
                 }
@@ -138,10 +137,10 @@ namespace BensCRS
             catch (EndOfStreamException)
             { }
             
-            LoginForm lgn = new LoginForm(A, F, S, C, past);
+            LoginForm lgn = new LoginForm(A, F, S, C);
             if (lgn.ShowDialog() == DialogResult.OK)
             {
-                Application.Run(new LoginForm(A, F, S, C, past));
+                Application.Run(new LoginForm(A, F, S, C));
                 
             }
                 this.Close();

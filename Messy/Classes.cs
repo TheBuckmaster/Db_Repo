@@ -54,7 +54,8 @@ namespace BensCRS
         public String MiddleName { get; set; }
         public String Advisor;
 
-        public List<String> MyCourses = new List<String>(); 
+        public List<String> MyCourses = new List<String>();
+        public List<PastCourse> MyPastCourses = new List<PastCourse>(); 
 
         public UserStudent(String UN, String PW, String FN, String MN, String LN, String ADV)
         {
